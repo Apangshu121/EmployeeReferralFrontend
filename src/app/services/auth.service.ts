@@ -16,12 +16,12 @@ export class AuthService {
     console.log('Token cookie deleted');
   };
 
-  LoginWithGoogle(credentials: string): Observable<any> {
-    const header = new HttpHeaders().set('Content-type', 'application/json;charset=UTF-8');
+  saveUser(credentials: string): Observable<any> {
+    const header = new HttpHeaders().set('Content-type', 'text/plain;charset=UTF-8');
     
     return this.httpClient.post(
-      this.path + 'LoginWithGoogle',
-      JSON.stringify(credentials),
+      this.path + 'saveUser',
+      credentials,
       { headers: header }
     );
   }

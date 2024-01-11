@@ -40,10 +40,9 @@ export class LoginComponent implements OnInit {
   // Whenever google responds back with a token then that will go to this function
   async handleCredentialResponse(response: CredentialResponse) {
     try {
-      await firstValueFrom(this.service.LoginWithGoogle(response.credential)).then(
+      await firstValueFrom(this.service.saveUser(response.credential)).then(
         (x) => {
-          console.log(x.tokenPayload);
-          this.service.setToken(x.tokenPayload)
+          this.service.setToken(x.tokenPayload);
           this.router.navigate(['/home']);
         }
       );
