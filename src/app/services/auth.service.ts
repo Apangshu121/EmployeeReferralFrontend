@@ -9,32 +9,59 @@ import { Observable } from 'rxjs/internal/Observable';
 export class AuthService {
   private path = 'http://localhost:8080/';
 
-  constructor(private httpClient: HttpClient, private cookieService: CookieService) {}
- 
+  constructor(
+    private httpClient: HttpClient,
+    private cookieService: CookieService
+  ) {}
+
   public signOutExternal = () => {
     this.cookieService.delete('authCookie');
     console.log('Token cookie deleted');
   };
 
   saveUser(credentials: string): Observable<any> {
-    const header = new HttpHeaders().set('Content-type', 'text/plain;charset=UTF-8');
-    
-    return this.httpClient.post(
-      this.path + 'saveUser',
-      credentials,
-      { headers: header }
+    const header = new HttpHeaders().set(
+      'Content-type',
+      'text/plain;charset=UTF-8'
     );
+
+    return this.httpClient.post(this.path + 'saveUser', credentials, {
+      headers: header,
+    });
   }
 
   getToken(): string | null {
     return this.cookieService.get('authCookie');
   }
 
-  setToken(tokenPayload:string): void {
+  setToken(tokenPayload: string): void {
     this.cookieService.set('authCookie', tokenPayload, { expires: 1 });
   }
 
   isTokenPresent(): boolean {
     return this.cookieService.check('authCookie');
+  }
+
+  getNameOfUser(googleToken: string): Observable<any> {
+    // const header = new HttpHeaders().set(
+    //   'Content-type',
+    //   'text/plain;charset=UTF-8'
+    // );
+
+    // return this.httpClient.post(this.path + 'saveUser', credentials, {
+    //   headers: header,
+    // });
+
+    // Include googleToken as a query parameter
+    // return this.httpClient.get(`${this.path}/user?googleToken=${googleToken}`, {
+    //   withCredentials: true,
+    // });
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+
+    return this.httpClient.get(this.path + 'user/getName', {
+      headers: headers,
+    });
   }
 }
