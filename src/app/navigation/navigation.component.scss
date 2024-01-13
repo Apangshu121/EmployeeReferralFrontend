@@ -1,11 +1,19 @@
 
-nav {
+.container-fluid {
     background-color: #333;
     padding: 10px;
     color: white;
   }
   
   img {
-    height: 70px; /* Adjust the height as needed */
-    width: 150px;  /* Maintain aspect ratio */
+    height: 80px; 
+    width: 200px;  
+  }
+  button{
+    background-color: purple;
+    border-radius: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -12,7 +13,7 @@ export class NavigationComponent implements OnInit {
   userName!: string;
   role!: string;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     const googleToken = this.authService.getToken();
@@ -34,5 +35,8 @@ export class NavigationComponent implements OnInit {
     } else {
       console.error('Authentication token not available.');
     }
+  }
+  OnBackClick(): void {
+    this.router.navigate(['/home']);
   }
 }
