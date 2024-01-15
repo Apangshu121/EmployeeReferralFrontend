@@ -1,4 +1,19 @@
 <app-navigation></app-navigation>
-<div class="home-container" *ngIf="employeeFlag">
+<div *ngIf="employeeFlag">
+  <p
+    style="font-weight: bold; text-align: right; padding-right: 20px"
+    (click)="onClick()"
+  >
+    Job Openings
+  </p>
   <app-employee></app-employee>
+</div>
+<div *ngIf="adminFlag">
+  <p
+    style="font-weight: bold; text-align: right; padding-right: 20px"
+    (click)="onClick()"
+  >
+    Job Openings
+  </p>
+  <app-admin></app-admin>
 </div>

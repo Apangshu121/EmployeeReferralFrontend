@@ -8,6 +8,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { AdminComponent } from './admin/admin.component';
+import { JobopeningsComponent } from './jobopenings/jobopenings.component';
 
 @NgModule({
   declarations: [
@@ -15,14 +21,20 @@ import { EmployeeComponent } from './employee/employee.component';
     LogoutComponent,
     HomeComponent,
     NavigationComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    AdminComponent,
+    JobopeningsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatCardModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
