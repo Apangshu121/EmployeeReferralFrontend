@@ -1,15 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+
+declare var $: any;
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  selector: 'app-navigation',
+  templateUrl: './navigation.component.html',
+  styleUrl: './navigation.component.scss',
 })
-export class HomeComponent implements OnInit {
+export class NavigationComponent implements OnInit {
+  userName!: string;
   role!: string;
-  employeeFlag: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -19,10 +21,10 @@ export class HomeComponent implements OnInit {
     if (googleToken) {
       this.authService.getNameOfUser(googleToken).subscribe(
         (data) => {
+          this.userName = data.name;
           this.role = data.role;
 
           if (this.role === 'EMPLOYEE') {
-            this.employeeFlag = true;
             this.authService.updateTokenTime();
           }
         },
@@ -34,9 +36,7 @@ export class HomeComponent implements OnInit {
       console.error('Authentication token not available.');
     }
   }
-
-  onCardClick(): void {
-    // Navigate to the card details route
-    this.router.navigate(['/navigation']);
+  OnBackClick(): void {
+    this.router.navigate(['/home']);
   }
 }
