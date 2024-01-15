@@ -63,12 +63,14 @@ export class AuthService {
   }
 
   getNameOfUser(googleToken: string): Observable<any> {
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + googleToken,
-    });
+    console.log('Google Token:', googleToken);
 
-    return this.httpClient.get(this.path + 'user/getUserDetails', {
-      headers: headers,
-    });
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + googleToken
+    );
+    console.log(headers);
+
+    return this.httpClient.get(this.path + 'user/getUserDetails', { headers });
   }
 }

@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 export class HomeComponent implements OnInit {
   role!: string;
   employeeFlag: boolean = false;
+  adminFlag: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -24,6 +25,8 @@ export class HomeComponent implements OnInit {
           if (this.role === 'EMPLOYEE') {
             this.employeeFlag = true;
             this.authService.updateTokenTime();
+          } else if (this.role === 'ADMIN') {
+            this.adminFlag = true;
           }
         },
         (error) => {
@@ -34,9 +37,8 @@ export class HomeComponent implements OnInit {
       console.error('Authentication token not available.');
     }
   }
-
-  onCardClick(): void {
+  onClick(): void {
     // Navigate to the card details route
-    this.router.navigate(['/navigation']);
+    this.router.navigate(['/jobopenings']);
   }
 }

@@ -24,9 +24,9 @@ export class NavigationComponent implements OnInit {
           this.userName = data.name;
           this.role = data.role;
 
-          if (this.role === 'EMPLOYEE') {
-            this.authService.updateTokenTime();
-          }
+          // if (this.role === 'EMPLOYEE') {
+          //   this.authService.updateTokenTime();
+          // }
         },
         (error) => {
           console.error('Error fetching user name:', error);
