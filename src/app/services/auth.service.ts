@@ -37,4 +37,14 @@ export class AuthService {
   isTokenPresent(): boolean {
     return this.cookieService.check('authCookie');
   }
+
+  getNameOfUser(googleToken: string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+
+    return this.httpClient.get(this.path + 'user/getUserDetails', {
+      headers: headers,
+    });
+  }
 }

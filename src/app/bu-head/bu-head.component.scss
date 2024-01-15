@@ -1,0 +1,6 @@
+.buttons {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: flex-end;
+    gap: 10px; /* Adjust the gap as needed */
+  }

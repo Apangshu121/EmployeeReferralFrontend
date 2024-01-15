@@ -6,17 +6,23 @@ import { AppComponent } from './app.component';
 import { LogoutComponent } from './logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { RecruiterComponent } from './recruiter/recruiter.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BuHeadComponent } from './bu-head/bu-head.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogoutComponent,
-    HomeComponent
+    HomeComponent,
+    RecruiterComponent,
+    BuHeadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
