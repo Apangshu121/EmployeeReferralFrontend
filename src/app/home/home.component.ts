@@ -9,8 +9,9 @@ import {  Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   role!:string;
-  isEmployee=true;
+  isEmployee=false;
   isBuhead=false;
+  isRecruiter=false;
   constructor(private authService:AuthService, private router : Router){}
   ngOnInit(){
     const googleToken = this.authService.getToken();
@@ -21,8 +22,8 @@ export class HomeComponent implements OnInit {
           if(this.role=="BU_HEAD"){
             this.isBuhead=true;
           }
-          else{
-            this.isEmployee=true
+          else if(this.role=="RECRUITER"){
+            this.isRecruiter=true
           }
         },
         (error)=>{

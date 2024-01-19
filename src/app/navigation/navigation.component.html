@@ -1,0 +1,23 @@
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div
+      class="container-fluid d-flex align-items-center justify-content-between"
+    >
+      <!-- Left side content -->
+      <img src="/assets/logo.png" alt="Logo" />
+  
+      <!-- Right side content -->
+      <div class="d-flex align-items-center">
+        <p
+          [style.font-family]="'Arial, sans-serif'"
+          [style.font-weight]="'bold'"
+          [style.color]="'#FFF'"
+          class="mr-2"
+          style="margin: auto"
+        >{{ userName }}
+        </p>
+        <button (click)="OnBackClick()">Home</button>
+        <app-logout></app-logout>
+      </div>
+    </div>
+  </nav>

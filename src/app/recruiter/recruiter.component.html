@@ -1,1 +1,30 @@
-<button type="submit">HR Component</button>
+<app-navigation></app-navigation>
+<h5 style="text-align: right; margin-right: 1cm;" (click)="jopOpenings()" *ngIf="!isShowJobs">Job Openings</h5>
+
+<div *ngIf="isRefer">
+  <app-refer-a-friend></app-refer-a-friend>
+  <button type="button" (click)="onClose()">Close</button>
+</div>
+
+<div *ngIf="isCard && !isShowJobs" class="cards">
+    <div class="card" (click)="onCard1Click()">
+      <div class="card-body">
+        <p class="center-text">Refer a Friend</p>
+      </div>
+      
+    </div>
+    <div class="card" (click)="onCard2Click()">
+      <div class="card-body">
+        <p class="center-text">
+          My Referrals
+        </p>
+      </div>
+    </div>
+    <div class="card" (click)="onCard3Click()">
+      <div class="card-body">
+        <p class="center-text">
+          Referred Candidates
+        </p>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,195 @@
+<div class="container">
+  <h1>Upload Candidate Resume</h1>
+  <form [formGroup]="refForm" (ngSubmit)="onSubmit()">
+    <label for="pdfFile">Select a PDF file:</label>
+    <div class="form-group">
+      <input
+        type="file"
+        id="resume"
+        (change)="onFileChange($event)"
+        accept=".pdf, .docx"
+      />
+      <!-- <input type="file" id="pdfFile" accept=".pdf" [(ngModel)]="selectedFile" (change)="onFileChange($event)"
+        [ngModelOptions]="{standalone:true}"> -->
+      <button type="submit" (click)="uploadPdf()">Upload</button>
+    </div>
+    <div class="candidateName">
+      <label for="name">Candidate Name:</label>
+      <div class="input-container">
+        <i aria-hidden="true"></i>
+        <input
+          type="text"
+          class="form-control input-field"
+          id="candidateName"
+          placeholder="Full Name"
+          formControlName="candidateName"
+          required
+        />
+      </div>
+    </div>
+    <div class="mobileNumber">
+      <label for="phone">Mobile Number:</label>
+      <div class="input-container">
+        <i aria-hidden="true"></i>
+        <input
+          type="number"
+          maxlength="10"
+          class="form-control input-field"
+          id="phone"
+          placeholder="Phone Number"
+          formControlName="contactNumber"
+          required
+        />
+      </div>
+    </div>
+    <div class="emailid">
+      <label for="email">Email Id:</label>
+      <div class="input-container">
+        <i aria-hidden="true"></i>
+        <input
+          type="text"
+          class="form-control input-field"
+          id="email"
+          placeholder="Email Id"
+          formControlName="candidateEmail"
+          required
+        />
+      </div>
+    </div>
+    <div class="experience">
+      <label for="experience">Experience:</label>
+      <div class="input-container">
+        <i aria-hidden="true"></i>
+        <input
+          type="number"
+          min="0"
+          class="form-control input-field"
+          id="experience"
+          placeholder="Experience in years"
+          formControlName="experience"
+          required
+        />
+      </div>
+    </div>
+    <div class="primaryskill">
+      <label for="primaryskill">Primary Skill:</label>
+      <div class="input-container">
+        <i aria-hidden="true"></i>
+        <input
+          type="text"
+          class="form-control input-field"
+          id="primaryskill"
+          placeholder="Primary Skill"
+          formControlName="primarySkill"
+          required
+        />
+      </div>
+    </div>
+    <div class="pannumber">
+      <label for="pannumber">Pan Number:</label>
+      <div class="input-container">
+        <i aria-hidden="true"></i>
+        <input
+          type="text"
+          class="form-control input-field"
+          maxlength="10"
+          id="pannumber"
+          pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
+          placeholder="Pan Number"
+          formControlName="panNumber"
+          required
+        />
+      </div>
+    </div>
+    <div class="location">
+      <label for="preferredLocation">Preferred Location:</label>
+      <select
+        id="preferredLocation"
+        [(ngModel)]="preferredLocation"
+        [ngModelOptions]="{ standalone: true }"
+        (change)="onLocationChange($event)"
+        required
+      >
+        <option value="Bangalore">Bangalore</option>
+        <option value="Gurgaon">Gurgaon</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Chennai">Chennai</option>
+      </select>
+    </div>
+    <div class="noticePeriod">
+      <label for="noticePeriod">Notice Period :</label>
+      <div class="input-container">
+        <i aria-hidden="true"></i>
+        <input
+          type="number"
+          class="form-control input-field"
+          id="noticePeriod"
+          placeholder="Notice Period in days"
+          formControlName="noticePeriod"
+          required
+        />
+      </div>
+    </div>
+    <div>
+        <label for="vouch"> 
+        <input type="checkbox" (change)="onCheckboxChange($event)" />
+        I vouch for this candidate.</label>
+      </div>
+      <div>
+        <label for="profileSource">Profile Source:</label>
+        <select
+        id="profileSource"
+        [(ngModel)]="refForm.value.profileSource"
+        [ngModelOptions]="{ standalone: true }"
+        (change)="onDropdownChange($event)"
+        required
+  >
+        <option value="LinkedIn">LinkedIn</option>
+        <option value="Naukri">Naukri</option>
+        <option value="Friend of friend">Friend of friend</option>
+        <option value="Ex-colleague">Ex-colleague</option>
+        <option value="Contacts">Contacts</option>
+        <option value="Others">Others</option>
+      </select>
+    </div>
+
+    <div>
+    <label>
+        Willing to Relocate:
+        <input type="checkbox" (change)="onRelocationChange($event)" name="willingToRelocate">
+    </label>
+    </div>
+
+    <div>
+
+        <label>
+            Serving Notice Period:
+            <input type="radio" [value]="true" name="servingNoticePeriod"  (change)="onServingNoticePeriodCheck($event)" > Yes
+          </label>
+          <label>
+            <input type="radio" [value]="false" name="servingNoticePeriod" (change)="onServingNoticePeriodCheck($event)" > No
+          </label>
+
+    </div>
+
+    <div *ngIf="isServing">
+        <label>
+            Number of Days Left:
+            <input type="number" name="daysLeft">
+        </label>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+  <div id="result" *ngIf="extractedText !== null">
+    <!-- <h2>Uploaded PDF:</h2> -->
+    <iframe
+      id="pdfViewer"
+      type="application/pdf"
+      width="100%"
+      height="400px"
+      [src]="pdfSrc"
+    ></iframe>
+  </div>
+</div>

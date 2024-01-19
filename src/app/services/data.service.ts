@@ -1,7 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Sheet } from './models/sheet.model';
+import { Sheet } from '../models/sheet.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,22 +15,10 @@ export class DataService {
     return this.http.get<any>(this.apiUrl);
   }
 
-  // createSheet(JobId:number, Role:string, YearsOfExperience:number, TechStack:string, Description:string, Bonus:number, BU:string):Observable<Sheet>{
-  //   return this.http.post<Sheet>(`${this.apiUrl}`,{
-  //     JobId, Role, YearsOfExperience, TechStack, Description, Bonus, BU
-  //   });
-  // }
-
-  // createSheet(newData: any): Observable<any> {
-  //   return this.http.post(this.apiUrl, newData);
-  // }
-
   createSheet(newData: any): Observable<any> {
     return this.http.post(this.apiUrl, newData);
   }
   
-
-  //In service.ts
   
   deleteSheet(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
@@ -40,9 +28,9 @@ export class DataService {
     return this.http.get(`${this.apiUrl}/${JobId}`);
   }
 
-  updateSheet(JobId:number, Role:string, YearsOfExperience:number, TechStack:string, Description:string, Bonus:number, BU:string){
+  updateSheet(JobId:number, Role:string, YearsOfExperience:number, TechStack:string, Description:string, Band:string, BU:string){
     return this.http.put<Sheet>(`${this.apiUrl}`,{
-      JobId, Role, YearsOfExperience, TechStack, Description, Bonus, BU
+      JobId, Role, YearsOfExperience, TechStack, Description, Band, BU
     });
   }
 
