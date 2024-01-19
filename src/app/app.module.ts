@@ -14,7 +14,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { AdminComponent } from './admin/admin.component';
 import { JobopeningsComponent } from './jobopenings/jobopenings.component';
-import { ManageemployeeComponent } from './manageemployee/manageemployee.component';
 
 import { MyReferralsComponent } from './my-referrals/my-referrals.component';
 import { ReferAFriendComponent } from './refer-a-friend/refer-a-friend.component';
@@ -32,7 +31,6 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
     EmployeeComponent,
     AdminComponent,
     JobopeningsComponent,
-    ManageemployeeComponent,
     MyReferralsComponent,
     ReferAFriendComponent,
   ],

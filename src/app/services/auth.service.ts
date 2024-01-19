@@ -78,7 +78,7 @@ export class AuthService {
       'Authorization',
       'Bearer ' + googleToken
     );
-    console.log(headers);
+    // console.log(headers);
     return this.httpClient.get<any[]>(this.path + 'admin/users/all', {
       headers,
     });
@@ -108,7 +108,7 @@ export class AuthService {
   }
 
   saveCandidate(googleToken: any, candidateData: any): Observable<any[]> {
-    console.log('saveCandidate google token :' + googleToken);
+    // console.log('saveCandidate google token :' + googleToken);
 
     const headers = new HttpHeaders().set(
       'Authorization',

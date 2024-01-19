@@ -18,6 +18,7 @@ export class ReferAFriendComponent {
   profileSource: any;
   noticePeriod: any;
   offerInHand!: boolean;
+
   // willingToRelocate:any;
   // blackListError: string = '';
   // isForm = true;
@@ -42,6 +43,7 @@ export class ReferAFriendComponent {
       offerInHand: [''],
       // other form controls...
     });
+    this.disableForm();
   }
 
   onFileChange(event: any): void {
@@ -64,24 +66,38 @@ export class ReferAFriendComponent {
           this.refForm.patchValue(refFormValue);
 
           this.extractedText = JSON.stringify(jsonResumeData, null, 2);
+          this.enableForm();
         },
         (error) => {
           if (error instanceof HttpErrorResponse && error.status === 401) {
             const errorMessage = error.error;
 
             alert(`${errorMessage.error}`);
-          } else {
-            // Handle other types of errors or statuses
-            // console.error('Error:', error);
+            this.onCannotReffer();
+            this.disableForm();
           }
         }
         // console.error('Error extracting information from PDF:', error);
       );
     } else {
       alert('Please choose a valid PDF file.');
+      this.disableForm();
     }
   }
 
+  disableForm() {
+    this.refForm.disable();
+  }
+
+  enableForm() {
+    this.refForm.enable();
+  }
+
+  onCannotReffer() {
+    this.selectedFile = null;
+    this.refForm.reset();
+    this.disableForm();
+  }
   onSubmit() {
     const googleToken = this.authService.getToken();
     if (this.refForm.valid) {
@@ -101,13 +117,17 @@ export class ReferAFriendComponent {
             const errorMessage = error.error.message;
 
             alert(` ${errorMessage}`);
-          } else {
-            // console.error('Error:', error);
+          } else if (
+            error instanceof HttpErrorResponse &&
+            error.status === 401
+          ) {
+            const errorMessage = error.error.message;
+            // console.log(errorMessage);
+            alert(`${errorMessage}`);
           }
         }
       );
     } else {
-      // Form is not valid, display an alert
       alert('Please fill in all fields before submitting.');
     }
   }

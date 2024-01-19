@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { NavigationComponent } from './navigation/navigation.component';
 import { JobopeningsComponent } from './jobopenings/jobopenings.component';
-import { ManageemployeeComponent } from './manageemployee/manageemployee.component';
+
 import { MyReferralsComponent } from './my-referrals/my-referrals.component';
 
 const routes: Routes = [
@@ -39,13 +39,13 @@ const routes: Routes = [
         (m) => m.JobopeningsModule
       ),
   },
-  {
-    path: 'manageemployee',
-    loadChildren: () =>
-      import('./manageemployee/manageemployee.module').then(
-        (m) => m.ManageemployeeModule
-      ),
-  },
+  // {
+  //   path: 'manageemployee',
+  //   loadChildren: () =>
+  //     import('./manageemployee/manageemployee.module').then(
+  //       (m) => m.ManageemployeeModule
+  //     ),
+  // },
   {
     path: 'my-referrals',
     loadChildren: () =>
