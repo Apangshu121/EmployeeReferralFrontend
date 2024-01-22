@@ -1,0 +1,59 @@
+<app-navigation></app-navigation>
+<!-- <div *ngIf="user">
+  <h2>List of Users</h2>
+  <ul>
+    <li *ngFor="let user of user.Users">
+      {{ user.name }} ({{ user.email }}) - {{ user.role }}
+      <button *ngIf="user.role !== userRole" (click)="editUser(user)">
+        Edit
+      </button>
+    </li>
+  </ul>
+</div> -->
+<div class="heading" *ngIf="editUserFlag">All Employee Details</div>
+<div *ngIf="user && editUserFlag">
+  <div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Role</th>
+          <th scope="col">Update Role</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let user of user.Users; let i = index">
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <button (click)="openEditCard(user)">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- *ngIf="user.role !== userRole"  (click)="editUser(user)"-->
+<!-- Card for updating role -->
+<div *ngIf="selectedUser && update">
+  <div class="card">
+    <div class="card-header">Update Role</div>
+    <div class="card-body">
+      <p>User: {{ selectedUser.name }} ({{ selectedUser.email }})</p>
+      <label for="newRole">New Role:</label>
+      <select id="newRole" [(ngModel)]="selectedRole">
+        <option value="RECRUITER">Recruiter</option>
+        <option value="BU_HEAD">BU Head</option>
+        <option value="EMPLOYEE">Employee</option>
+        <option value="ADMIN">Admin</option>
+      </select>
+      <button (click)="editUser(selectedUser)">Update Role</button>
+
+      <button (click)="close()">Cancel</button>
+    </div>
+  </div>
+</div>

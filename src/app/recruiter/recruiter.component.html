@@ -1,0 +1,106 @@
+<app-navigation></app-navigation>
+<h5 style="text-align: right; margin-right: 1cm;" (click)="jopOpenings()" *ngIf="!isShowJobs">Job Openings</h5>
+
+<div *ngIf="isCard && !isShowJobs" class="cards">
+    <div class="card" (click)="onCard1Click()">
+      <div class="card-body">
+        <p class="center-text">Refer a Friend</p>
+      </div>
+      
+    </div>
+    <div class="card" (click)="onCard2Click()">
+      <div class="card-body">
+        <p class="center-text">
+          My Referrals
+        </p>
+      </div>
+    </div>
+    <div class="card" (click)="onCard3Click()">
+      <div class="card-body">
+        <p class="center-text">
+          Referred Candidates
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="info" *ngIf="!isCard && !showCandInfo">
+    <div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Ph No</th>
+            <th scope="col">Primary Skill</th>
+            <th scope="col">Preffered Location</th>
+            <th scope="col">Experience</th>
+            <th scope="col">Current Status</th>
+            <th scope="col">Referer Email</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of data.candidates; let i =index">
+          <tr  (click)="candidateInfo(i)">
+            <td>{{item.id}}</td>
+            <td>{{item.candidateName}}</td>
+            <td>{{item.candidateEmail}}</td>
+            <td>{{item.contactNumber}}</td>
+            <td>{{item.primarySkill}}</td>
+            <td>{{item.preferredLocation}}</td>
+            <td> {{item.experience}} </td>
+            <td>{{item.currentStatus}}</td>
+            <td>{{item.referrerEmail}}</td>
+            <td> <button class="btn btn-primary" (click)="sendMail(i)"> Send mail</button></td>
+          </tr>
+          
+        </tbody>  
+    </table>
+    </div>
+  </div>
+
+  <div class="candInfo" *ngIf="showCandInfo && !isUpdate">
+  <h5>Candidate Details : </h5><br>
+  <p>ID: {{ candidate.id }}</p>
+  <p>Name: {{ candidate.candidateName }}</p>
+  <p>Email: {{ candidate.candidateEmail }}</p>
+  <p>Phone Number: {{ candidate.contactNumber }}</p>
+  <p>Experience: {{ candidate.experience}}</p>
+  <p>Primary Skill: {{ candidate.primarySkill }}</p>
+  <br>
+  <p>Business Unit: {{ candidate.businessUnit }}</p>
+  <p>Current Status: {{ candidate.currentStatus }}</p>
+  <p>Interview Status: {{ candidate.interviewStatus }}</p>
+  <p>Interviewed Position: {{ candidate.interviewedPosition }}</p>
+  <br>
+  <p>Notice Period: {{ candidate.noticePeriod }}</p>
+  <p>Offers In Hand: {{ candidate.offersInHand }}</p>
+  <p>Preferred Location: {{ candidate.preferredLocation }}</p>
+  <p>Willing To Relocate: {{ candidate.willingToRelocate }}</p>
+  <p>Vouch: {{ candidate.vouch }}</p>
+  <br>
+  <p>Referrer Email: {{ candidate.referrerEmail }}</p>
+  <br><br>
+  <button type="button" class="btn btn-secondary" (click)="onClick()"> Update </button><br>
+  <button type="button" class="btn btn-danger" (click)="onClose()"> Close </button>
+</div>
+
+<div class="candInfo" *ngIf="isUpdate">
+  <h5>Update Candidate Details</h5>
+  <label for="currentStatus">Current Status:</label>
+  <input type="text" id="currentStatus" [(ngModel)]="updatedDetails.currentStatus" />
+
+  <label for="interviewStatus">Interview Status:</label>
+  <input type="text" id="interviewStatus" [(ngModel)]="updatedDetails.interviewStatus" />
+
+  <label for="businessUnit">Business Unit:</label>
+  <input type="text" id="businessUnit" [(ngModel)]="updatedDetails.businessUnit" />
+
+  <label for="interviewedPosition">Interviewed Position:</label>
+  <input type="text" id="interviewedPosition" [(ngModel)]="updatedDetails.interviewedPosition" />
+
+  <label for="band">Band:</label>
+  <input type="text" id="band" [(ngModel)]="updatedDetails.band" />
+
+  <button (click)="updateCandidateDetails()">Update Candidate Details</button>
+</div>

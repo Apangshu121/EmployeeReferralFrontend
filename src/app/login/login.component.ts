@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
     window.onGoogleLibraryLoad = () => {
       // @ts-ignore
       google.accounts.id.initialize({
-        client_id: '1099395230005-3al1826neta10s18um44o98i62g8to5b.apps.googleusercontent.com',
+        client_id:
+          '1099395230005-3al1826neta10s18um44o98i62g8to5b.apps.googleusercontent.com',
         callback: this.handleCredentialResponse.bind(this),
         auto_select: false,
         cancel_on_tap_outside: true,
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
       await firstValueFrom(this.service.saveUser(response.credential)).then(
         (x) => {
           this.service.setToken(x.tokenPayload);
+          console.log(x.tokenPayload)
           this.router.navigate(['/home']);
         }
       );

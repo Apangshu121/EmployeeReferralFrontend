@@ -1,0 +1,236 @@
+<app-navigation></app-navigation>
+<div class="form-container">
+  <h2>Upload Candidate Resume</h2>
+  <div class="label-container">
+    <div>
+      <label for="pdfFile">Select a PDF file:</label>
+      <input
+        type="file"
+        id="resume"
+        (change)="onFileChange($event)"
+        accept=".pdf, .docx"
+      />
+      <button type="submit" (click)="uploadPdf()" style="margin: auto">
+        Upload
+      </button>
+    </div>
+  </div>
+  <form [formGroup]="refForm" (ngSubmit)="onSubmit()" *ngIf="!formClosed">
+    <div class="label-container">
+      <label for="name">Candidate Name:</label>
+      <div>
+        <i aria-hidden="true"></i>
+        <input
+          type="text"
+
+          id="candidateName"
+          placeholder="Full Name"
+          formControlName="candidateName"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="label-container">
+      <label for="phone">Mobile Number:</label>
+      <div>
+        <i aria-hidden="true"></i>
+        <input
+          type="number"
+          maxlength="10"
+          id="phone"
+          placeholder="Phone Number"
+          formControlName="contactNumber"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="label-container">
+      <label for="email">Email Id:</label>
+      <div>
+        <i aria-hidden="true"></i>
+        <input
+          type="text"
+          id="email"
+          placeholder="Email Id"
+          formControlName="candidateEmail"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="label-container">
+      <label for="experience">Experience:</label>
+      <div>
+        <i aria-hidden="true"></i>
+        <input
+          type="number"
+          min="0"
+          id="experience"
+          placeholder="Experience in years and months"
+          formControlName="experience"
+          required
+        />
+      </div>
+    </div>
+    <div class="label-container">
+      <label for="primaryskill">Primary Skill:</label>
+      <div>
+        <i aria-hidden="true"></i>
+        <input
+          type="text"
+          id="primaryskill"
+          placeholder="Primary Skill"
+          formControlName="primarySkill"
+          required
+        />
+      </div>
+    </div>
+    <div class="label-container">
+      <label for="pannumber">Pan Number:</label>
+      <div>
+        <i aria-hidden="true"></i>
+        <input
+          type="text"
+          maxlength="10"
+          id="pannumber"
+          placeholder="Pan Number"
+          formControlName="panNumber"
+          required
+        />
+      </div>
+    </div>
+    <div class="label-container">
+      <label for="currentCompanyNoticePeriod"
+        >Current Company Notice Period:</label
+      >
+      <div>
+        <i aria-hidden="true"></i>
+        <input
+          type="number"
+          id="currentCompanyNoticePeriod"
+          placeholder="Enter Days"
+          formControlName="noticePeriod"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="label-container">
+      <label for="preferredlocation">Preferred Location:</label>
+      <select
+        id="preferredlocation"
+        class="dropdown"
+        [(ngModel)]="preferredLocation"
+        formControlName="preferredLocation"
+        required
+      >
+        <option value="Bangalore">Bangalore</option>
+        <option value="Gurgaon">Gurgaon</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Chennai">Chennai</option>
+      </select>
+    </div>
+    <div class="label-container">
+      <label for="willingToRelocate"> Are you willing to relocate </label>
+      <input type="checkbox" formControlName="willingToRelocate" />
+    </div>
+
+    <div class="label-container">
+      <label for="radio">Are you serving in notice period?</label>
+      <label>
+        <input
+          type="radio"
+          formControlName="servingNoticePeriod"
+          value="true"
+        />
+        Yes
+      </label>
+      <label>
+        <input
+          type="radio"
+          formControlName="servingNoticePeriod"
+          value="false"
+        />
+        No
+      </label>
+    </div>
+
+    <div *ngIf="refForm.get('servingNoticePeriod')?.value === 'true'">
+      <div class="label-container">
+        <label for="numberofdays"
+          >Enter the number of days left in notice period:</label
+        >
+        <div>
+          <i aria-hidden="true"></i>
+          <input
+            type="text"
+            id="numberofdays"
+            placeholder="Enter days"
+            formControlName="noticePeriodLeft"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="label-container">
+      <label for="radio">Having any offer in hand</label>
+      <label>
+        <input type="radio" formControlName="offerInHand" value="true" /> Yes
+      </label>
+      <label>
+        <input type="radio" formControlName="offerInHand" value="false" /> No
+      </label>
+    </div>
+    <div class="label-container">
+      <label for="vouch" style="padding-left: 10px">
+        <a href="javascript:void(0);" (click)="openPdf()"
+          >I vouch for this candidate.</a
+        >
+      </label>
+      <input type="checkbox" formControlName="vouch" />
+    </div>
+
+    <div class="label-container">
+      <label for="profileSource">Profile Source:</label>
+      <select
+        id="profileSource"
+        class="dropdown"
+        [(ngModel)]="profileSource"
+        formControlName="profileSource"
+        required
+      >
+        <option value="LinkedIn">LinkedIn</option>
+        <option value="Naukri">Naukri</option>
+        <option value="Friend of friend">Friend of friend</option>
+        <option value="Ex-colleague">Ex-colleague</option>
+        <option value="Contacts">Contacts</option>
+        <option value="Others">Others</option>
+      </select>
+    </div>
+    <button type="submit" class="label-container">Submit</button>
+  </form>
+
+  <div id="result" *ngIf="extractedText !== null">
+    <!-- <h2>Uploaded PDF:</h2> -->
+    <iframe
+      id="pdfViewer"
+      type="application/pdf"
+      width="100%"
+      height="400px"
+      [src]="pdfSrc"
+    ></iframe>
+  </div>
+</div>
+
+<div *ngIf="showPdfModal" id="pdfViewerModal">
+  <!-- <span id="closeButton" (click)="closePdfModal()">Close</span> -->
+  <iframe
+    type="application/pdf"
+    width="100%"
+    height="100%"
+    [src]="pdfSrc"
+  ></iframe>
+</div>

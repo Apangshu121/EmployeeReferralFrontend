@@ -1,0 +1,24 @@
+<app-navigation></app-navigation>
+
+<div class="=cards" *ngIf="!isJob">
+  <div class="card" *ngFor="let item of data; let i = index">
+    <p>Job Id : {{ item.JobId }}</p>
+    <p>Role : {{ item.Role }}</p>
+    <p>Years Of Experience: {{ item.YearsOfExperience }}</p>
+    <p>Tech Stack : {{ item.TechStack }}</p>
+    <button (click)="onMore(i)">More</button>
+  </div>
+</div>
+
+<div class="box" *ngIf="isJob">
+  <div class="details">
+    <p>Job Id : {{ jobData.JobId }}</p>
+    <p>Role : {{ jobData.Role }}</p>
+    <p>Years Of Experience: {{ jobData.YearsOfExperience }}</p>
+    <p>Tech Stack : {{ jobData.TechStack }}</p>
+    <p>Description : {{ jobData.Description }}</p>
+    <p>Band : {{ jobData.Band }}</p>
+    <p>Business Unit : {{ jobData.BU }}</p>
+    <button (click)="onClose()">close</button>
+  </div>
+</div>
