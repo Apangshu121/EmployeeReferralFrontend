@@ -1,0 +1,125 @@
+<!-- <head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>      
+</head> -->
+
+<app-navigation></app-navigation>
+
+<div *ngIf="!isShowJobs">
+<h5 style="text-align: right; margin-right: 1cm;" (click)="jopOpenings()" >Job Openings</h5>
+  
+</div>
+<div *ngIf="isCard && !isShowJobs" class="cards" >
+  <div class="card" (click)="onCard1Click()">
+    <div class="card-body">
+      <p class="center-text">Refer a Friend</p>
+    </div>
+  </div>
+  <div class="card" (click)="onCard2Click()">
+    <div class="card-body">
+      <p class="center-text">
+        My Referrals
+      </p>
+    </div>
+  </div>
+  <div class="card" (click)="onCard3Click()">
+    <div class="card-body">
+      <p class="center-text">
+        Job Management
+      </p>
+    </div>
+  </div>
+</div>
+
+  <div class="buttons" *ngIf="!isCard">
+<button type="button" class="btn btn-primary" (click)="createSheet()" *ngIf="!isAdd && !showJobPosts"> Add Job</button>
+<button type="button" class="btn btn-primary" (click)="showDetails()" *ngIf="!showJobPosts && !isAdd">Job Posts</button>
+</div>
+<table class="table table-hover" *ngIf="showJobPosts && !isEdit && !isAdd && !isJob">
+    <thead>
+        <tr>
+          <th scope="col">JobId</th>
+          <th scope="col">Role</th>
+          <th scope="col">YearsOfExperience</th>
+          <th scope="col">TechStack</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of data; let i =index" >
+        <tr *ngIf="item.Visibility" (click)="jobInfo(i)">
+            <th scope="row">{{item.JobId}}</th>
+            <td>{{item.Role}}</td>
+            <td>{{item.YearsOfExperience}}</td>
+            <td>{{item.TechStack}}</td>
+            <td><button type="button" class="btn btn-secondary" (click)="editSheet(i)">Edit</button></td>
+            <td><button type="button" class="btn btn-danger" (click)="deleteSheet(i)">Delete</button></td>
+          </tr>
+      </tbody>
+  </table>
+
+  <div class="box" *ngIf="isJob">
+    <div class="details">
+    <p>Job Id : {{ jobData.JobId}}</p>
+    <p>Role : {{jobData.Role}}</p>
+    <p>Years Of Experience: {{jobData.YearsOfExperience}} </p>
+    <p>Tech Stack : {{jobData.TechStack}}  </p>
+    <p>Description : {{jobData.Description}}  </p>
+    <p>Band : {{jobData.Band}} </p>
+    <p>Business Unit : {{jobData.BU}} </p>
+    <button (click)="onClose()">close</button>
+  </div>
+  </div>
+
+  <div class="edit" *ngIf="isEdit">
+    <form [formGroup]="googleSheetForm" (ngSubmit)="onUpdate()">
+        <label for="jobId">Job ID:</label>
+        <input type="text" id="jobId" class="form-control" required formControlName="JobId"><br>
+
+        <label for="role">Role:</label>
+        <input type="text" id="role" class="form-control" required formControlName="Role"><br>
+
+        <label for="yearsOfExperience">Years of Experience:</label>
+        <input type="number" id="yearsOfExperience" class="form-control" required formControlName="YearsOfExperience"><br>
+
+        <label for="techStack">Tech Stack:</label>
+        <input type="text" id="techStack" class="form-control" required formControlName="TechStack"><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" rows="4" class="form-control" required formControlName="Description"></textarea><br>
+
+        <label for="band">Band:</label>
+        <input type="text" id="band" name="band" class="form-control" required formControlName="band"><br>
+
+        <label for="bu">Business Unit (BU):</label>
+        <input type="text" id="bu" class="form-control" required formControlName="BU"><br>
+
+        <button type="submit" (click)="onUpdate()">Update</button>
+    </form>
+  </div>
+
+
+  <div class="add" *ngIf="isAdd">
+    <form [formGroup]="googleSheetForm" (ngSubmit)="onSubmit()">
+        <label for="jobId">Job ID:</label>
+        <input type="text" id="jobId" class="form-control" required formControlName="JobId"><br>
+
+        <label for="role">Role:</label>
+        <input type="text" id="role" class="form-control" required formControlName="Role"><br>
+
+        <label for="yearsOfExperience">Years of Experience:</label>
+        <input type="number" id="yearsOfExperience" class="form-control" required formControlName="YearsOfExperience"><br>
+
+        <label for="techStack">Tech Stack:</label>
+        <input type="text" id="techStack" class="form-control" required formControlName="TechStack"><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" rows="4" class="form-control" required formControlName="Description"></textarea><br>
+
+        <label for="band">Band:</label>
+        <input type="text" id="band" name="band" class="form-control" required formControlName="band"><br>
+
+        <label for="bu">Business Unit (BU):</label>
+        <input type="text" id="bu" class="form-control" required formControlName="BU"><br>
+
+        <button type="submit">Submit</button>
+    </form>
+  </div>

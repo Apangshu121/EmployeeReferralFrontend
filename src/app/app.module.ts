@@ -1,45 +1,67 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogoutComponent } from './logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+
+import { RecruiterComponent } from './recruiter/recruiter.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BuHeadComponent } from './bu-head/bu-head.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+
+import { JobOpeningsComponent } from './job-openings/job-openings.component';
+
+import { MyReferralsComponent } from './my-referrals/my-referrals.component';
+
 import { NavigationComponent } from './navigation/navigation.component';
 import { EmployeeComponent } from './employee/employee.component';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { AdminComponent } from './admin/admin.component';
-import { JobopeningsComponent } from './jobopenings/jobopenings.component';
+
 
 import { MyReferralsComponent } from './my-referrals/my-referrals.component';
 import { ReferAFriendComponent } from './refer-a-friend/refer-a-friend.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
-// import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LogoutComponent,
     HomeComponent,
+
+    RecruiterComponent,
+    BuHeadComponent,
+    JobOpeningsComponent,
+
     NavigationComponent,
     EmployeeComponent,
     AdminComponent,
-    JobopeningsComponent,
     MyReferralsComponent,
     ReferAFriendComponent,
     ManageEmployeeComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+
+    ReactiveFormsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatSelectModule,
+
     MatButtonModule,
     MatIconModule,
     MatInputModule,
@@ -47,6 +69,7 @@ import { ManageEmployeeComponent } from './manage-employee/manage-employee.compo
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

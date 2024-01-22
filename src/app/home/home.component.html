@@ -1,3 +1,11 @@
+
+<div *ngIf="isBuhead">
+<app-bu-head></app-bu-head>
+</div>
+<div *ngIf="isRecruiter">
+<app-recruiter></app-recruiter>
+</div>
+
 <app-navigation></app-navigation>
 <div *ngIf="employeeFlag">
   <p
@@ -17,3 +25,4 @@
   </p>
   <app-admin></app-admin>
 </div>
+

@@ -23,10 +23,6 @@ export class NavigationComponent implements OnInit {
         (data) => {
           this.userName = data.name;
           this.role = data.role;
-
-          // if (this.role === 'EMPLOYEE') {
-          //   this.authService.updateTokenTime();
-          // }
         },
         (error) => {
           console.error('Error fetching user name:', error);
@@ -37,6 +33,8 @@ export class NavigationComponent implements OnInit {
     }
   }
   OnBackClick(): void {
+
     this.router.navigate(['/home']);
+
   }
 }

@@ -1,13 +1,17 @@
+
 import { Component, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-refer-a-friend',
   templateUrl: './refer-a-friend.component.html',
+
   styleUrl: './refer-a-friend.component.scss',
+
 })
 export class ReferAFriendComponent {
   refForm!: FormGroup;
