@@ -15,4 +15,39 @@
     align-items: center;
     background-color: rgb(231, 175, 247);
   }
+
+  .candInfo {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1cm;
+    margin: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+  
+  .candInfo h2 {
+    color: #333;
+  }
+  
+  .candInfo p {
+    
+    margin: 8px 0;
+    margin-left: 3cm;
+    color: #555;
+  }
+
+  button{
+    width: 20%;
+    align-self: center;
+  }
+
+  .btn-primary {
+    width:100%;
+    padding: 5px 8px;
+    font-size: 10px;
+}
+
+
   

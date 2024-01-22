@@ -72,4 +72,33 @@ export class AuthService {
     })
   );
   }
+
+  getAllReferredCandidates(googleToken:string) : Observable<any[]>{
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient.get<any[]>(`${this.path}api/referredCandidates/getAll`,{
+      headers: headers,
+    }).pipe();
+  }
+
+  updateCandidateDetails(googleToken:string, candidateId: number, updatedDetails: any) :Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient.put<any>(`${this.path}api/referredCandidates/update/${candidateId}`,updatedDetails,{
+     headers:headers, 
+    });
+  }
+
+  sendMail(googleToken:string, id : number){
+    const header = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    console.log(header);
+    
+    return this.httpClient.post<any>(`${this.path}api/referredCandidates/sendMail/${id}`,id,{
+      headers:header,
+    });
+  }
 }

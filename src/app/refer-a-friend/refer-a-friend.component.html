@@ -1,3 +1,8 @@
+<app-navigation></app-navigation>
+<div>
+    <h5 (click)="onBack()" style="text-align:right;margin-right: 1cm;">Back</h5>
+</div>
+
 <div class="container">
   <h1>Upload Candidate Resume</h1>
   <form [formGroup]="refForm" (ngSubmit)="onSubmit()">
@@ -11,7 +16,7 @@
       />
       <!-- <input type="file" id="pdfFile" accept=".pdf" [(ngModel)]="selectedFile" (change)="onFileChange($event)"
         [ngModelOptions]="{standalone:true}"> -->
-      <button type="submit" (click)="uploadPdf()">Upload</button>
+      <button type="button" (click)="uploadPdf()">Upload</button>
     </div>
     <div class="candidateName">
       <label for="name">Candidate Name:</label>

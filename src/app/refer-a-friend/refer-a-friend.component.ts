@@ -3,6 +3,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-refer-a-friend',
@@ -22,7 +23,7 @@ export class ReferAFriendComponent {
   noticePeriodLeft!:number;
   // profileSource: any;
   // isForm = true;
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router : Router) {
     this.refForm = this.fb.group({
       candidateName: [''],
       contactNumber: [''],
@@ -95,7 +96,7 @@ export class ReferAFriendComponent {
       console.log(formData);
       this.authService.saveCandidate(googleToken, formData).subscribe(
         (response) => {
-          console.log('Candidate saved successfully:', response);
+          //console.log('Candidate saved successfully:', response);
           // Handle success (e.g., navigate to another page)
         },
         (error) => {
@@ -105,9 +106,14 @@ export class ReferAFriendComponent {
       );
     }
     else{
+      console.log(this.refForm);
       console.log('Form is invalid.');
       console.log('Form errors:', this.refForm.errors);
     }
+  }
+
+  onBack(){
+    this.router.navigate(['/app-home'])
   }
   
 }
