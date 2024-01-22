@@ -10,10 +10,10 @@ export class EmployeeComponent {
   constructor(private router: Router) {}
   onCard1Click(): void {
     // Navigate to the card details route
-    this.router.navigate(['/navigation']);
+    this.router.navigate(['/refer-a-friend']);
   }
   onCard2Click(): void {
     // Navigate to the card details route
-    this.router.navigate(['/navigation']);
+    this.router.navigate(['/my-referrals']);
   }
 }

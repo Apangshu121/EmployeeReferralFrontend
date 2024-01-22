@@ -1,4 +1,21 @@
-div button{
-    background-color: purple;
-    border-radius: 10px;
-}
+// div button{
+//     background-color: purple;
+//     border-radius: 10px;
+// }
+
+
+button {
+    background-color: #7e57c2;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+    width: 80px;
+  
+    &:hover {
+      background-color: #5e35b1;
+    }
+  }

@@ -15,6 +15,14 @@ import { MatCardModule } from '@angular/material/card';
 import { AdminComponent } from './admin/admin.component';
 import { JobopeningsComponent } from './jobopenings/jobopenings.component';
 
+import { MyReferralsComponent } from './my-referrals/my-referrals.component';
+import { ReferAFriendComponent } from './refer-a-friend/refer-a-friend.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
+// import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +32,9 @@ import { JobopeningsComponent } from './jobopenings/jobopenings.component';
     EmployeeComponent,
     AdminComponent,
     JobopeningsComponent,
+    MyReferralsComponent,
+    ReferAFriendComponent,
+    ManageEmployeeComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +44,9 @@ import { JobopeningsComponent } from './jobopenings/jobopenings.component';
     MatIconModule,
     MatInputModule,
     MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

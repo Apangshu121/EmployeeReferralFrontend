@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs/internal/Observable';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -63,8 +65,6 @@ export class AuthService {
   }
 
   getNameOfUser(googleToken: string): Observable<any> {
-    console.log('Google Token:', googleToken);
-
     const headers = new HttpHeaders().set(
       'Authorization',
       'Bearer ' + googleToken
@@ -72,5 +72,89 @@ export class AuthService {
     console.log(headers);
 
     return this.httpClient.get(this.path + 'user/getUserDetails', { headers });
+  }
+  getAllEmployees(googleToken: string): Observable<any[]> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + googleToken
+    );
+    // console.log(headers);
+    return this.httpClient
+      .get<any[]>(this.path + 'admin/users/all', {
+        headers,
+      })
+      .pipe();
+  }
+  getReferredCandidatesOfUser(
+    googleToken: string
+  ): Observable<{ [key: string]: [{ [key: string]: string }] }> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + googleToken
+    );
+    console.log(headers);
+    return this.httpClient.get<{ [key: string]: [{ [key: string]: string }] }>(
+      this.path + 'api/referredCandidates/getAllCandidatesOfUser',
+      {
+        headers,
+      }
+    );
+  }
+  extractInfo(pdfFile: File): Observable<string> {
+    const formData: FormData = new FormData();
+    formData.append('pdfFile', pdfFile, pdfFile.name);
+    return this.httpClient.post<string>(
+      `${this.path}api/extractInfo`,
+      formData
+    );
+  }
+
+  saveCandidate(googleToken: any, candidateData: any): Observable<any[]> {
+    // console.log('saveCandidate google token :' + googleToken);
+
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + googleToken
+    );
+    // console.log(headers);
+    return this.httpClient
+      .post<any[]>(this.path + 'api/referredCandidates/add', candidateData, {
+        headers,
+      })
+      .pipe(
+        catchError((error: any) => {
+          if (
+            error.error &&
+            error.error.message === 'Candidate already referred'
+          ) {
+            console.warn('Warning: Candidate already referred');
+          }
+          return throwError(error);
+        })
+      );
+  }
+  createUser(user: any): Observable<any> {
+    return this.httpClient.post<any>(
+      this.path + 'api/referredCandidates/add',
+      user
+    );
+  }
+
+  updateRole(
+    googleToken: any,
+    userEmail: string,
+    newRole: string
+  ): Observable<any> {
+    const header = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + googleToken
+    );
+    const modifiedUser = { role: newRole };
+
+    return this.httpClient.put<any>(
+      this.path + `admin/users/modify/${userEmail}`,
+      modifiedUser,
+      { headers: header }
+    );
   }
 }

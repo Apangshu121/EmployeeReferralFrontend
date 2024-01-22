@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
           if (this.role === 'EMPLOYEE') {
             this.employeeFlag = true;
-            this.authService.updateTokenTime();
+            // this.authService.updateTokenTime();
           } else if (this.role === 'ADMIN') {
             this.adminFlag = true;
           }
