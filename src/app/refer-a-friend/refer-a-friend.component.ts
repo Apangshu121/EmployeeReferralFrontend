@@ -18,7 +18,8 @@ export class ReferAFriendComponent {
   profileSource: any;
   noticePeriod: any;
   offerInHand!: boolean;
-
+  showPdfModal: boolean = false;
+  servingNoticePeriod!: boolean;
   // willingToRelocate:any;
   // blackListError: string = '';
   // isForm = true;
@@ -41,6 +42,8 @@ export class ReferAFriendComponent {
       profileSource: [''],
       willingToRelocate: [''],
       offerInHand: [''],
+      servingNoticePeriod: [''],
+      noticePeriodLeft: [''],
       // other form controls...
     });
     this.disableForm();
@@ -133,13 +136,16 @@ export class ReferAFriendComponent {
   }
   showSuccessMessage() {
     alert('Form submitted successfully!');
-
     this.closeForm();
-
     this.router.navigate(['/home']);
   }
   formClosed: boolean = false;
   closeForm() {
     this.formClosed = true;
+  }
+
+  openPdf() {
+    this.showPdfModal = true;
+    window.open('assets/DummyResume.pdf', '_blank');
   }
 }

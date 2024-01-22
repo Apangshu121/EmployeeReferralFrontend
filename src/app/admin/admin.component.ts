@@ -15,6 +15,6 @@ export class AdminComponent {
     this.router.navigate(['/my-referrals']);
   }
   onCard3Click(): void {
-    this.router.navigate(['/navigation']);
+    this.router.navigate(['/manage-employee']);
   }
 }

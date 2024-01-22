@@ -28,6 +28,13 @@ const routes: Routes = [
       import('./employee/employee.component').then((m) => m.EmployeeComponent),
   },
   {
+    path: 'manage-employee',
+    loadChildren: () =>
+      import('./manage-employee/manage-employee.module').then(
+        (m) => m.ManageEmployeeModule
+      ),
+  },
+  {
     path: 'navigation',
     loadChildren: () =>
       import('./navigation/navigation.module').then((m) => m.NavigationModule),

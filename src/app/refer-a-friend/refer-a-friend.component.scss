@@ -1,3 +1,55 @@
+.form-container {
+    padding: 20px; 
+    background-color: #f0f0f0; 
+    border: 1px solid #ccc; 
+    border-radius: 8px;   
+    } 
+h2{
+    text-align: center;
+    font-style: italic;
+    color: purple;
+}
+.label-container {
+    margin: 0 auto; // This will center the container horizontally
+    max-width: 500px; // Adjust the max-width as needed
+  
+    display: flex;
+    flex-direction: row; 
+    
+    // display: flex;
+    // margin-left: 300px;
+    margin-top: 15px;
+    
+    input{
+    margin-left:10px; 
+    flex: 1;
+      }
+      .dropdown{
+        margin-left: 10px;
+        // flex: 1;
+      }
+}
+  
+  button {
+    background-color: #7e57c2;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 80px;
+  
+    &:hover {
+      background-color: #5e35b1;
+    }
+  }
+// .pdf-container{
+//     text-align: center;
+//     color: purple;
+// }
 // body {
 //     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 //     margin: 0;
@@ -75,3 +127,8 @@
 //     border: 1px solid #ddd;
 //     border-radius: 4px;
 //   }
+
+// .form-container{
+//   align-items: center;
+// }
+

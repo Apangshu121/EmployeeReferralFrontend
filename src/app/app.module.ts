@@ -20,6 +20,7 @@ import { ReferAFriendComponent } from './refer-a-friend/refer-a-friend.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 // import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -33,6 +34,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
     JobopeningsComponent,
     MyReferralsComponent,
     ReferAFriendComponent,
+    ManageEmployeeComponent,
   ],
   imports: [
     BrowserModule,

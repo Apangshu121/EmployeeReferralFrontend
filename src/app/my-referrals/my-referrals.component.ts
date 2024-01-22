@@ -21,10 +21,10 @@ export class MyReferralsComponent {
     console.log(googleToken);
 
     if (googleToken) {
-      this.authService.getReferredCandidates(googleToken).subscribe(
+      this.authService.getReferredCandidatesOfUser(googleToken).subscribe(
         (response) => {
           this.referredCandidates = response['referredCandidates'];
-          console.log(this.referredCandidates);
+          // console.log(this.referredCandidates);
         },
         (error) => {
           console.error('Error fetching referrals:', error);

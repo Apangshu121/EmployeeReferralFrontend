@@ -79,11 +79,13 @@ export class AuthService {
       'Bearer ' + googleToken
     );
     // console.log(headers);
-    return this.httpClient.get<any[]>(this.path + 'admin/users/all', {
-      headers,
-    });
+    return this.httpClient
+      .get<any[]>(this.path + 'admin/users/all', {
+        headers,
+      })
+      .pipe();
   }
-  getReferredCandidates(
+  getReferredCandidatesOfUser(
     googleToken: string
   ): Observable<{ [key: string]: [{ [key: string]: string }] }> {
     const headers = new HttpHeaders().set(
@@ -121,16 +123,12 @@ export class AuthService {
       })
       .pipe(
         catchError((error: any) => {
-          // Handle your specific error here
           if (
             error.error &&
             error.error.message === 'Candidate already referred'
           ) {
-            // Display a warning at the front end
             console.warn('Warning: Candidate already referred');
           }
-
-          // Re-throw the error so that it can be further handled if needed
           return throwError(error);
         })
       );
@@ -139,6 +137,24 @@ export class AuthService {
     return this.httpClient.post<any>(
       this.path + 'api/referredCandidates/add',
       user
+    );
+  }
+
+  updateRole(
+    googleToken: any,
+    userEmail: string,
+    newRole: string
+  ): Observable<any> {
+    const header = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + googleToken
+    );
+    const modifiedUser = { role: newRole };
+
+    return this.httpClient.put<any>(
+      this.path + `admin/users/modify/${userEmail}`,
+      modifiedUser,
+      { headers: header }
     );
   }
 }
