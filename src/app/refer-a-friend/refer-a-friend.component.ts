@@ -1,14 +1,17 @@
-//component.ts
 
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-refer-a-friend',
   templateUrl: './refer-a-friend.component.html',
-  styleUrls: ['./refer-a-friend.component.scss'] 
+
+  styleUrl: './refer-a-friend.component.scss',
+
 })
 export class ReferAFriendComponent {
   refForm!: FormGroup;
@@ -16,14 +19,20 @@ export class ReferAFriendComponent {
   extractedText: string | null = null;
   pdfSrc: string | null = null;
   preferredLocation: any;
-  profileSource:any;
-  vouch!:boolean;
-  willingToRelocate!:boolean;
-  isServing!:boolean;
-  noticePeriodLeft!:number;
-  // profileSource: any;
+  profileSource: any;
+  noticePeriod: any;
+  offerInHand!: boolean;
+  showPdfModal: boolean = false;
+  servingNoticePeriod!: boolean;
+  // willingToRelocate:any;
+  // blackListError: string = '';
   // isForm = true;
-  constructor(private fb: FormBuilder, private authService: AuthService, private router : Router) {
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.refForm = this.fb.group({
       candidateName: [''],
       contactNumber: [''],
@@ -33,35 +42,19 @@ export class ReferAFriendComponent {
       panNumber: [''],
       preferredLocation: [''],
       noticePeriod: [''],
-      vouch: [false],
+      vouch: [''],
       profileSource: [''],
-      willingToRelocate:[false],
-      servingNoticePeriod:[false],
-      noticePeriodLeft:['']
+      willingToRelocate: [''],
+      offerInHand: [''],
+      servingNoticePeriod: [''],
+      noticePeriodLeft: [''],
       // other form controls...
     });
+    this.disableForm();
   }
+
   onFileChange(event: any): void {
     this.selectedFile = event.target.files[0] as File;
-  }
-
-  onCheckboxChange(event: any): void {
-    this.refForm.get('vouch')?.setValue(event.target.checked);
-  }
-
-  onRelocationChange(event: any): void {
-    this.refForm.get('willingToRelocate')?.setValue(event.target.checked);
-  }
-
-  onDropdownChange(event: any): void {
-    this.refForm.get('profileSource')?.setValue(event.target.value);
-  }
-  onServingNoticePeriodCheck(event:any){
-    this.refForm.get('servingNoticePeriod')?.setValue(event.target.value);
-    this.isServing=event.target.value === 'true'
-  }
-  onLocationChange(event: any): void {
-    this.refForm.get('preferredLocation')?.setValue(event.target.value);
   }
 
   uploadPdf(): void {
@@ -72,48 +65,91 @@ export class ReferAFriendComponent {
           refFormValue.contactNumber = jsonResumeData.phone;
           refFormValue.candidateEmail = jsonResumeData.email;
           refFormValue.candidateName = jsonResumeData.name;
-          refFormValue.experience = Number(
-            jsonResumeData.experience.split(' ')[0]
-          );
+          refFormValue.experience = jsonResumeData.experience
+            ? Number(jsonResumeData.experience.split(' ')[0])
+            : '0';
           refFormValue.primarySkill = jsonResumeData.primarySkill;
+
           this.refForm.patchValue(refFormValue);
-          console.log('Extracted Data:', jsonResumeData);
+
           this.extractedText = JSON.stringify(jsonResumeData, null, 2);
+          this.enableForm();
         },
         (error) => {
-          console.error('Error extracting information from PDF:', error);
+          if (error instanceof HttpErrorResponse && error.status === 401) {
+            const errorMessage = error.error;
+
+            alert(`${errorMessage.error}`);
+            this.onCannotReffer();
+            this.disableForm();
+          }
         }
+        // console.error('Error extracting information from PDF:', error);
       );
     } else {
       alert('Please choose a valid PDF file.');
+      this.disableForm();
     }
+  }
+
+  disableForm() {
+    this.refForm.disable();
+  }
+
+  enableForm() {
+    this.refForm.enable();
+  }
+
+  onCannotReffer() {
+    this.selectedFile = null;
+    this.refForm.reset();
+    this.disableForm();
   }
   onSubmit() {
     const googleToken = this.authService.getToken();
     if (this.refForm.valid) {
-      console.log("Form is submitted");
       const formData = this.refForm.value;
-      console.log(formData);
+      this.refForm.get('offerInHand')?.setValue(this.offerInHand === true);
+      // console.log(formData);
+
       this.authService.saveCandidate(googleToken, formData).subscribe(
         (response) => {
-          //console.log('Candidate saved successfully:', response);
+          // console.log('Candidate saved successfully:', response);
+
+          this.showSuccessMessage();
           // Handle success (e.g., navigate to another page)
         },
         (error) => {
-          console.error('Error saving candidate:', error);
-          // Handle error
+          if (error instanceof HttpErrorResponse && error.status === 500) {
+            const errorMessage = error.error.message;
+
+            alert(` ${errorMessage}`);
+          } else if (
+            error instanceof HttpErrorResponse &&
+            error.status === 401
+          ) {
+            const errorMessage = error.error.message;
+            // console.log(errorMessage);
+            alert(`${errorMessage}`);
+          }
         }
       );
+    } else {
+      alert('Please fill in all fields before submitting.');
     }
-    else{
-      console.log(this.refForm);
-      console.log('Form is invalid.');
-      console.log('Form errors:', this.refForm.errors);
-    }
+  }
+  showSuccessMessage() {
+    alert('Form submitted successfully!');
+    this.closeForm();
+    this.router.navigate(['/home']);
+  }
+  formClosed: boolean = false;
+  closeForm() {
+    this.formClosed = true;
   }
 
-  onBack(){
-    this.router.navigate(['/app-home'])
+  openPdf() {
+    this.showPdfModal = true;
+    window.open('assets/DummyResume.pdf', '_blank');
   }
-  
 }

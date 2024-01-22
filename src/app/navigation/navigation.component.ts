@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+
+declare var $: any;
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  styleUrl: './navigation.component.scss',
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit {
   userName!: string;
+  role!: string;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -19,7 +22,7 @@ export class NavigationComponent {
       this.authService.getNameOfUser(googleToken).subscribe(
         (data) => {
           this.userName = data.name;
-          console.log(this.userName)
+          this.role = data.role;
         },
         (error) => {
           console.error('Error fetching user name:', error);
@@ -30,6 +33,8 @@ export class NavigationComponent {
     }
   }
   OnBackClick(): void {
-    this.router.navigate(['/app-home']);
+
+    this.router.navigate(['/home']);
+
   }
 }

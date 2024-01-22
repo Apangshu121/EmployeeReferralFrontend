@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, tap } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -10,29 +12,53 @@ import { Observable } from 'rxjs/internal/Observable';
 export class AuthService {
   private path = 'http://localhost:8080/';
 
-  constructor(private httpClient: HttpClient, private cookieService: CookieService) {}
- 
+  constructor(
+    private httpClient: HttpClient,
+    private cookieService: CookieService
+  ) {}
+
   public signOutExternal = () => {
     this.cookieService.delete('authCookie');
     console.log('Token cookie deleted');
   };
 
   saveUser(credentials: string): Observable<any> {
-    const header = new HttpHeaders().set('Content-type', 'text/plain;charset=UTF-8');
-    
-    return this.httpClient.post(
-      this.path + 'saveUser',
-      credentials,
-      { headers: header }
+    const header = new HttpHeaders().set(
+      'Content-type',
+      'text/plain;charset=UTF-8'
     );
+
+    return this.httpClient.post(this.path + 'saveUser', credentials, {
+      headers: header,
+    });
   }
 
   getToken(): string | null {
     return this.cookieService.get('authCookie');
   }
 
-  setToken(tokenPayload:string): void {
-    this.cookieService.set('authCookie', tokenPayload, { expires: 1 });
+  setToken(tokenPayload: string): void {
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + 30 * 60 * 1000);
+    this.cookieService.set('authCookie', tokenPayload, {
+      expires: expirationDate,
+    });
+  }
+
+  updateTokenTime(): void {
+    const currentCookieValue = this.cookieService.get('authCookie');
+    if (currentCookieValue) {
+      console.log('Deleting cookie');
+
+      this.cookieService.delete('authCookie');
+      const expirationDate = new Date();
+      console.log('Updating expiry time');
+      expirationDate.setTime(expirationDate.getTime() + 1 * 60 * 1000);
+      this.cookieService.set('authCookie', currentCookieValue, {
+        expires: expirationDate,
+      });
+      console.log(expirationDate.getTime() + 1 * 60 * 1000);
+    }
   }
 
   isTokenPresent(): boolean {
@@ -40,13 +66,40 @@ export class AuthService {
   }
 
   getNameOfUser(googleToken: string): Observable<any> {
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer ' + googleToken,
-    });
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + googleToken
+    );
+    console.log(headers);
 
-    return this.httpClient.get(this.path + 'user/getUserDetails', {
-      headers: headers,
-    });
+    return this.httpClient.get(this.path + 'user/getUserDetails', { headers });
+  }
+  getAllEmployees(googleToken: string): Observable<any[]> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + googleToken
+    );
+    // console.log(headers);
+    return this.httpClient
+      .get<any[]>(this.path + 'admin/users/all', {
+        headers,
+      })
+      .pipe();
+  }
+  getReferredCandidatesOfUser(
+    googleToken: string
+  ): Observable<{ [key: string]: [{ [key: string]: string }] }> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + googleToken
+    );
+    console.log(headers);
+    return this.httpClient.get<{ [key: string]: [{ [key: string]: string }] }>(
+      this.path + 'api/referredCandidates/getAllCandidatesOfUser',
+      {
+        headers,
+      }
+    );
   }
   extractInfo(pdfFile: File): Observable<string> {
     const formData: FormData = new FormData();
@@ -55,22 +108,6 @@ export class AuthService {
       `${this.path}api/extractInfo`,
       formData
     );
-  }
-  saveCandidate(googleToken: any, candidateData: any): Observable<any[]> {
-    console.log('saveCandidate google token :' + googleToken);
-  const headers = new HttpHeaders().set('Authorization', 'Bearer ' + googleToken);
-  console.log(headers);
-
-  return this.httpClient.post<any[]>(this.path + 'api/referredCandidates/add', candidateData, {
-    headers,
-  })
-  .pipe(
-    tap(response => console.log('Save Candidate Success:', response)),
-    catchError(error => {
-      console.error('Save Candidate Error:', error);
-      throw error;
-    })
-  );
   }
 
   getAllReferredCandidates(googleToken:string) : Observable<any[]>{
@@ -100,5 +137,55 @@ export class AuthService {
     return this.httpClient.post<any>(`${this.path}api/referredCandidates/sendMail/${id}`,id,{
       headers:header,
     });
+
+
+  saveCandidate(googleToken: any, candidateData: any): Observable<any[]> {
+    // console.log('saveCandidate google token :' + googleToken);
+
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + googleToken
+    );
+    // console.log(headers);
+    return this.httpClient
+      .post<any[]>(this.path + 'api/referredCandidates/add', candidateData, {
+        headers,
+      })
+      .pipe(
+        catchError((error: any) => {
+          if (
+            error.error &&
+            error.error.message === 'Candidate already referred'
+          ) {
+            console.warn('Warning: Candidate already referred');
+          }
+          return throwError(error);
+        })
+      );
+  }
+  createUser(user: any): Observable<any> {
+    return this.httpClient.post<any>(
+      this.path + 'api/referredCandidates/add',
+      user
+    );
+  }
+
+  updateRole(
+    googleToken: any,
+    userEmail: string,
+    newRole: string
+  ): Observable<any> {
+    const header = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + googleToken
+    );
+    const modifiedUser = { role: newRole };
+
+    return this.httpClient.put<any>(
+      this.path + `admin/users/modify/${userEmail}`,
+      modifiedUser,
+      { headers: header }
+    );
+
   }
 }

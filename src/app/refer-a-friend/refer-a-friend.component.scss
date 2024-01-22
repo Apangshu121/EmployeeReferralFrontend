@@ -1,111 +1,50 @@
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #aee5f4;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+.form-container {
+    padding: 20px; 
+    background-color: #f0f0f0; 
+    border: 1px solid #ccc; 
+    border-radius: 8px;   
+    } 
+h2{
+    text-align: center;
+    font-style: italic;
+    color: purple;
+}
+.label-container {
+    margin: 0 auto; // This will center the container horizontally
+    max-width: 500px; // Adjust the max-width as needed
+  
+    display: flex;
+    flex-direction: row; 
+    
+    // display: flex;
+    // margin-left: 300px;
+    margin-top: 15px;
+    
+    input{
+    margin-left:10px; 
+    flex: 1;
+      }
+      .dropdown{
+        margin-left: 10px;
+        // flex: 1;
+      }
+}
+  
+  button {
+    background-color: #7e57c2;
+    border: none;
     border-radius: 8px;
+    padding: 8px 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 80px;
   
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-  
-    form {
-      margin-top: 20px;
-  
-      label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
-  
-      .form-group {
-        margin-bottom: 20px;
-  
-       
-  
-        button {
-          background-color: #007bff;
-          color: #fff;
-          padding: 8px 12px;
-          border: none;
-          cursor: pointer;
-          transition: background-color 0.3s;
-  
-          &:hover {
-            background-color: #0056b3;
-          }
-        }
-      }
-  
-      .input-container {
-        position: relative;
-  
-        input {
-          width: 80%;
-          padding: 8px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-  
-          &:focus {
-            outline: none;
-            border-color: #007bff;
-          }
-        }
-  
-        i {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          right: 10px;
-        }
-      }
-  
-      .candidateName,
-      .mobileNumber,
-      .emailid,
-      .experience,
-      .primaryskill,
-      .pannumber,
-      .location,
-      .noticePeriod {
-        margin-bottom: 20px;
-      }
-  
-      select {
-        width: 82%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-  
-      input[type="checkbox"] {
-        margin-right: 5px;
-      }
-  
-      button[type="submit"] {
-        background-color: #4caf50;
-        color: #fff;
-        padding: 10px 15px;
-        border: none;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: background-color 0.3s;
-  
-        &:hover {
-          background-color: #45a049;
-        }
-      }
-  
-      #result {
-        margin-top: 20px;
-  
-        iframe {
-          border: 1px solid #ddd;
-          border-radius: 4px;
-        }
-      }
+    &:hover {
+      background-color: #5e35b1;
     }
   }
-  
+

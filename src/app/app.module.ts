@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { LogoutComponent } from './logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+
 import { RecruiterComponent } from './recruiter/recruiter.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BuHeadComponent } from './bu-head/bu-head.component';
@@ -13,36 +14,64 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { NavigationComponent } from './navigation/navigation.component';
+
 import { JobOpeningsComponent } from './job-openings/job-openings.component';
-import { ReferAFriendComponent } from './refer-a-friend/refer-a-friend.component';
+
 import { MyReferralsComponent } from './my-referrals/my-referrals.component';
+
+import { NavigationComponent } from './navigation/navigation.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { AdminComponent } from './admin/admin.component';
+
+
+import { MyReferralsComponent } from './my-referrals/my-referrals.component';
+import { ReferAFriendComponent } from './refer-a-friend/refer-a-friend.component';
+
+
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LogoutComponent,
     HomeComponent,
+
     RecruiterComponent,
     BuHeadComponent,
-    NavigationComponent,
     JobOpeningsComponent,
+
+    NavigationComponent,
+    EmployeeComponent,
+    AdminComponent,
+    MyReferralsComponent,
     ReferAFriendComponent,
-    MyReferralsComponent
+    ManageEmployeeComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+
     ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
     MatTableModule,
     MatFormFieldModule,
     MatSelectModule,
-    FormsModule
+
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
