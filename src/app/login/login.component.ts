@@ -3,11 +3,13 @@ import { Router } from '@angular/router';
 import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
 import { AuthService } from '../services/auth.service';
 import { firstValueFrom } from 'rxjs';
-
+import { MatCardModule } from '@angular/material/card';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
+  standalone: true,
+  imports: [MatCardModule],
 })
 export class LoginComponent implements OnInit {
   constructor(
@@ -15,7 +17,6 @@ export class LoginComponent implements OnInit {
     private service: AuthService,
     private _ngZone: NgZone
   ) {}
-
   ngOnInit(): void {
     // @ts-ignore
     window.onGoogleLibraryLoad = () => {
@@ -37,14 +38,13 @@ export class LoginComponent implements OnInit {
       google.accounts.id.prompt((notification: PromptMomentNotification) => {});
     };
   }
-
   // Whenever google responds back with a token then that will go to this function
   async handleCredentialResponse(response: CredentialResponse) {
     try {
       await firstValueFrom(this.service.saveUser(response.credential)).then(
         (x) => {
           this.service.setToken(x.tokenPayload);
-          console.log(x.tokenPayload)
+          console.log(x.tokenPayload);
           this.router.navigate(['/home']);
         }
       );
