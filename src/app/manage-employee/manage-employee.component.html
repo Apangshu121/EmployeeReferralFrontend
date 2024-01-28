@@ -1,59 +1,73 @@
 <app-navigation></app-navigation>
-<!-- <div *ngIf="user">
-  <h2>List of Users</h2>
-  <ul>
-    <li *ngFor="let user of user.Users">
-      {{ user.name }} ({{ user.email }}) - {{ user.role }}
-      <button *ngIf="user.role !== userRole" (click)="editUser(user)">
-        Edit
-      </button>
-    </li>
-  </ul>
-</div> -->
+
+
 <div class="heading" *ngIf="editUserFlag">All Employee Details</div>
-<div *ngIf="user && editUserFlag">
+
+<div class="table1">
+<div *ngIf="user && editUserFlag" class="info1">
   <div>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Role</th>
-          <th scope="col">Update Role</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let user of user.Users; let i = index">
-        <tr>
-          <td>{{ user.id }}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
-          <td>
-            <button (click)="openEditCard(user)">Edit</button>
+   
+    <div class="mat-elevation-z8">
+    <table mat-table class="mat-table table container" [dataSource]="user.Users" >
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let element" [ngClass]="getColumnAlignment(element.id)">
+            {{ element.id }}
           </td>
-        </tr>
-      </tbody>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+
+      <!-- Role Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Role</th>
+        <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+      </ng-container>
+
+      <!-- Update Role Column -->
+      <ng-container matColumnDef="updateRole">
+        <th mat-header-cell *matHeaderCellDef>Update Role</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button (click)="openEditCard(element)" *ngIf="!(element.role==='ADMIN')">Edit</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
+  </div>
 </div>
-<!-- *ngIf="user.role !== userRole"  (click)="editUser(user)"-->
+</div>
+
+
 <!-- Card for updating role -->
-<div *ngIf="selectedUser && update">
+<div *ngIf="selectedUser && update" class="update-role-card">
   <div class="card">
-    <div class="card-header">Update Role</div>
+    <div class="card-header">Update User Details</div>
     <div class="card-body">
       <p>User: {{ selectedUser.name }} ({{ selectedUser.email }})</p>
       <label for="newRole">New Role:</label>
       <select id="newRole" [(ngModel)]="selectedRole">
         <option value="RECRUITER">Recruiter</option>
-        <option value="BU_HEAD">BU Head</option>
+        <option value="SENIOR">Senior</option>
         <option value="EMPLOYEE">Employee</option>
         <option value="ADMIN">Admin</option>
       </select>
-      <button (click)="editUser(selectedUser)">Update Role</button>
-
-      <button (click)="close()">Cancel</button>
+      <button mat-button (click)="editUser(selectedUser)">Update</button>
+      <button mat-button (click)="close()">Cancel</button>
     </div>
   </div>
 </div>
+

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -73,6 +74,7 @@ export class AuthService {
 
     return this.httpClient.get(this.path + 'user/getUserDetails', { headers });
   }
+
   getAllEmployees(googleToken: string): Observable<any[]> {
     const headers = new HttpHeaders().set(
       'Authorization',
@@ -85,6 +87,7 @@ export class AuthService {
       })
       .pipe();
   }
+
   getReferredCandidatesOfUser(
     googleToken: string
   ): Observable<{ [key: string]: [{ [key: string]: string }] }> {
@@ -100,6 +103,7 @@ export class AuthService {
       }
     );
   }
+
   extractInfo(pdfFile: File): Observable<string> {
     const formData: FormData = new FormData();
     formData.append('pdfFile', pdfFile, pdfFile.name);
@@ -108,15 +112,64 @@ export class AuthService {
       formData
     );
   }
+  // extractInfo(pdfFile: File): Observable<string> {
+  //   const formData: FormData = new FormData();
+  //   formData.append('pdfFile', pdfFile, pdfFile.name);
+  //   return this.httpClient.post<string>(
+  //     `${this.path}api/extractInfo`,
+  //     formData
+  //   );
+  // }
+
+  getAllReferredCandidates(googleToken: string): Observable<any[]> {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient
+      .get<any[]>(`${this.path}api/referredCandidates/getAll`, {
+        headers: headers,
+      })
+      .pipe();
+  }
+
+  updateCandidateDetails(
+    googleToken: string,
+    candidateId: number,
+    updatedDetails: any
+  ): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient.put<any>(
+      `${this.path}api/referredCandidates/update/${candidateId}`,
+      updatedDetails,
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  sendMail(googleToken: string, id: number) {
+    const header = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    console.log(header);
+
+    return this.httpClient.post<any>(
+      `${this.path}api/referredCandidates/sendMail/${id}`,
+      id,
+      {
+        headers: header,
+      }
+    );
+  }
 
   saveCandidate(googleToken: any, candidateData: any): Observable<any[]> {
-    // console.log('saveCandidate google token :' + googleToken);
-
     const headers = new HttpHeaders().set(
       'Authorization',
       'Bearer ' + googleToken
     );
-    // console.log(headers);
+
     return this.httpClient
       .post<any[]>(this.path + 'api/referredCandidates/add', candidateData, {
         headers,
@@ -133,6 +186,7 @@ export class AuthService {
         })
       );
   }
+  
   createUser(user: any): Observable<any> {
     return this.httpClient.post<any>(
       this.path + 'api/referredCandidates/add',

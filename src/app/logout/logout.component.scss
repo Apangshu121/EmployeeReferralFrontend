@@ -1,3 +1,4 @@
+
 // div button{
 //     background-color: purple;
 //     border-radius: 10px;
@@ -5,17 +6,18 @@
 
 
 button {
-    background-color: #7e57c2;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  
+    // background-color: purple;
+    // color: white;
+    border-radius: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
     margin-right: 10px;
-    width: 80px;
+    margin-left: 10px;
+  
   
     &:hover {
-      background-color: #5e35b1;
+      background-color: #b3aac5;
     }
   }
+
