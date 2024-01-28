@@ -54,6 +54,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { JobManagementComponent } from './job-management/job-management.component';
 import { FilterCandidatesComponent } from './filter-candidates/filter-candidates.component';
 import { SearchCandidatesComponent } from './search-candidates/search-candidates.component';
+import { ReferredCandidateAdminComponent } from './referred-candidate-admin/referred-candidate-admin.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { SearchCandidatesComponent } from './search-candidates/search-candidates
     JobManagementComponent,
     FilterCandidatesComponent,
     SearchCandidatesComponent,
+    ReferredCandidateAdminComponent,
   ],
   imports: [
     BrowserModule,

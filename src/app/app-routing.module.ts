@@ -51,7 +51,13 @@ const routes: Routes = [
         (m) => m.ReferAFriendModule
       ),
   },
-
+  {
+    path: 'referred-candidate-admin',
+    loadChildren: () =>
+      import('./referred-candidate-admin/referred-candidate-admin.module').then(
+        (m) => m.ReferredCandidateAdminModule
+      ),
+  },
 
 
   {

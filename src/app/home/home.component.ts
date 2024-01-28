@@ -95,5 +95,8 @@ ngAfterViewChild(){
  allReferredCandidates():void{
   this.router.navigate(['referred-candidates'])
  }
+ allReferredCandidatesAdmin():void{
+  this.router.navigate(['referred-candidate-admin'])
+ }
 
 }

@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Tally } from '../my-profile/my-profile.component';
 
 @Injectable({
   providedIn: 'root',
@@ -72,9 +73,16 @@ export class AuthService {
       'Authorization',
       'Bearer ' + googleToken
     );
-    console.log(headers);
+    // console.log(headers);
 
     return this.httpClient.get(this.path + 'user/getUserDetails', { headers });
+  }
+
+ 
+  getTallyData(googleToken: string): Observable<Tally> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${googleToken}`);
+
+    return this.httpClient.get<Tally>(this.path + 'user/getReferralTally', { headers });
   }
 
   getAllEmployees(googleToken: string): Observable<any[]> {
@@ -114,14 +122,8 @@ export class AuthService {
       formData
     );
   }
-  // extractInfo(pdfFile: File): Observable<string> {
-  //   const formData: FormData = new FormData();
-  //   formData.append('pdfFile', pdfFile, pdfFile.name);
-  //   return this.httpClient.post<string>(
-  //     `${this.path}api/extractInfo`,
-  //     formData
-  //   );
-  // }
+
+
 
   getAllReferredCandidates(googleToken: string): Observable<any[]> {
     const headers = new HttpHeaders({
@@ -245,6 +247,17 @@ export class AuthService {
     });
     return this.httpClient
       .get<any[]>(`${this.path}api/referredCandidates/getAll?keyword=${searchKeyword}`, {
+        headers: headers,
+      })
+      .pipe();
+  }
+
+  searchUsers(googleToken:string, searchKeyword: string){
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient
+      .get<any[]>(`${this.path}admin/users/all?keyword=${searchKeyword}`, {
         headers: headers,
       })
       .pipe();

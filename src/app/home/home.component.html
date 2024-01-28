@@ -22,14 +22,19 @@
           <span>My Referrals</span>
        </button>
 
+       <button mat-button class="menu-button" (click)="jobOpening()">
+        <mat-icon>work</mat-icon>
+          <span>Job Openings</span>
+       </button>
+
        <button mat-button class="menu-button" *ngIf="isRecruiter" (click)="allReferredCandidates()" >
         <mat-icon>dashboard</mat-icon>
           <span>Dashboard</span>
        </button>
 
-       <button mat-button class="menu-button" (click)="jobOpening()">
-        <mat-icon>work</mat-icon>
-          <span>Job Openings</span>
+       <button mat-button class="menu-button" *ngIf="adminFlag" (click)="allReferredCandidatesAdmin()" >
+        <mat-icon>dashboard</mat-icon>
+          <span>Referred Candidates</span>
        </button>
 
        <button mat-button class="menu-button" (click)="manageEmployee()" *ngIf="adminFlag">
