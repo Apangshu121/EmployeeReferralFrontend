@@ -1,0 +1,22 @@
+.container{
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0%;
+    // background-color: rgb(80, 114, 156);
+}
+.smaller-image {
+    max-width: 100px; /* Adjust the max-width as needed */
+    max-height: 150px;
+    align-self: center;/* Adjust the max-height as needed */
+  }
+  .card{
+    width :100%;
+    height:45vh;
+    // background-color:lightgrey;
+    background-color:#e9e9f4;
+  }
+  h3 {
+    margin-top: 1.5rem;
+    align-self: center;
+  }

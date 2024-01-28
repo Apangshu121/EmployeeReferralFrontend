@@ -9,39 +9,15 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { JobOpeningsComponent } from './job-openings/job-openings.component';
 
 import { MyReferralsComponent } from './my-referrals/my-referrals.component';
-import { BuHeadComponent } from './bu-head/bu-head.component';
+
 import { from } from 'rxjs';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  {
-    path: '',
-    loadChildren: () =>
-      import('./logout/logout.module').then((m) => m.LogoutModule),
-  },
-  {
-    path: 'admin',
-    loadChildren: () =>
-      import('./admin/admin.module').then((m) => m.AdminModule),
-  },
-  {
-    path: 'employee',
-    loadChildren: () =>
-      import('./employee/employee.component').then((m) => m.EmployeeComponent),
-  },
-  {
-    path: 'bu-head',
-    loadChildren: () =>
-      import('./bu-head/bu-head.component').then((m) => m.BuHeadComponent),
-  },
-  {
-    path: 'recruiter',
-    loadChildren: () =>
-      import('./recruiter/recruiter.component').then(
-        (m) => m.RecruiterComponent
-      ),
-  },
+  
+ 
   {
     path: 'manage-employee',
     loadChildren: () =>
@@ -49,18 +25,18 @@ const routes: Routes = [
         (m) => m.ManageEmployeeModule
       ),
   },
+  {path:'job-openings', 
+  loadChildren:()=> import('./job-openings/job-openings.module').then((m)=>m.JobOpeningsModule)},
   {
-    path: 'navigation',
-    loadChildren: () =>
-      import('./navigation/navigation.module').then((m) => m.NavigationModule),
+    path: 'my-profile', loadChildren:()=>import('./my-profile/my-profile.module').then((m)=>m.MyProfileModule)
   },
-  {
-    path: 'job-openings',
-    loadChildren: () =>
-      import('./job-openings/job-openings.module').then(
-        (m) => m.JobOpeningsModule
-      ),
-  },
+  // {
+  //   path: 'job-openings',
+  //   loadChildren: () =>
+  //     import('./job-openings/job-openings.module').then(
+  //       (m) => m.JobOpeningsModule
+  //     ),
+  // },
   // {
   //   path: 'manageemployee',
   //   loadChildren: () =>

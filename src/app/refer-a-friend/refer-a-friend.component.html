@@ -1,4 +1,5 @@
 <app-navigation></app-navigation>
+
 <div class="form-container">
   <h2>Upload Candidate Resume</h2>
   <div class="label-container">
@@ -8,7 +9,7 @@
         type="file"
         id="resume"
         (change)="onFileChange($event)"
-        accept=".pdf, .docx"
+        accept=".pdf"
       />
       <button type="submit" (click)="uploadPdf()" style="margin: auto">
         Upload
@@ -22,7 +23,6 @@
         <i aria-hidden="true"></i>
         <input
           type="text"
-
           id="candidateName"
           placeholder="Full Name"
           formControlName="candidateName"
@@ -30,7 +30,6 @@
         />
       </div>
     </div>
-
     <div class="label-container">
       <label for="phone">Mobile Number:</label>
       <div>
@@ -45,7 +44,6 @@
         />
       </div>
     </div>
-
     <div class="label-container">
       <label for="email">Email Id:</label>
       <div>
@@ -59,7 +57,6 @@
         />
       </div>
     </div>
-
     <div class="label-container">
       <label for="experience">Experience:</label>
       <div>
@@ -88,20 +85,6 @@
       </div>
     </div>
     <div class="label-container">
-      <label for="pannumber">Pan Number:</label>
-      <div>
-        <i aria-hidden="true"></i>
-        <input
-          type="text"
-          maxlength="10"
-          id="pannumber"
-          placeholder="Pan Number"
-          formControlName="panNumber"
-          required
-        />
-      </div>
-    </div>
-    <div class="label-container">
       <label for="currentCompanyNoticePeriod"
         >Current Company Notice Period:</label
       >
@@ -116,7 +99,6 @@
         />
       </div>
     </div>
-
     <div class="label-container">
       <label for="preferredlocation">Preferred Location:</label>
       <select
@@ -137,7 +119,6 @@
       <label for="willingToRelocate"> Are you willing to relocate </label>
       <input type="checkbox" formControlName="willingToRelocate" />
     </div>
-
     <div class="label-container">
       <label for="radio">Are you serving in notice period?</label>
       <label>
@@ -157,7 +138,6 @@
         No
       </label>
     </div>
-
     <div *ngIf="refForm.get('servingNoticePeriod')?.value === 'true'">
       <div class="label-container">
         <label for="numberofdays"
@@ -174,7 +154,6 @@
         </div>
       </div>
     </div>
-
     <div class="label-container">
       <label for="radio">Having any offer in hand</label>
       <label>
@@ -192,7 +171,6 @@
       </label>
       <input type="checkbox" formControlName="vouch" />
     </div>
-
     <div class="label-container">
       <label for="profileSource">Profile Source:</label>
       <select
@@ -212,7 +190,6 @@
     </div>
     <button type="submit" class="label-container">Submit</button>
   </form>
-
   <div id="result" *ngIf="extractedText !== null">
     <!-- <h2>Uploaded PDF:</h2> -->
     <iframe
@@ -224,7 +201,6 @@
     ></iframe>
   </div>
 </div>
-
 <div *ngIf="showPdfModal" id="pdfViewerModal">
   <!-- <span id="closeButton" (click)="closePdfModal()">Close</span> -->
   <iframe
