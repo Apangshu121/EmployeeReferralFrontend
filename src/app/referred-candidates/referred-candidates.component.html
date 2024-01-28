@@ -2,7 +2,8 @@
 
 <div class="icons-container" *ngIf="!isUpdate">
   <!-- <mat-icon class="icon" (click)="openSearchComponent()">search</mat-icon> -->
-  <button mat-raised-button color="primary"  (click)="openSearchComponent()">Search<mat-icon class="icon" >search</mat-icon> </button>
+  <input type = "text" placeholder="Search" *ngIf="!isOpenfilter" [(ngModel)]="searchKeyword">
+  <button mat-raised-button color="primary"  (click)="onSearchClicked()">Search<mat-icon class="icon" >search</mat-icon> </button>
   <button mat-raised-button color="primary"  (click)="openFilterComponent()">Filter<mat-icon class="icon" >filter_list</mat-icon> </button>
 </div>
 
@@ -56,7 +57,18 @@
 
   <div class="filter">
     <button mat-raised-button color="primary" (click)="onFilterChange()">Apply Filter</button>
+  </div><br>
+
+  <div class="filter">
+    <mat-form-field>
+      <input matInput [(ngModel)]="searchKeyword" placeholder="Search in Filter">
+    </mat-form-field>
   </div>
+
+    <div class="filter">
+    <button mat-raised-button color="primary">Search<mat-icon class="icon" >search</mat-icon> </button>
+  </div>
+
   </div>
 
     <!-- <div class="table1" *ngIf="isFilter">

@@ -41,6 +41,8 @@ export class ReferredCandidatesComponent implements OnInit{
   isOpenfilter=false
   isSearch=false;
   isOpenSearch=false;
+  searchKeyword!:string;
+  searchResults: any;
   
 
 
@@ -140,10 +142,15 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
   getTableDataSource(): any[] {
     if (this.isFilter) {
       return this.filteredCandidates;
-    } else {
+    } else if(this.isSearch){
+      return this.searchResults.SearchedCandidates;
+    }
+    else {
       return this.data.candidates;
     }
   }
+
+
   
   
 
@@ -231,6 +238,24 @@ updateCandidateDetails() {
 
   openSearchComponent(){
     this.isOpenSearch=true;
+  }
+
+  onSearchClicked(){
+    this.isSearch=true;
+    const googleToken = this.authService.getToken();
+    if(googleToken){
+      this.authService.searchCandidates(googleToken,this.searchKeyword).subscribe(
+        (response)=>{
+          this.searchResults = response;
+          //this.searchResults=this.searchResults.searchCandidates
+        },
+        (error) =>{
+          console.log(error);
+        }
+      )
+    }
+
+
   }
 
   

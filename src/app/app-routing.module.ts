@@ -14,7 +14,6 @@ import { from } from 'rxjs';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
-  
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   {
     path: '',

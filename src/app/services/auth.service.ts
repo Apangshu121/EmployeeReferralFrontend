@@ -226,4 +226,15 @@ export class AuthService {
     
   }
 
+  searchCandidates(googleToken:string, searchKeyword: string){
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient
+      .get<any[]>(`${this.path}api/referredCandidates/getAll?keyword=${searchKeyword}`, {
+        headers: headers,
+      })
+      .pipe();
+  }
+
 }

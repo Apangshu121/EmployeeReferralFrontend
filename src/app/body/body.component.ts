@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavServiceService } from '../services/nav-service.service';
+import { Component, Input } from '@angular/core';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-body',
@@ -7,8 +7,8 @@ import { NavServiceService } from '../services/nav-service.service';
   styleUrl: './body.component.scss'
 })
 export class BodyComponent {
+  constructor(public _dataService:DataService){}
 
-  constructor( public _dataService:NavServiceService){}
 
   getBodyClass(): string{
     let styleClass= '';
@@ -20,5 +20,7 @@ export class BodyComponent {
       styleClass='body-md-screen';
     }
     return styleClass;
+
   }
+
 }

@@ -13,7 +13,7 @@ interface SideNavToggle{
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
+  templateUrl:'./home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {

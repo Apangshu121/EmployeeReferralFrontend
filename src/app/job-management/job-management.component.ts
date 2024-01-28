@@ -7,7 +7,7 @@ import { DataServices } from '../sidenav/data.services';
 
 @Component({
   selector: 'app-job-management',
-  templateUrl: './job-management.component.html',
+  templateUrl:'./job-management.component.html',
   styleUrl: './job-management.component.scss'
 })
 export class JobManagementComponent implements OnInit{
