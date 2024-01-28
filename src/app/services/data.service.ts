@@ -8,6 +8,10 @@ import { Sheet } from '../models/sheet.model';
 })
 export class DataService {
 
+
+  collapsed: boolean = false;
+  screenWidth: number = 0;
+  
   constructor( private http : HttpClient) { }
 
   private apiUrl = 'https://sheet.best/api/sheets/fe88a680-2c26-45ba-aec7-0d6691606aec';

@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 export class MyReferralsComponent {
   constructor(private authService: AuthService) {}
 
-  referredCandidates!: [{ [key: string]: string }];
+  referredCandidates: any;
 
   ngOnInit(): void {
     this.getMyReferrals();

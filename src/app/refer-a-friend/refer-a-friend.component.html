@@ -1,4 +1,4 @@
-<app-navigation></app-navigation>
+<app-sidenav></app-sidenav>
 <div class="form-container">
   <h2>Upload Candidate Resume</h2>
   <div class="label-container">
@@ -8,7 +8,7 @@
         type="file"
         id="resume"
         (change)="onFileChange($event)"
-        accept=".pdf, .docx"
+        accept=".pdf"
       />
       <button type="submit" (click)="uploadPdf()" style="margin: auto">
         Upload
@@ -87,7 +87,7 @@
         />
       </div>
     </div>
-    <div class="label-container">
+    <!-- <div class="label-container">
       <label for="pannumber">Pan Number:</label>
       <div>
         <i aria-hidden="true"></i>
@@ -97,10 +97,9 @@
           id="pannumber"
           placeholder="Pan Number"
           formControlName="panNumber"
-          required
         />
       </div>
-    </div>
+    </div> -->
     <div class="label-container">
       <label for="currentCompanyNoticePeriod"
         >Current Company Notice Period:</label

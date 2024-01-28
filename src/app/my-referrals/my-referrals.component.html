@@ -1,15 +1,15 @@
 
-<app-navigation></app-navigation>
+<app-sidenav></app-sidenav>
 <!-- <p>my-referrals works!</p> -->
 
-<div>
-  <h2 style="padding-left: 30px">My Referrals</h2>
+<div class="my-referrals-container">
+  <h2 >My Referrals</h2>
   <ul>
     <li *ngFor="let candidate of referredCandidates">
       <strong>Candidate Name:</strong> {{ candidate["candidateName"] }}<br />
       <strong>Date of Referral:</strong>
       {{ candidate["dateOfReferral"] | date : "short" }}<br />
-      <strong>Interview Status:</strong> {{ candidate["interviewStatus"]
+      <strong>Interview Status:</strong> {{ candidate.interviewStatus.interviewStatus
       }}<br />
       <strong>Interviewed Position:</strong>
       {{ candidate["interviewedPosition"] }}<br />

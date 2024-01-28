@@ -24,6 +24,8 @@ export class ReferAFriendComponent {
   offerInHand!: boolean;
   showPdfModal: boolean = false;
   servingNoticePeriod!: boolean;
+  blacklisted!:any;
+  fileName!:any;
   // willingToRelocate:any;
   // blackListError: string = '';
   // isForm = true;
@@ -39,7 +41,8 @@ export class ReferAFriendComponent {
       candidateEmail: [''],
       experience: [''],
       primarySkill: [''],
-      panNumber: [''],
+      blacklisted:[''],
+      fileName:[''],
       preferredLocation: [''],
       noticePeriod: [''],
       vouch: [''],
@@ -69,7 +72,8 @@ export class ReferAFriendComponent {
             ? Number(jsonResumeData.experience.split(' ')[0])
             : '0';
           refFormValue.primarySkill = jsonResumeData.primarySkill;
-
+          refFormValue.fileName=jsonResumeData.filename;
+          refFormValue.blacklisted=jsonResumeData.blacklisted;
           this.refForm.patchValue(refFormValue);
 
           this.extractedText = JSON.stringify(jsonResumeData, null, 2);
@@ -108,10 +112,32 @@ export class ReferAFriendComponent {
   onSubmit() {
     const googleToken = this.authService.getToken();
     if (this.refForm.valid) {
-      const formData = this.refForm.value;
+      
+      console.log(this.refForm);
       this.refForm.get('offerInHand')?.setValue(this.offerInHand === true);
-      // console.log(formData);
+      const serve = this.refForm.get('servingNoticePeriod');
+      const noticePeriodValue = this.refForm.get('noticePeriod');
 
+      if(noticePeriodValue && serve){
+        console.log(noticePeriodValue.value);
+        console.log(serve.value);
+        if(serve.value=="false"){
+          
+          const noticePeriodV = noticePeriodValue.value;
+          console.log(noticePeriodV);
+          console.log('Form value before patch:', this.refForm.value);
+          
+          this.refForm.patchValue({
+            noticePeriodLeft: noticePeriodV
+          });
+          console.log('Form value before patch:', this.refForm.value);
+
+          //this.refForm.get('noticePeriodLeft')?.setValue(noticePeriodV);
+      }}
+      else{
+        console.log("Notice Period Left");
+      }
+      const formData = this.refForm.value;
       this.authService.saveCandidate(googleToken, formData).subscribe(
         (response) => {
           // console.log('Candidate saved successfully:', response);
@@ -134,7 +160,8 @@ export class ReferAFriendComponent {
           }
         }
       );
-    } else {
+    } 
+    else {
       alert('Please fill in all fields before submitting.');
     }
   }

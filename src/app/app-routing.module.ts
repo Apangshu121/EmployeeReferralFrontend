@@ -14,6 +14,7 @@ import { from } from 'rxjs';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
+  
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   {
     path: '',
@@ -83,6 +84,48 @@ const routes: Routes = [
         (m) => m.ReferAFriendModule
       ),
   },
+
+
+
+  {
+    path: 'referred-candidates',
+    loadChildren: () =>
+      import('./referred-candidates/referred-candidates.module').then(
+        (m) => m.ReferredCandidatesModule
+      ),
+  },
+
+  {
+    path: 'job-management',
+    loadChildren: () =>
+      import('./job-management/job-management.module').then(
+        (m) => m.JobManagementModule
+      ),
+  },
+
+  {
+    path: 'filter-candidates',
+    loadChildren: () =>
+      import('./filter-candidates/filter-candidates.module').then(
+        (m) => m.FilterCandidatesModule
+      ),
+  },
+
+  // {
+  //   path: 'sidenav',
+  //   loadChildren: () =>
+  //     import('./sidenav/sidenav.module').then(
+  //       (m) => m.SidenavModule
+  //     ),
+  // },
+
+  // {
+  //   path: 'body',
+  //   loadChildren: () =>
+  //     import('./body/body.module').then(
+  //       (m) => m.BodyModule
+  //     ),
+  // },
 ];
 
 @NgModule({

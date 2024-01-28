@@ -1,72 +1,68 @@
-.buttons {
-    // margin-top: 5cm;
-    display: flex;
-    grid-template-columns: auto;
-    justify-content: center;
-    gap: 50px; /* Adjust the gap as needed */
-    //margin-right: 1cm;
-    align-items: center;
-    cursor: pointer;
-    //height: 70vh;
-  }
-  .btn-primary{
-    width: 20%;
-    height:100px;
-  }
 
-  .edit{
-    margin:20px;
+  .custom-card{
+    // background-image: linear-gradient( 111.5deg,  rgba(254,210,255,1) -7.2%, rgba(115,9,112,1) 100.2% );
+    background-color: #DCD6F7;
+    width: 30%;
+    height: 60%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh; /* 100% of the viewport height */
-    border: 2px;
+    justify-content: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
   }
   
-  form {
-    max-width: 40%;
-    width: 100%;
-    padding: 20px;
-    background-color: #fff; /* Add background color if needed */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box shadow for a subtle effect */
+  .custom-card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
   }
-
-  .add{
-    margin:20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* 100% of the viewport height */
-    border: 2px;
-  }
-  .cards{
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    height: 70vh;
-
+  .material-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
   }
   .card{
-    width: 30%; 
-    height: 100px;
-    margin: 1cm;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(231, 175, 247);
-    cursor: pointer;
-  }
-  .box{
-    margin-top:20px;
     display: flex;
-    justify-content: center;
     align-items: center;
-  }
-  h5{
-    cursor: pointer;
-  }
-  td{
-    cursor: pointer;
-  }
-  
+    justify-content: center;
+    height: 87vh;
+}
+
+img{
+  margin-left:2cm;
+  height: 87vh;
+  width: 94%;
+}
+
+// .buhead {
+//   position: relative;
+//   display: inline-block;
+// }
+
+.buhead {
+  position: relative;
+  display: inline-block;
+  height :87vh;
+  width: 100%;
+  border-radius: 8px; /* Add border-radius as desired */
+}
+
+.header-image {
+  width: 94%; /* Make the image fill the container width */
+  height: 100%; /* Make the image fill the container height */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+  // border-radius: 8px; /* Add border-radius as desired */
+}
+
+button {
+  position: absolute;
+  padding: 15px;
+  top: 1cm; /* Adjust as needed */
+  right: 1cm; /* Adjust as needed */
+  background-color: rgb(240, 143, 26);
+  border: none;
+  color: rgb(23, 3, 3); /* Set the color you want */
+  cursor: pointer;
+}

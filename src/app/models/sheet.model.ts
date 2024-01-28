@@ -4,7 +4,7 @@ export interface Sheet{
     YearsOfExperience:number;
     TechStack:string;
     Description:string;
-    Band:string;
+    Band:string
     BU:string;
     Visibility: boolean
 }

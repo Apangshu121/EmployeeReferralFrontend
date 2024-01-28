@@ -30,13 +30,24 @@ import { ReferAFriendComponent } from './refer-a-friend/refer-a-friend.component
 
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReferredCandidatesComponent } from './referred-candidates/referred-candidates.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { BodyComponent } from './body/body.component';
+import { JobManagementComponent } from './job-management/job-management.component';
+import { FilterCandidatesComponent } from './filter-candidates/filter-candidates.component';
+import { SearchCandidatesComponent } from './search-candidates/search-candidates.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LogoutComponent,
     HomeComponent,
-
     RecruiterComponent,
     BuHeadComponent,
     JobOpeningsComponent,
@@ -47,26 +58,39 @@ import { ManageEmployeeComponent } from './manage-employee/manage-employee.compo
     MyReferralsComponent,
     ReferAFriendComponent,
     ManageEmployeeComponent,
+    ReferredCandidatesComponent,
+    SidenavComponent,
+    BodyComponent,
+    JobManagementComponent,
+    FilterCandidatesComponent,
+    SearchCandidatesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-
+    
     ReactiveFormsModule,
-    MatTableModule,
     MatFormFieldModule,
     MatSelectModule,
-
-    MatButtonModule,
+    MatTableModule,
     MatIconModule,
+    MatSortModule,
+    MatButtonModule,
     MatInputModule,
     MatCardModule,
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+
+  
+}
