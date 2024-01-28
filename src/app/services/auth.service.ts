@@ -74,6 +74,7 @@ export class AuthService {
 
     return this.httpClient.get(this.path + 'user/getUserDetails', { headers });
   }
+
   getAllEmployees(googleToken: string): Observable<any[]> {
     const headers = new HttpHeaders().set(
       'Authorization',
@@ -86,6 +87,7 @@ export class AuthService {
       })
       .pipe();
   }
+
   getReferredCandidatesOfUser(
     googleToken: string
   ): Observable<{ [key: string]: [{ [key: string]: string }] }> {
@@ -101,6 +103,7 @@ export class AuthService {
       }
     );
   }
+
   extractInfo(pdfFile: File): Observable<string> {
     const formData: FormData = new FormData();
     formData.append('pdfFile', pdfFile, pdfFile.name);
@@ -109,6 +112,14 @@ export class AuthService {
       formData
     );
   }
+  // extractInfo(pdfFile: File): Observable<string> {
+  //   const formData: FormData = new FormData();
+  //   formData.append('pdfFile', pdfFile, pdfFile.name);
+  //   return this.httpClient.post<string>(
+  //     `${this.path}api/extractInfo`,
+  //     formData
+  //   );
+  // }
 
   getAllReferredCandidates(googleToken: string): Observable<any[]> {
     const headers = new HttpHeaders({
@@ -152,6 +163,7 @@ export class AuthService {
       }
     );
   }
+
   saveCandidate(googleToken: any, candidateData: any): Observable<any[]> {
     const headers = new HttpHeaders().set(
       'Authorization',
@@ -174,6 +186,7 @@ export class AuthService {
         })
       );
   }
+  
   createUser(user: any): Observable<any> {
     return this.httpClient.post<any>(
       this.path + 'api/referredCandidates/add',
