@@ -1,3 +1,5 @@
+
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -211,4 +213,41 @@ export class AuthService {
       { headers: header }
     );
   }
+
+  interviewTheCandidate(googleToken: string, id: number){
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient.put<any>(
+      `${this.path}api/referredCandidates/selectReferredCandidateForInterview/${id}`,id,{
+        headers
+      });
+  }
+  getCandDetailsById(googleToken: string, id: number){
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient.get<any>(`${this.path}api/referredCandidates/get/${id}`,{headers});
+  }
+
+  filterCandidates(googleToken: string, filterType: string, value: any): Observable<any> {
+    console.log(filterType, value);
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient.get(`${this.path}api/referredCandidates/filter/${filterType}/${value}`,{headers});
+    
+  }
+
+  searchCandidates(googleToken:string, searchKeyword: string){
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient
+      .get<any[]>(`${this.path}api/referredCandidates/getAll?keyword=${searchKeyword}`, {
+        headers: headers,
+      })
+      .pipe();
+  }
+
 }

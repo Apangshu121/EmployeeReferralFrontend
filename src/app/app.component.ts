@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'EmployeeReferral';
+  isSideNavCollapsed =false;
+  screenWidth=0;
 
 
   constructor(private authService: AuthService,private router: Router,
@@ -36,4 +38,7 @@ export class AppComponent implements OnInit {
       this.router.navigate(['']);
     });
   }
+
+ 
+  
 }

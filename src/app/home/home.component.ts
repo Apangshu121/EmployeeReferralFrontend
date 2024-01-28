@@ -5,12 +5,12 @@ import { MatSidenav } from '@angular/material/sidenav';
 
 
 import {BreakpointObserver} from '@angular/cdk/layout';
-import { faL } from '@fortawesome/free-solid-svg-icons';
+
 
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
+  templateUrl:'./home.component.html',
   styleUrl: './home.component.scss',
 
 })
@@ -19,6 +19,9 @@ export class HomeComponent implements OnInit {
   employeeFlag: boolean = false;
   adminFlag: boolean = false;
 
+
+
+  isBuhead=false;
   isSenior = false;
   isRecruiter = false;
 
@@ -40,9 +43,12 @@ ngAfterViewChild(){
   constructor(private authService: AuthService, private router: Router,private observer:BreakpointObserver) {}
   ngOnInit() {
     const googleToken = this.authService.getToken();
+    console.log(googleToken);
     if (googleToken) {
+      console.log(googleToken)
       this.authService.getNameOfUser(googleToken).subscribe(
         (data) => {
+          console.log(data.role);
           this.role = data.role;
           if (this.role == 'SENIOR') {
             this.isSenior = true;
@@ -86,6 +92,8 @@ ngAfterViewChild(){
   manageEmployee():void{
     this.router.navigate(['manage-employee']);
   }
-
+ allReferredCandidates():void{
+  this.router.navigate(['referred-candidates'])
+ }
 
 }

@@ -1,0 +1,149 @@
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h3{
+  text-align: center;
+  color: crimson;
+}
+
+.square-card {
+  border-radius: 10px;
+  background-color: #DCD6F7;
+  
+  
+  padding: 1cm;
+  text-align: center;
+  align-items: center;
+  width: 8cm; /* Adjust the width as needed */
+  height: 6cm; /* Make it a square by setting the same height as the width */
+  margin: 10px; /* Adjust the margin as needed */
+  cursor: pointer; /* Add a pointer cursor to indicate clickability */
+  transition: transform 0.3s ease; /* Add smooth transition for the transform property */
+}
+
+.square-card:hover {
+  transform: translateY(-5px); /* Move the card up by 5 pixels when hovering */
+}
+
+.btn-primary{
+    width: 3cm;
+    height: 1cm
+  }
+  .center-container{
+    // height: 80vh;
+    display: flex;
+  }
+
+
+  .box{
+    margin-top:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  h5{
+    cursor: pointer;
+    color: #fff;
+  }
+  tr{
+    
+    padding: 8px; 
+
+    // &.mat-header-cell {
+    //   background-color: #6ad4f768; /* Background color for header cells */
+    // }
+
+    &:hover {
+      background-color: rgba(248, 244, 244, 0.575); /* Background color on hover for data cells */
+    }
+  }
+  td{
+    text-align: center;
+  }
+  
+  th{
+    background-color: rgba(0, 255, 179, 0.63);
+    text-align: center;
+    
+    padding: 8px;
+  }
+
+  .mat-icon {
+    cursor: pointer;
+    margin-right: 8px; /* Adjust the spacing as needed */
+  }
+  
+  .delete-icon {
+    color: red; /* Set the color for the delete icon */
+  }
+
+  .edit-icon {
+    color: black; /* Set the color for the delete icon */
+  }
+  .view-icon {
+    color: rgb(13, 186, 254); /* Set the color for the delete icon */
+  }
+  /* job-management.component.scss */
+
+.mat-table {
+  margin-top: 1cm;
+  width: 80%; /* Set the width of the table */
+  align-self: right;
+  border-collapse: collapse; /* Collapse the borders between cells */
+}
+
+:host ::ng-deep {
+  .custom-dialog {
+    background-color: aqua;
+    color: brown;
+  }
+}
+
+// .custom-dialog{
+//   background-color: aqua;
+//   color: brown;
+// }
+
+img{
+  width: 3cm;
+  height: 3cm;
+  // border: 2px solid;
+}
+
+.forms{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form {
+  width: 70%;
+  align-self: center;
+  max-width: 500px; /* Adjust the maximum width as needed */
+  margin: auto; /* Center the form horizontally */
+}
+
+.form-header {
+  background-color: #52616B;
+  margin-bottom: 20px;
+  color: #fff; 
+  padding: 10px;
+  text-align: center;
+}
+
+button {
+  margin-top: 20px; /* Adjust spacing between the form fields and the button */
+}
+
+.add{
+  margin-top: 20px;
+  border-radius: 10px;
+  width: 45%;
+  align-items: center;
+  justify-content: center;
+  background-color: #C9D6DF;
+}
+
+

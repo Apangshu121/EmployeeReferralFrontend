@@ -22,7 +22,7 @@
           <span>My Referrals</span>
        </button>
 
-       <button mat-button class="menu-button" *ngIf="isRecruiter" >
+       <button mat-button class="menu-button" *ngIf="isRecruiter" (click)="allReferredCandidates()" >
         <mat-icon>dashboard</mat-icon>
           <span>Dashboard</span>
        </button>
