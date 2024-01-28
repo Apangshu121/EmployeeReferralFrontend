@@ -86,11 +86,11 @@ export class ManageEmployeeComponent implements OnInit {
           .updateRole(googleToken, userEmail, this.selectedRole)
           .subscribe(
             (response) => {
-              // console.log(user.email);
+              console.log(user.email);
               this.selectedUser = null;
               this.selectedRole = null;
 
-              // console.log('Role updated successfully:', response);
+              console.log('Role updated successfully:', response);
             },
             (error) => {
               // console.error('Error updating role:', error);
@@ -99,7 +99,7 @@ export class ManageEmployeeComponent implements OnInit {
       }
     }
     this.editUserFlag = true;
-    // this.update = false;
+    this.update = false;
   }
   close(): void {
     this.editUserFlag = true;

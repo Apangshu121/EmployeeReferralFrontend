@@ -13,16 +13,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
 import {MatBadgeModule} from '@angular/material/badge';
 import { JobOpeningsComponent } from './job-openings/job-openings.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MatDividerModule} from '@angular/material/divider';
-
-
-
-
-
 
 
 import { MyReferralsComponent } from './my-referrals/my-referrals.component';
@@ -46,54 +40,71 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ErrorMessageDialogComponent } from './error-message-dialog/error-message-dialog.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
-const routes: Routes = [
-  { path: 'my-referrals', component: MyReferralsComponent },
-  // Add more routes as needed
-];
+// const routes: Routes = [
+//   { path: 'my-referrals', component: MyReferralsComponent },
+//   // Add more routes as needed
+// ];
+
+import { ReferredCandidatesComponent } from './referred-candidates/referred-candidates.component';
+import { MatSortModule } from '@angular/material/sort';
+
+
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { JobManagementComponent } from './job-management/job-management.component';
+import { FilterCandidatesComponent } from './filter-candidates/filter-candidates.component';
+import { SearchCandidatesComponent } from './search-candidates/search-candidates.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogoutComponent,
     HomeComponent,
-
     JobOpeningsComponent,
-
     NavigationComponent,
-
     MyReferralsComponent,
     ReferAFriendComponent,
     ManageEmployeeComponent,
     MyProfileComponent,
     LandingPageComponent,
     ErrorMessageDialogComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    ReferredCandidatesComponent,
+  
+    JobManagementComponent,
+    FilterCandidatesComponent,
+    SearchCandidatesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-RouterModule,
+    RouterModule,
     ReactiveFormsModule,
-    MatTableModule,
+    MatPaginatorModule,
     MatFormFieldModule,
     MatSelectModule,
+    BrowserAnimationsModule,
     MatSidenavModule,
-    MatListModule,
-    MatButtonModule,
+    MatListModule,    
+    MatTableModule,
     MatIconModule,
+    MatSortModule,
+    MatButtonModule,
     MatInputModule,
     MatBadgeModule,
     MatCardModule,
-    FontAwesomeModule,
+    MatToolbarModule,
+    
+    MatDividerModule,
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatToolbarModule,
-    BrowserAnimationsModule,
-    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+
+  
+}
