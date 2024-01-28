@@ -9,7 +9,9 @@ import { AuthService } from '../services/auth.service';
 export class MyReferralsComponent {
   constructor(private authService: AuthService) {}
 
-  referredCandidates: any;
+  referredCandidates!: [{ [key: string]: string }];
+  displayedColumns: string[] = ['name', 'interviewPosition', 'interviewStatus'];
+
 
   ngOnInit(): void {
     this.getMyReferrals();
@@ -24,7 +26,7 @@ export class MyReferralsComponent {
       this.authService.getReferredCandidatesOfUser(googleToken).subscribe(
         (response) => {
           this.referredCandidates = response['referredCandidates'];
-          // console.log(this.referredCandidates);
+          console.log(this.referredCandidates);
         },
         (error) => {
           console.error('Error fetching referrals:', error);

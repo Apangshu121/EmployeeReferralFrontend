@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { DataServices } from '../sidenav/data.services';
+
 
 @Component({
   selector: 'app-job-management',
@@ -32,22 +32,21 @@ jobDetailsTemplate!: TemplateRef<any>;
 
   
 
-  onToggleSideNav():void{
-    this.screenWidth=this._dataService.screenWidth;
-    this.isSideNavCollapsed=this._dataService.collapsed;
-  }
+  // onToggleSideNav():void{
+  //   this.screenWidth=this._dataService.screenWidth;
+  //   this.isSideNavCollapsed=this._dataService.collapsed;
+  // }
 
   
   ngOnInit() : any{
-    console.log("BuHead");
-    this.dataService.getData().subscribe((result)=>{
-      this.data=result;
-    });
+    // console.log("BuHead");
+    // this.dataService.getData().subscribe((result)=>{
+    //   this.data=result;
+    // });
   }
 
   constructor(private formBuilder : FormBuilder,
-    public dialog: MatDialog, private dataService : DataService, private router : Router,
-    public _dataService:DataServices){
+    public dialog: MatDialog, private dataService : DataService, private router : Router){
     this.googleSheetForm=this.formBuilder.group({
       JobId: ['', Validators.required],
       Role: ['', Validators.required],

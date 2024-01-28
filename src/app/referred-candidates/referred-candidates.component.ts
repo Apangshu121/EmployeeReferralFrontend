@@ -8,10 +8,9 @@ interface UpdatedFields {
   businessUnit?: string;
   interviewedPosition?: string;
   band?: string;
-  // currentStatus?: string;
   interviewStatus?: string;
   noOfRounds?: number;
-  // Add other properties as needed
+
 }
 
 @Component({

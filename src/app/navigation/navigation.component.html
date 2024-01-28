@@ -1,23 +1,16 @@
-
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div
-      class="container-fluid d-flex align-items-center justify-content-between"
-    >
-     
-      <img src="/assets/logo.png" alt="Logo" />
+ <mat-toolbar color="primary">
+      <span>ERP</span>
+      <span class="example-spacer" ></span>
+      <button mat-button class="menu-button" [routerLink]="'/home'" >
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+     </button>
+     <button mat-button class="menu-button" [routerLink]="''">
+      <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+     </button>
+</mat-toolbar>
   
-      
-      <div class="d-flex align-items-center">
-        <p
-          [style.font-family]="'Arial, sans-serif'"
-          [style.font-weight]="'bold'"
-          [style.color]="'#FFF'"
-          class="mr-2"
-          style="margin: auto"
-        >{{ userName }}
-        </p>
-        <button (click)="OnBackClick()">Home</button>
-        <app-logout></app-logout>
-      </div>
-    </div>
-  </nav>
+
+  
+  

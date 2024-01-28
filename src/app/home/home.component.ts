@@ -1,20 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { DataService } from '../services/data.service';
-// import { DataServices } from '../sidenav/sidenav.component';
-import { NavServiceService } from '../services/nav-service.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
-interface SideNavToggle{
-  screenWidth:number;
-  collapsed:boolean;
 
-}
+import {BreakpointObserver} from '@angular/cdk/layout';
+
+
 
 @Component({
   selector: 'app-home',
   templateUrl:'./home.component.html',
   styleUrl: './home.component.scss',
+
 })
 export class HomeComponent implements OnInit {
   role!: string;
@@ -23,12 +21,26 @@ export class HomeComponent implements OnInit {
 
 
 
-  isBuhead = false;
+  isBuhead=false;
+  isSenior = false;
   isRecruiter = false;
-  constructor(private authService: AuthService, private router: Router, public _dataService:NavServiceService) {}
 
- 
-
+  // @ViewChild(MatSidenav) sidenav !: MatSidenav;
+  
+@ViewChild(MatSidenav) sidenav!:MatSidenav;
+ngAfterViewChild(){
+  this.observer.observe(['max-width:800px']).subscribe((res)=>{
+    if(res.matches){
+      this.sidenav.mode='over';
+      this.sidenav.close();
+    }else{
+      this.sidenav.mode='side';
+      this.sidenav.open();
+    }
+  });
+}
+  
+  constructor(private authService: AuthService, private router: Router,private observer:BreakpointObserver) {}
   ngOnInit() {
     const googleToken = this.authService.getToken();
     console.log(googleToken);
@@ -39,7 +51,7 @@ export class HomeComponent implements OnInit {
           console.log(data.role);
           this.role = data.role;
           if (this.role == 'SENIOR') {
-            this.isBuhead = true;
+            this.isSenior = true;
           } else if (this.role == 'RECRUITER') {
             this.isRecruiter = true;
           } else if (this.role === 'EMPLOYEE') {
@@ -57,17 +69,31 @@ export class HomeComponent implements OnInit {
       console.error('Authentication token not Available');
     }
   }
-  onClick(): void {
-    // Navigate to the card details route
-    this.router.navigate(['/job-openings']);
-  }
-  isSideNavCollapsed =false;
-  screenWidth=0;
 
+  isHome():void{
+    this.router.navigate(['home']);
+  }
+  jobOpening():void{
+    this.router.navigate(['job-openings']);
+  }
+  referFriend():void{
+    this.router.navigate(['refer-a-friend']);
+  }
+  myReferrals():void{
+    this.router.navigate(['my-referrals']);
+  }
+  referredCandidates():void{
+    
+  }
+  myProfile():void{
+    this.router.navigate(['my-profile']);
+  }
   
-
-  onToggleSideNav():void{
-    this.screenWidth=this._dataService.screenWidth;
-    this.isSideNavCollapsed=this._dataService.collapsed;
+  manageEmployee():void{
+    this.router.navigate(['manage-employee']);
   }
+ allReferredCandidates():void{
+  this.router.navigate(['referred-candidates'])
+ }
+
 }

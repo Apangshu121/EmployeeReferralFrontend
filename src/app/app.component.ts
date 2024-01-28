@@ -1,12 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from './services/auth.service';
-import { NavServiceService } from './services/nav-service.service';
+import { ErrorMessageDialogComponent } from './error-message-dialog/error-message-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
-interface SideNavToggle{
-  screenWidth:number;
-  collapsed:boolean;
-
-}
 
 @Component({
   selector: 'app-root',
@@ -18,7 +15,9 @@ export class AppComponent implements OnInit {
   isSideNavCollapsed =false;
   screenWidth=0;
 
-  constructor(private authService: AuthService, public _dataService:NavServiceService) {}
+
+  constructor(private authService: AuthService,private router: Router,
+    private dialog: MatDialog) {}
   loginFlag: boolean = false;
 
   ngOnInit(): void {
@@ -26,14 +25,20 @@ export class AppComponent implements OnInit {
 
     if (googleToken) {
       this.loginFlag = true;
-    }else if(googleToken){
-      this.loginFlag=false;
+    }else{
+      this.showErrorMessage('Please login again');
     }
   }
 
-  onToggleSideNav():void{
-    this.screenWidth=this._dataService.screenWidth;
-    this.isSideNavCollapsed=this._dataService.collapsed;
+  private showErrorMessage(message: string): void {
+    const dialogRef = this.dialog.open(ErrorMessageDialogComponent, {
+      data: { message: message },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.router.navigate(['']);
+    });
   }
+
+ 
   
 }

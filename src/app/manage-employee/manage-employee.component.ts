@@ -12,9 +12,15 @@ export class ManageEmployeeComponent implements OnInit {
   userRole!: string;
   update: boolean = false;
   editUserFlag: boolean = true;
+  isAdmin:boolean=false;
+
 
   user: any;
-
+  displayedColumns: string[] = ['id', 'name', 'email', 'role', 'updateRole'];
+  getColumnAlignment(value: any): string {
+    // Check the data type of the 'id' column and return the appropriate CSS class
+    return typeof value === 'number' ? 'align-right' : 'align-left';
+  }
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
