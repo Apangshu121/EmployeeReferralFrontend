@@ -49,6 +49,8 @@
   padding: 20px;
 }
 
+
+
 /* Style the table header */
 .table-container th {
   background-color: #526D82;
@@ -95,6 +97,8 @@ tr{
  }
 
 .cand-info {
+  margin-top: 1cm;
+  background-color: #C9D6DF;
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 20px;
@@ -103,7 +107,7 @@ tr{
 
   .cand-title {
     margin-top: 0;
-    color: #333;
+    
     margin-bottom: 10px;
     text-align: center;
   }
@@ -174,6 +178,7 @@ mat-form-field {
   width: 90%;
   margin-bottom: 15px;
 }
+
 
 // button {
 //   width: 100%;

@@ -1,9 +1,9 @@
 <app-navigation></app-navigation>
 
-<div class="icons-container" *ngIf="!isUpdate">
+<div class="icons-container" *ngIf="!isUpdate && !showCandInfo">
   <!-- <mat-icon class="icon" (click)="openSearchComponent()">search</mat-icon> -->
   <input type = "text" placeholder="Search" *ngIf="!isOpenfilter" [(ngModel)]="searchKeyword">
-  <button mat-raised-button color="primary"  (click)="onSearchClicked()">Search<mat-icon class="icon" >search</mat-icon> </button>
+  <button mat-raised-button color="primary"  (click)="onSearchClicked()" *ngIf="!isOpenfilter">Search<mat-icon class="icon" >search</mat-icon> </button>
   <button mat-raised-button color="primary"  (click)="openFilterComponent()">Filter<mat-icon class="icon" >filter_list</mat-icon> </button>
 </div>
 
@@ -66,7 +66,7 @@
   </div>
 
     <div class="filter">
-    <button mat-raised-button color="primary">Search<mat-icon class="icon" >search</mat-icon> </button>
+    <button mat-raised-button color="primary" (click)="onFilterSearch()">Search<mat-icon class="icon" >search</mat-icon></button>
   </div>
 
   </div>    
@@ -119,16 +119,16 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
           <td mat-cell *matCellDef="let item">
-            <button (click)="interviewTheCandidate(item.id)">
+            <button (click)="interviewTheCandidate(item.id, item)" *ngIf="!item.interviewTheCandidate" class="btn btn-primary">
               Interview this candidate
             </button>
-            <button mat-icon-button (click)="sendMail(candidate.id)">
-              <mat-icon aria-label="Send">send</mat-icon>
+            <button *ngIf="item.interviewTheCandidate" (click)="candidateInfo(item)" class="btn btn-primary">
+              See details
             </button>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="candidateInfo(row)"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       
       </table>
     </div>
@@ -160,54 +160,14 @@
       <p>Interview Status: {{ candidate.interviewStatus.interviewStatus }}</p>
     </div>
     <div class="cand-btn-group">
-      <button type="button" class="btn btn-secondary" (click)="onClick()">Update</button>
-      <button type="button" class="btn btn-danger" (click)="onClose()">Close</button>
+      <button mat-raised-button class="update-button" (click)="onClick()">Update</button>
+      <button mat-raised-button color="primary" (click)="downloadResume(candidate.id)">Download Resume</button>
+      <button mat-raised-button color="warn" (click)="onClose()">Close</button>
+      <button mat-raised-button color="primary" (click)="sendMail(candidate.id)">Send Mail</button>
     </div>
   </div>
   </div>
   
-  <!-- <div class="center-container" *ngIf="isUpdate">
-    <div class="update-form">
-  
-    <form [formGroup]="updateForm">
-
-      <h5 class="form-header">Update Candidate Details</h5>
-
-
-      <label for="businessUnit">Business Unit:</label>
-      <input type="text" id="businessUnit" formControlName="businessUnit" /><br>
-  
-      <label for="interviewedPosition">Interviewed Position:</label>
-      <input type="text" id="interviewedPosition" formControlName="interviewedPosition" /><br>
-  
-      <label for="band">Band:</label>
-      <input type="text" id="band" formControlName="band" /><br>
-
-      <label for="noOfRounds">No Of Rounds:</label>
-      <input type="number" id="noOfRounds" formControlName="noOfRounds" /><br>
-      
-  
-      <label for="currentStatus">Current Status:</label>
-      <select id="currentStatus" formControlName="currentStatus">
-        <option value="SELECT">SELECT</option>
-        <option value="POOL">POOL</option>
-        <option value="REJECT">REJECT</option>
-        <option value="DROP">DROP</option>
-        <option value="ON HOLD">ON HOLD</option>
-        <option value="BETTER QUALIFIED FOR OTHER POSITION">BETTER QUALIFIED FOR OTHER POSITION</option>
-      </select>
-      <br>
-
-  <label for="interviewStatus">Interview Status:</label>
-  <select id="interviewStatus" formControlName="interviewStatus">
-    <option *ngFor="let option of interviewStatuses" [value]="option">{{ option }}</option>
-  </select><br>
-      
-      <button (click)="updateCandidateDetails()">Update Candidate Details</button>
-    </form>
-  </div>
-</div> -->
-
 
   <div class="center-container" *ngIf="isUpdate">
     

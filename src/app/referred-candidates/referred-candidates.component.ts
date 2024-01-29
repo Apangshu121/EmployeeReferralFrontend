@@ -42,6 +42,9 @@ export class ReferredCandidatesComponent implements OnInit{
   isOpenSearch=false;
   searchKeyword!:string;
   searchResults: any;
+  isFilterSearch=false;
+  filterSearchResults:any;
+  isInterview=true;
   
 
 
@@ -61,10 +64,12 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
   ngOnInit(){
     this.getAllReferredCandidates();
    
-    this.interviewStatuses.push('CODELYSER SELECT');
-    this.interviewStatuses.push('CODELYSER REJECT');
+    
   
     this.updateForm.get('noOfRounds')!.valueChanges.subscribe((value) => {
+      this.interviewStatuses=[];
+      this.interviewStatuses.push('CODELYSER SELECT');
+      this.interviewStatuses.push('CODELYSER REJECT');
       this.generateInterviewStatusOptions(value);
     });
   }
@@ -72,7 +77,7 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
   generateInterviewStatusOptions(noOfRounds: number): void {
     // this.interviewStatuses = [];
     
-    for (let i = 1; i <= noOfRounds; i++) {
+    for (let i = 1; i < noOfRounds; i++) {
       this.interviewStatuses.push(`R${i} SELECT`);
       this.interviewStatuses.push(`R${i} REJECT`);
     }
@@ -100,7 +105,9 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
     this.showCandInfo=false;
   }
 
-  interviewTheCandidate(candidateId : number){
+  interviewTheCandidate(candidateId : number, index:number){
+    // candidate.interviewed = true;
+    console.log(index);
     const googleToken = this.authService.getToken();
     if(googleToken){
       this.authService.interviewTheCandidate(googleToken,candidateId).subscribe(
@@ -115,6 +122,7 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
     else{
       alert("You Are Not Authorized")
     }
+    this.candidateInfo(index);
 
   }
 
@@ -143,15 +151,13 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
       return this.filteredCandidates;
     } else if(this.isSearch){
       return this.searchResults.SearchedCandidates;
+    } else if(this.isFilterSearch){
+      return this.filterSearchResults.FilteredCandidates;
     }
     else {
       return this.data.candidates;
     }
   }
-
-
-  
-  
 
   candidateInfo(index : number){
     console.log("Hello")
@@ -250,13 +256,34 @@ updateCandidateDetails() {
         },
         (error) =>{
           console.log(error);
-        }
-      )
+        });
     }
-
-
+  }
+  onFilterSearch(){
+    this.isFilter=false;
+    this.isFilterSearch=true;
+    const googleToken = this.authService.getToken();
+    if(googleToken){
+      this.authService.filterSearch(googleToken,this.selectedFilter,this.searchText,this.searchKeyword).subscribe(
+        (response)=>
+        {
+          this.filterSearchResults=response;
+          console.log(this.filterSearchResults);
+        },
+        (error)=>{
+          alert(error);
+        });
+    }
+    else{
+      alert("Not Authorized");
+    }
   }
 
-  
+  downloadResume(candId : number){
+      this.authService.downloadResume(candId).subscribe((content) => {
+        this.authService.saveFile(content, 'resume.pdf')
+        console.log("resume.pdf")
+      });
+    }  
 
 }

@@ -3,7 +3,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-
+import { saveAs } from 'file-saver';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -114,14 +114,6 @@ export class AuthService {
       formData
     );
   }
-  // extractInfo(pdfFile: File): Observable<string> {
-  //   const formData: FormData = new FormData();
-  //   formData.append('pdfFile', pdfFile, pdfFile.name);
-  //   return this.httpClient.post<string>(
-  //     `${this.path}api/extractInfo`,
-  //     formData
-  //   );
-  // }
 
   getAllReferredCandidates(googleToken: string): Observable<any[]> {
     const headers = new HttpHeaders({
@@ -249,5 +241,43 @@ export class AuthService {
       })
       .pipe();
   }
+  filterSearch(googleToken:string, filterType: string, value: any,searchKeyword: string){
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient.get(`${this.path}api/referredCandidates/filter/${filterType}/${value}?keyword=${searchKeyword}`,{headers});
+  }
+  search(googleToken:string, searchKeyword: string){
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient
+      .get<any[]>(`${this.path}admin/users/all?keyword=${searchKeyword}`, {
+        headers: headers,
+      })
+      .pipe();
+  }
+
+  
+
+  downloadResume(id:number){
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept': 'application/pdf' });
+
+
+    return this.httpClient.get(`${this.path}api/referredCandidates/download/${id}`,{ headers, responseType: 'arraybuffer' });
+  }
+
+  saveFile(content: ArrayBuffer, fileName: string) {
+    const blob = new Blob([content]);
+    saveAs(blob, fileName);
+  }
+
+  getAllReferralsTally(googleToken: string){
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient.get(`${this.path}user/getAllReferralsTally`,{headers});
+  }
+
 
 }

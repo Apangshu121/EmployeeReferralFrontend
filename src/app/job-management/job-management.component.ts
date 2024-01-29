@@ -39,10 +39,10 @@ jobDetailsTemplate!: TemplateRef<any>;
 
   
   ngOnInit() : any{
-    // console.log("BuHead");
-    // this.dataService.getData().subscribe((result)=>{
-    //   this.data=result;
-    // });
+    console.log("BuHead");
+    this.dataService.getData().subscribe((result)=>{
+      this.data=result;
+    });
   }
 
   constructor(private formBuilder : FormBuilder,

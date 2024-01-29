@@ -77,6 +77,13 @@ const routes: Routes = [
         (m) => m.FilterCandidatesModule
       ),
   },
+  {
+    path: 'referrals-tally',
+    loadChildren: () =>
+      import('./referrals-tally/referrals-tally.module').then(
+        (m) => m.ReferralsTallyModule
+      ),
+  },
 
 ];
 

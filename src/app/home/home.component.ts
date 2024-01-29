@@ -95,5 +95,12 @@ ngAfterViewChild(){
  allReferredCandidates():void{
   this.router.navigate(['referred-candidates'])
  }
+ JobManagement():void{
+  this.router.navigate(['job-management'])
+ }
+ onReferralsTally():void{
+  this.router.navigate(['referrals-tally'])
+ }
 
 }
+// http://localhost:8080/admin/users/all?keyword=Sakshi

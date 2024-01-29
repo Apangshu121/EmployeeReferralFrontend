@@ -23,6 +23,61 @@ export class ManageEmployeeComponent implements OnInit {
   }
   constructor(private authService: AuthService) {}
 
+  searchQuery!:string;
+  searchResults: any;
+  onSearch(){
+    const googleToken = this.authService.getToken();
+    if(googleToken){
+      if(this.searchQuery!=""){
+      this.editUserFlag=false;
+      this.authService.search(googleToken,this.searchQuery).subscribe(
+        (response)=> {
+        this.searchResults=response;
+        // console.log("query: ",this.searchQuery);
+        
+        // console.log(this.searchResults.SearchedCandidates);
+        this.searchResults=this.searchResults.SearchedCandidates;
+       // console.log(this.searchResults);
+        
+        // this.searchResults = response['Searched Candidates'] || [];
+        },
+        (error)=>{
+          alert("error while fetching data"+ error);
+        }
+        );
+      }
+      else{
+        console.log(this.user)
+        this.searchResults=this.user.Users;
+      }
+    }
+    else{
+      alert("error for google Token");
+    }
+  }
+  // \onSearchClicked(){
+  //   this.isSearch=true;
+  //   const googleToken = this.authService.getToken();
+  //   if(googleToken){
+  //     this.authService.searchCandidates(googleToken,this.searchKeyword).subscribe(
+  //       (response)=>{
+  //         this.searchResults = response;
+  //         //this.searchResults=this.searchResults.searchCandidates
+  //       },
+  //       (error) =>{
+  //         console.log(error);
+  //       });
+  //   }
+  // }
+
+
+  // onSearch(query: string): void {
+  //   this.authService.search(query)
+  //     .subscribe(results => {
+  //       this.searchResults = results;
+  //     });
+  // }
+
   ngOnInit(): void {
     this.getAllUsers();
     this.getUserDetails();
