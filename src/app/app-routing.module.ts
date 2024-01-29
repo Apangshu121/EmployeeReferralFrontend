@@ -5,7 +5,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './services/auth-guard.service';
 
-import { NavigationComponent } from './navigation/navigation.component';
+
 import { JobOpeningsComponent } from './job-openings/job-openings.component';
 
 import { MyReferralsComponent } from './my-referrals/my-referrals.component';

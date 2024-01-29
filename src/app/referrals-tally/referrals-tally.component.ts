@@ -9,6 +9,7 @@ import { AuthService } from '../services/auth.service';
 export class ReferralsTallyComponent implements OnInit{
   
   allReferralsTally:any;
+  displayedColumns: string[] = ['name', 'totalReferrals', 'inProgress', 'reject', 'select']; // Add more column names as needed
 
   ngOnInit(){
     console.log("Tally");
@@ -24,6 +25,7 @@ export class ReferralsTallyComponent implements OnInit{
       (response)=>
       {
         this.allReferralsTally=response;
+        this.allReferralsTally=this.allReferralsTally.Tally;
         console.log(this.allReferralsTally);
 
       },

@@ -247,6 +247,7 @@ export class AuthService {
     });
     return this.httpClient.get(`${this.path}api/referredCandidates/filter/${filterType}/${value}?keyword=${searchKeyword}`,{headers});
   }
+  
   search(googleToken:string, searchKeyword: string){
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + googleToken,

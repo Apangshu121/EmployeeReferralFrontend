@@ -1,4 +1,4 @@
-<app-navigation></app-navigation>
+
 
 <div class="icons-container" *ngIf="!isUpdate && !showCandInfo">
   <!-- <mat-icon class="icon" (click)="openSearchComponent()">search</mat-icon> -->
@@ -59,14 +59,14 @@
     <button mat-raised-button color="primary" (click)="onFilterChange()">Apply Filter</button>
   </div><br>
 
-  <div class="filter">
+  <div class="filter" *ngIf="isfilterSearchButton">
     <mat-form-field>
       <input matInput [(ngModel)]="searchKeyword" placeholder="Search in Filter">
     </mat-form-field>
   </div>
 
     <div class="filter">
-    <button mat-raised-button color="primary" (click)="onFilterSearch()">Search<mat-icon class="icon" >search</mat-icon></button>
+    <button mat-raised-button color="primary" (click)="onFilterSearch()" *ngIf="isfilterSearchButton">Search<mat-icon class="icon" >search</mat-icon></button>
   </div>
 
   </div>    
@@ -160,7 +160,7 @@
       <p>Interview Status: {{ candidate.interviewStatus.interviewStatus }}</p>
     </div>
     <div class="cand-btn-group">
-      <button mat-raised-button class="update-button" (click)="onClick()">Update</button>
+      <button mat-raised-button class="update-button" (click)="onClick(candidate)">Update</button>
       <button mat-raised-button color="primary" (click)="downloadResume(candidate.id)">Download Resume</button>
       <button mat-raised-button color="warn" (click)="onClose()">Close</button>
       <button mat-raised-button color="primary" (click)="sendMail(candidate.id)">Send Mail</button>

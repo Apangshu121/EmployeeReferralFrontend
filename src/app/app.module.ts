@@ -22,7 +22,6 @@ import {MatDividerModule} from '@angular/material/divider';
 import { MyReferralsComponent } from './my-referrals/my-referrals.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { NavigationComponent } from './navigation/navigation.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -62,7 +61,7 @@ import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.compo
     LogoutComponent,
     HomeComponent,
     JobOpeningsComponent,
-    NavigationComponent,
+    
     MyReferralsComponent,
     ReferAFriendComponent,
     ManageEmployeeComponent,

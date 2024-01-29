@@ -45,6 +45,7 @@ export class ReferredCandidatesComponent implements OnInit{
   isFilterSearch=false;
   filterSearchResults:any;
   isInterview=true;
+  isfilterSearchButton=false;
   
 
 
@@ -150,9 +151,9 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
     if (this.isFilter) {
       return this.filteredCandidates;
     } else if(this.isSearch){
-      return this.searchResults.SearchedCandidates;
+      return this.searchResults;
     } else if(this.isFilterSearch){
-      return this.filterSearchResults.FilteredCandidates;
+      return this.filterSearchResults;
     }
     else {
       return this.data.candidates;
@@ -160,6 +161,7 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
   }
 
   candidateInfo(index : number){
+    this.isOpenfilter=false;
     console.log("Hello")
     this.showCandInfo=true;
     this.candidate=index;
@@ -197,8 +199,9 @@ updateCandidateDetails() {
 
 
 
-  onClick(){
+  onClick(candidateData : any){
     this.isUpdate=true;
+    this.updateForm.patchValue(candidateData);
   }
 
   getCandDetailsById(candId : number){
@@ -221,6 +224,7 @@ updateCandidateDetails() {
 
   onFilterChange(){
     this.isFilter=true;
+    this.isfilterSearchButton=true;
     const googleToken = this.authService.getToken();
     if(googleToken){
     if (this.selectedFilter && this.searchText) {
@@ -249,31 +253,46 @@ updateCandidateDetails() {
     this.isSearch=true;
     const googleToken = this.authService.getToken();
     if(googleToken){
+      if(this.searchKeyword!=""){
       this.authService.searchCandidates(googleToken,this.searchKeyword).subscribe(
         (response)=>{
           this.searchResults = response;
-          //this.searchResults=this.searchResults.searchCandidates
+          this.searchResults=this.searchResults.SearchedCandidates;
+
         },
         (error) =>{
           console.log(error);
         });
     }
+    else{
+      this.searchResults=this.data.candidates;
+      console.log("keyword" , this.searchKeyword);
+      console.log(this.searchResults)
+    }
+    
+  }
   }
   onFilterSearch(){
     this.isFilter=false;
     this.isFilterSearch=true;
     const googleToken = this.authService.getToken();
     if(googleToken){
+      if(this.searchKeyword!=""){
       this.authService.filterSearch(googleToken,this.selectedFilter,this.searchText,this.searchKeyword).subscribe(
         (response)=>
         {
           this.filterSearchResults=response;
+          this.filterSearchResults=this.filterSearchResults.FilteredCandidates;
           console.log(this.filterSearchResults);
         },
         (error)=>{
           alert(error);
         });
     }
+    else{
+      this.filterSearchResults=this.filteredCandidates
+    }
+  }
     else{
       alert("Not Authorized");
     }
