@@ -44,12 +44,12 @@ export class LoginComponent implements OnInit {
       await firstValueFrom(this.service.saveUser(response.credential)).then(
         (x) => {
           this.service.setToken(x.tokenPayload);
-          console.log(x.tokenPayload);
+          // console.log(x.tokenPayload);
           this.router.navigate(['/home']);
         }
       );
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
 }

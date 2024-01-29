@@ -1,0 +1,109 @@
+<mat-toolbar>
+  <button
+    mat-icon-button
+    *ngIf="sidenav.mode === 'over'"
+    (click)="sidenav.toggle()"
+  >
+    <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+    <mat-icon *ngIf="sidenav.opened">menu</mat-icon>
+  </button>
+
+  <span
+    ><img
+      class="company-logo"
+      src="../../assets/accolite_digital.png"
+      alt="Company Logo"
+  /></span>
+  <span class="example-spacer"></span>
+  <button
+    mat-icon-button
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with account_circle icon"
+    [routerLink]="'my-profile'"
+  >
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with logout icon"
+    [routerLink]="''"
+  >
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+    <button mat-button class="menu-button" [routerLink]="'home'">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+    <button mat-button class="menu-button" [routerLink]="'refer-a-friend'">
+      <mat-icon>person_add</mat-icon>
+      <span>Refer A Friend</span>
+    </button>
+    <button mat-button class="menu-button" [routerLink]="'my-referrals'">
+      <mat-icon>groups</mat-icon>
+      <span>My Referrals</span>
+    </button>
+
+    <button mat-button class="menu-button" [routerLink]="'job-openings'">
+      <mat-icon>work</mat-icon>
+      <span>Job Openings</span>
+    </button>
+
+    <button
+      mat-button
+      class="menu-button"
+      *ngIf="isRecruiter"
+      [routerLink]="'referred-candidates'"
+    >
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard</span>
+    </button>
+
+    <button
+      mat-button
+      class="menu-button"
+      *ngIf="isRecruiter"
+      [routerLink]="'referral-tally'"
+    >
+      <mat-icon>poll</mat-icon>
+      <span>All Referrals Tally</span>
+    </button>
+
+    <button
+      mat-button
+      class="menu-button"
+      *ngIf="isSenior"
+      [routerLink]="'job-management'"
+    >
+    <mat-icon>business_center</mat-icon>
+      <span>Job Management</span>
+    </button>
+
+    <button
+      mat-button
+      class="menu-button"
+      *ngIf="adminFlag"
+      [routerLink]="'referred-candidate-admin'"
+    >
+      <mat-icon>dashboard</mat-icon>
+      <span>Referred Candidates</span>
+    </button>
+
+    <button
+      mat-button
+      class="menu-button"
+      [routerLink]="'manage-employee'"
+      *ngIf="adminFlag"
+    >
+      <mat-icon>person</mat-icon>
+      <span>Manage Employees</span>
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

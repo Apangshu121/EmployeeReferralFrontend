@@ -13,11 +13,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
+import { MatBadgeModule } from '@angular/material/badge';
 import { JobOpeningsComponent } from './job-openings/job-openings.component';
-import {MatDividerModule} from '@angular/material/divider';
-
+import { MatDividerModule } from '@angular/material/divider';
 
 import { MyReferralsComponent } from './my-referrals/my-referrals.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -47,12 +46,11 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { ReferredCandidatesComponent } from './referred-candidates/referred-candidates.component';
 import { MatSortModule } from '@angular/material/sort';
 
-
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { JobManagementComponent } from './job-management/job-management.component';
-import { FilterCandidatesComponent } from './filter-candidates/filter-candidates.component';
-import { SearchCandidatesComponent } from './search-candidates/search-candidates.component';
+import { AppLayoutComponent } from './app-layout/app-layout.component';
+import { ReferredCandidateAdminComponent } from './referred-candidate-admin/referred-candidate-admin.component';
 import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.component';
 
 @NgModule({
@@ -61,7 +59,7 @@ import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.compo
     LogoutComponent,
     HomeComponent,
     JobOpeningsComponent,
-    
+
     MyReferralsComponent,
     ReferAFriendComponent,
     ManageEmployeeComponent,
@@ -70,11 +68,10 @@ import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.compo
     ErrorMessageDialogComponent,
     ErrorDialogComponent,
     ReferredCandidatesComponent,
-  
+ReferralsTallyComponent,
     JobManagementComponent,
-    FilterCandidatesComponent,
-    SearchCandidatesComponent,
-    ReferralsTallyComponent,
+    ReferredCandidateAdminComponent,
+    AppLayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,7 +84,7 @@ import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.compo
     MatSelectModule,
     BrowserAnimationsModule,
     MatSidenavModule,
-    MatListModule,    
+    MatListModule,
     MatTableModule,
     MatIconModule,
     MatSortModule,
@@ -96,7 +93,7 @@ import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.compo
     MatBadgeModule,
     MatCardModule,
     MatToolbarModule,
-    
+
     MatDividerModule,
     FormsModule,
     ReactiveFormsModule,
@@ -105,7 +102,4 @@ import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.compo
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-
-  
-}
+export class AppModule {}

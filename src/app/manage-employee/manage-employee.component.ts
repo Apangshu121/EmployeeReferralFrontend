@@ -12,8 +12,7 @@ export class ManageEmployeeComponent implements OnInit {
   userRole!: string;
   update: boolean = false;
   editUserFlag: boolean = true;
-  isAdmin:boolean=false;
-
+  isAdmin: boolean = false;
 
   user: any;
   displayedColumns: string[] = ['id', 'name', 'email', 'role', 'updateRole'];
@@ -129,7 +128,7 @@ export class ManageEmployeeComponent implements OnInit {
   editUser(user: any): void {
     const googleToken = this.authService.getToken();
     if (googleToken && this.selectedUser) {
-      console.log('google Token');
+      // console.log('google Token');
       const userEmail = this.selectedUser.email;
       if (
         this.selectedRole &&
@@ -141,11 +140,11 @@ export class ManageEmployeeComponent implements OnInit {
           .updateRole(googleToken, userEmail, this.selectedRole)
           .subscribe(
             (response) => {
-              console.log(user.email);
+              // console.log(user.email);
               this.selectedUser = null;
               this.selectedRole = null;
 
-              console.log('Role updated successfully:', response);
+              // console.log('Role updated successfully:', response);
             },
             (error) => {
               // console.error('Error updating role:', error);

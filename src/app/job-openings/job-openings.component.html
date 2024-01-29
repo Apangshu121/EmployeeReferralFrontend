@@ -1,28 +1,36 @@
-
 <div class="JobOpenings">
-<div class="=cards" *ngIf="!isJob">
-  <div class="card" *ngFor="let item of data; let i = index">
-    <p>Job Id : {{ item.JobId }}</p>
-    <p>Role : {{ item.Role }}</p>
-    <p>Years Of Experience: {{ item.YearsOfExperience }}</p>
-    <p>Tech Stack : {{ item.TechStack }}</p>
-    <p class="button" (click)="onMore(i)">More</p>
-    <!-- <button (click)="onMore(i)">More</button> -->
+  <div class="=cards" *ngIf="!isJob">
+    <div class="card" *ngFor="let item of data; let i = index">
+      <p>Job Id : {{ item.JobId }}</p>
+      <p>Role : {{ item.Role }}</p>
+      <p>Years Of Experience: {{ item.YearsOfExperience }}</p>
+      <p>Tech Stack : {{ item.TechStack }}</p>
+      <p class="button" (click)="onMore(i)">More</p>
+    </div>
   </div>
-</div>
 
-<div class="box" *ngIf="isJob">
-  <div class="details">
-    <p>Job Id : {{ jobData.JobId }}</p>
-    <p>Role : {{ jobData.Role }}</p>
-    <p>Years Of Experience: {{ jobData.YearsOfExperience }}</p>
-    <p>Tech Stack : {{ jobData.TechStack }}</p>
-    <p>Description : {{ jobData.Description }}</p>
-    <p>Band : {{ jobData.Band }}</p>
-    <p>Business Unit : {{ jobData.BU }}</p>
-    <p (click)="onClose()" style="font-weight: bold; width: 100px; color: #0d016b; padding: 8px 12px;
-    cursor: pointer; margin-top: 10px;">Close</p>
-    
+  <div class="box" *ngIf="isJob">
+    <div class="details">
+      <p>Job Id : {{ jobData.JobId }}</p>
+      <p>Role : {{ jobData.Role }}</p>
+      <p>Years Of Experience: {{ jobData.YearsOfExperience }}</p>
+      <p>Tech Stack : {{ jobData.TechStack }}</p>
+      <p>Description : {{ jobData.Description }}</p>
+      <p>Band : {{ jobData.Band }}</p>
+      <p>Business Unit : {{ jobData.BU }}</p>
+      <p
+        (click)="onClose()"
+        style="
+          font-weight: bold;
+          width: 100px;
+          color: #0d016b;
+          padding: 8px 12px;
+          cursor: pointer;
+          margin-top: 10px;
+        "
+      >
+        Close
+      </p>
+    </div>
   </div>
-</div>
 </div>

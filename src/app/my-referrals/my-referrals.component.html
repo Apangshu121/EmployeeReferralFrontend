@@ -1,35 +1,40 @@
-
-
-  <div class="heading">My Referrals</div>
+<div class="heading">My Referrals</div>
 
 <div class="table1">
   <div class="info1">
+    <div class="mat-elevation-z8">
+      <table
+        mat-table
+        class="mat-table table container"
+        [dataSource]="referredCandidates"
+      >
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let candidate">
+            {{ candidate.candidateName }}
+          </td>
+        </ng-container>
 
-  <div class="mat-elevation-z8">
-  <table mat-table class="mat-table table container" [dataSource]="referredCandidates" >
+        <!-- Interview Position Column -->
+        <ng-container matColumnDef="interviewPosition">
+          <th mat-header-cell *matHeaderCellDef>Interview Position</th>
+          <td mat-cell *matCellDef="let candidate">
+            {{ candidate.interviewedPosition }}
+          </td>
+        </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let candidate">{{ candidate.candidateName }}</td>
-    </ng-container>
-  
-    <!-- Interview Position Column -->
-    <ng-container matColumnDef="interviewPosition">
-      <th mat-header-cell *matHeaderCellDef>Interview Position</th>
-      <td mat-cell *matCellDef="let candidate">{{ candidate.interviewedPosition}}</td>
-    </ng-container>
-  
-    <!-- Interview Status Column -->
-    <ng-container matColumnDef="interviewStatus">
-      <th mat-header-cell *matHeaderCellDef>Interview Status</th>
-      <td mat-cell *matCellDef="let candidate">{{ candidate.interviewStatus }}</td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-</div>
-</div>
-</div>
+        <!-- Interview Status Column -->
+        <ng-container matColumnDef="interviewStatus">
+          <th mat-header-cell *matHeaderCellDef>Interview Status</th>
+          <td mat-cell *matCellDef="let candidate">
+            {{ candidate.interviewStatus }}
+          </td>
+        </ng-container>
 
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </div>
+</div>

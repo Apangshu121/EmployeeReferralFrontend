@@ -1,7 +1,9 @@
-
+<!-- <app-navigation></app-navigation> -->
 
 <div class="cont">
 <h3 *ngIf="!isAdd && !isEdit">Job Posts</h3>
+<button mat-raised-button color="warn" (click)="onClose()"
+class="close-button" *ngIf="showJobPosts && !isEdit && !isAdd && !isJob">Close</button>
   <div class="center-container">
     <mat-card class="square-card" *ngIf="!isAdd && !showJobPosts">
       <mat-card-content>
@@ -16,9 +18,16 @@
           <img src="assets/show_job.png" (click)="showDetails()">
               </mat-card-content>
       </mat-card>
+
+      
+    
+      
   <ng-container>
 
+    
+    
   <table mat-table class="mat-elevation-z8" *ngIf="showJobPosts && !isEdit && !isAdd && !isJob" [dataSource]="data">
+    
     <ng-container matColumnDef="jobId">
       <th mat-header-cell *matHeaderCellDef> JobId </th>
       <td mat-cell *matCellDef="let item of data"> {{ item.JobId }} </td>
@@ -80,6 +89,7 @@
   <div class="add" *ngIf="isAdd || isEdit">
     <div class="form-header"  *ngIf="isAdd">
       <h5>Job Details Form</h5>
+
     </div>
 
     <div class="form-header"  *ngIf="isEdit">
@@ -155,8 +165,11 @@
         /><br />
     
         <button mat-raised-button color="primary" type="submit" *ngIf="isAdd" (click)="onSubmit()">Submit</button><br>
+        <button mat-raised-button color="warn" type="submit" *ngIf="isAdd" (click)="onAddClose()">Close</button>
+
   
         <button mat-raised-button color="primary" type="submit" *ngIf="isEdit" (click)="onUpdate()">Update</button>
+        <button mat-raised-button color="warn" type="submit" *ngIf="isEdit" (click)="onEditClose()">Close</button>
         <br>
       </form>
       </div>

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+import { ErrorMessageDialogComponent } from '../error-message-dialog/error-message-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 interface UpdatedFields {
   businessUnit?: string;
@@ -10,37 +12,44 @@ interface UpdatedFields {
   band?: string;
   interviewStatus?: string;
   noOfRounds?: number;
-
 }
 
 @Component({
   selector: 'app-referred-candidates',
   templateUrl: './referred-candidates.component.html',
-  styleUrl: './referred-candidates.component.scss'
+  styleUrl: './referred-candidates.component.scss',
 })
-
-export class ReferredCandidatesComponent implements OnInit{
-
-  data:any;
-  showCandInfo=false;
-  candidate:any;
-  isCard=true;
-  isUpdate=false;
-  isShowJobs=false;
-  isRefer=false;
+export class ReferredCandidatesComponent implements OnInit {
+  data: any;
+  showCandInfo = false;
+  candidate: any;
+  isCard = true;
+  isUpdate = false;
+  isShowJobs = false;
+  isRefer = false;
   updateForm!: FormGroup;
   updatedDetails: any = {};
   selectedFilter!: string;
   searchText!: string;
   filteredCandidates: any[] = [];
-  isFilter=false;
-  displayedColumns: string[] = ['id', 'candidateName', 'candidateEmail', 'contactNumber', 'primarySkill', 'preferredLocation', 'experience', 'referrerEmail', 'actions'];
+  isFilter = false;
+  displayedColumns: string[] = [
+    'id',
+    'candidateName',
+    'candidateEmail',
+    'contactNumber',
+    'primarySkill',
+    'preferredLocation',
+    'experience',
+    'referrerEmail',
+    'actions',
+  ];
   roundsArray = [1, 2, 3, 4];
   interviewStatuses: string[] = [];
-  isOpenfilter=false
-  isSearch=false;
-  isOpenSearch=false;
-  searchKeyword!:string;
+  isOpenfilter = false;
+  isSearch = false;
+  isOpenSearch = false;
+  searchKeyword!: string;
   searchResults: any;
   isFilterSearch=false;
   filterSearchResults:any;
@@ -49,7 +58,7 @@ export class ReferredCandidatesComponent implements OnInit{
   
 
 
-constructor(private fb: FormBuilder, private authService : AuthService, private router: Router){
+constructor(private fb: FormBuilder, private authService : AuthService, private router: Router,private dialog: MatDialog){
 
   this.updateForm = this.fb.group({
     businessUnit: ['', Validators.required],
@@ -62,7 +71,7 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
 
 }
 
-  ngOnInit(){
+  ngOnInit() {
     this.getAllReferredCandidates();
    
     
@@ -84,66 +93,77 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
     }
   }
 
-  getAllReferredCandidates(){
+  getAllReferredCandidates() {
     const googleToken = this.authService.getToken();
-    if(googleToken){
+    if (googleToken) {
       this.authService.getAllReferredCandidates(googleToken).subscribe(
-        (response)=> {
-        this.data=response;
+        (response) => {
+          this.data = response;
         },
-        (error)=>{
-          alert("error while fetching data"+ error);
+        (error) => {
+          this.showErrorDialog(error);
         }
-        );
-      }
-    else{
-      alert("error for google Token");
+      );
+    } else {
+      this.showErrorMessage('error for google Token');
     }
   }
+  private showErrorMessage(message: string): void {
+    const dialogRef = this.dialog.open(ErrorMessageDialogComponent, {
+      data: { message: message },
+    });
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
 
-  
-  onClose(){
-    this.showCandInfo=false;
+  showErrorDialog(errorMessage: string): void {
+    this.dialog.open(ErrorDialogComponent, {
+      data: errorMessage,
+    });
+  }
+
+  onClose() {
+    this.showCandInfo = false;
   }
 
   interviewTheCandidate(candidateId : number, index:number){
     // candidate.interviewed = true;
     console.log(index);
     const googleToken = this.authService.getToken();
-    if(googleToken){
-      this.authService.interviewTheCandidate(googleToken,candidateId).subscribe(
-        (response)=>{
-          alert(response.message + "\n please update details")
-        },
-        (error)=>{
-          alert("Error" + error)
-        }
-      );
-    }
-    else{
-      alert("You Are Not Authorized")
+    if (googleToken) {
+      this.authService
+        .interviewTheCandidate(googleToken, candidateId)
+        .subscribe(
+          (response) => {
+            const errorMessage = response.message;
+            this.showErrorDialog(errorMessage);
+          },
+          (error) => {
+            this.showErrorDialog(error);
+          }
+        );
+    } else {
+      this.showErrorMessage('You Are Not Authorized');
     }
     this.candidateInfo(index);
 
   }
 
-  sendMail(id:number){
-    this.showCandInfo=false;    
-    const googleToken=this.authService.getToken();
-    if(googleToken){
-      this.authService.sendMail(googleToken,id).subscribe(
-        (response)=>{
-          alert("Mails are sent successfully to both candidate and referrer")
+  sendMail(id: number) {
+    this.showCandInfo = false;
+    const googleToken = this.authService.getToken();
+    if (googleToken) {
+      this.authService.sendMail(googleToken, id).subscribe(
+        (response) => {
+          this.showErrorMessage(
+            'Mails are sent successfully to both candidate and referrer'
+          );
         },
-        (error)=>{
-          alert("Error "+ error);
-          
+        (error) => {
+          this.showErrorDialog(error);
         }
       );
-    }
-    else{
-      alert("Not Authorized");
-      
+    } else {
+      this.showErrorMessage('Not Authorized');
     }
   }
 
@@ -168,55 +188,54 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
     console.log(this.candidate);
   }
 
-updateCandidateDetails() {
-  this.isUpdate = false;
-  this.showCandInfo = false;
-  if (this.updateForm.valid){
-    const googleToken = this.authService.getToken();
-    if (googleToken) {
-      const candidateId = this.candidate && this.candidate.id;
+  updateCandidateDetails() {
+    this.isUpdate = false;
+    this.showCandInfo = false;
+    if (this.updateForm.valid) {
+      const googleToken = this.authService.getToken();
+      if (googleToken) {
+        const candidateId = this.candidate && this.candidate.id;
 
-      if (candidateId) {
-        const updatedDetails = this.updateForm.value;
-        this.authService.updateCandidateDetails(googleToken, candidateId, updatedDetails).subscribe(
-          (response) => {
-            alert("Details updated successfully");
-          },
-          (error) => {
-            alert("Error occurred"+ error.error);
-          }
-        );
-      }else {
-        alert("Invalid Candidate info");
+        if (candidateId) {
+          const updatedDetails = this.updateForm.value;
+          this.authService
+            .updateCandidateDetails(googleToken, candidateId, updatedDetails)
+            .subscribe(
+              (response) => {
+                this.showErrorMessage('Details updated successfully');
+              },
+              (error) => {
+                this.showErrorMessage('Error occurred' + error.error);
+              }
+            );
+        } else {
+          this.showErrorMessage('Invalid Candidate info');
+        }
+      } else {
+        this.showErrorMessage('Not Authorized');
       }
     } else {
-      alert("Not Authorized");
+      this.showErrorMessage('Please update the necessary details');
     }
-  } else {
-    alert("Please update the necessary details");
   }
-}
 
 
-
-  onClick(candidateData : any){
-    this.isUpdate=true;
+  onClick(candidateData : any) {
+    this.isUpdate = true;
     this.updateForm.patchValue(candidateData);
   }
 
-  getCandDetailsById(candId : number){
-    this.showCandInfo=true;
+  getCandDetailsById(candId: number) {
+    this.showCandInfo = true;
     const googleToken = this.authService.getToken();
-    if(googleToken){
-      this.authService.getCandDetailsById(googleToken,candId).subscribe(
-        (response)=>
-        {
-          this.candidate=response.candidate;
-          console.log(this.candidate);
+    if (googleToken) {
+      this.authService.getCandDetailsById(googleToken, candId).subscribe(
+        (response) => {
+          this.candidate = response.candidate;
+          // console.log(this.candidate);
         },
-        (error) =>
-        {
-          console.log("Error ", error);
+        (error) => {
+          // console.log('Error ', error);
         }
       );
     }
@@ -226,31 +245,34 @@ updateCandidateDetails() {
     this.isFilter=true;
     this.isfilterSearchButton=true;
     const googleToken = this.authService.getToken();
-    if(googleToken){
-    if (this.selectedFilter && this.searchText) {
-      console.log(this.searchText, this.selectedFilter);
-      this.authService.filterCandidates(googleToken,this.selectedFilter, this.searchText)
-        .subscribe(
-          (response) => {
-          this.filteredCandidates = response['Filtered Candidates'];
-          console.log(this.filteredCandidates);
-        }, (error: any) => {
-          console.error('Error fetching filtered candidates:', error);
-        });
+    if (googleToken) {
+      if (this.selectedFilter && this.searchText) {
+        // console.log(this.searchText, this.selectedFilter);
+        this.authService
+          .filterCandidates(googleToken, this.selectedFilter, this.searchText)
+          .subscribe(
+            (response) => {
+              this.filteredCandidates = response['Filtered Candidates'];
+              // console.log(this.filteredCandidates);
+            },
+            (error: any) => {
+              console.error('Error fetching filtered candidates:', error);
+            }
+          );
+      }
     }
   }
+
+  openFilterComponent() {
+    this.isOpenfilter = true;
   }
 
-  openFilterComponent(){
-    this.isOpenfilter=true;
-  } 
-
-  openSearchComponent(){
-    this.isOpenSearch=true;
+  openSearchComponent() {
+    this.isOpenSearch = true;
   }
 
-  onSearchClicked(){
-    this.isSearch=true;
+  onSearchClicked() {
+    this.isSearch = true;
     const googleToken = this.authService.getToken();
     if(googleToken){
       if(this.searchKeyword!=""){
@@ -305,4 +327,4 @@ updateCandidateDetails() {
       });
     }  
 
-}
+  }

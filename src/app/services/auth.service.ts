@@ -7,6 +7,7 @@ import { saveAs } from 'file-saver';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Tally } from '../my-profile/my-profile.component';
 
 @Injectable({
   providedIn: 'root',
@@ -72,9 +73,16 @@ export class AuthService {
       'Authorization',
       'Bearer ' + googleToken
     );
-    console.log(headers);
+    // console.log(headers);
 
     return this.httpClient.get(this.path + 'user/getUserDetails', { headers });
+  }
+
+ 
+  getTallyData(googleToken: string): Observable<Tally> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${googleToken}`);
+
+    return this.httpClient.get<Tally>(this.path + 'user/getReferralTally', { headers });
   }
 
   getAllEmployees(googleToken: string): Observable<any[]> {
@@ -114,6 +122,8 @@ export class AuthService {
       formData
     );
   }
+
+
 
   getAllReferredCandidates(googleToken: string): Observable<any[]> {
     const headers = new HttpHeaders({
@@ -259,8 +269,6 @@ export class AuthService {
       .pipe();
   }
 
-  
-
   downloadResume(id:number){
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept': 'application/pdf' });
 
@@ -280,5 +288,16 @@ export class AuthService {
     return this.httpClient.get(`${this.path}user/getAllReferralsTally`,{headers});
   }
 
+
+  searchUsers(googleToken:string, searchKeyword: string){
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient
+      .get<any[]>(`${this.path}admin/users/all?keyword=${searchKeyword}`, {
+        headers: headers,
+      })
+      .pipe();
+  }
 
 }
