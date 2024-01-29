@@ -12,21 +12,20 @@ export class MyReferralsComponent {
   referredCandidates!: [{ [key: string]: string }];
   displayedColumns: string[] = ['name', 'interviewPosition', 'interviewStatus'];
 
-
   ngOnInit(): void {
     this.getMyReferrals();
-    console.log('my referral');
+    // console.log('my referral');
   }
 
   getMyReferrals(): void {
     const googleToken = this.authService.getToken();
-    console.log(googleToken);
+    // console.log(googleToken);
 
     if (googleToken) {
       this.authService.getReferredCandidatesOfUser(googleToken).subscribe(
         (response) => {
           this.referredCandidates = response['referredCandidates'];
-          console.log(this.referredCandidates);
+          // console.log(this.referredCandidates);
         },
         (error) => {
           console.error('Error fetching referrals:', error);

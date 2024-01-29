@@ -1,10 +1,19 @@
-<app-navigation></app-navigation>
+<!-- <app-navigation></app-navigation> -->
 
 <div class="icons-container" *ngIf="!isUpdate">
   <!-- <mat-icon class="icon" (click)="openSearchComponent()">search</mat-icon> -->
-  <input type = "text" placeholder="Search" *ngIf="!isOpenfilter" [(ngModel)]="searchKeyword">
-  <button mat-raised-button color="primary"  (click)="onSearchClicked()">Search<mat-icon class="icon" >search</mat-icon> </button>
-  <button mat-raised-button color="primary"  (click)="openFilterComponent()">Filter<mat-icon class="icon" >filter_list</mat-icon> </button>
+  <input
+    type="text"
+    placeholder="Search"
+    *ngIf="!isOpenfilter"
+    [(ngModel)]="searchKeyword"
+  />
+  <button mat-raised-button color="primary" (click)="onSearchClicked()">
+    Search<mat-icon class="icon">search</mat-icon>
+  </button>
+  <button mat-raised-button color="primary" (click)="openFilterComponent()">
+    Filter<mat-icon class="icon">filter_list</mat-icon>
+  </button>
 </div>
 
 <div class="filters" *ngIf="isOpenfilter">
@@ -28,7 +37,6 @@
         <mat-option value="Chennai">Chennai</mat-option>
         <mat-option value="Mumbai">Mumbai</mat-option>
         <mat-option value="Gurgaon">Gurgaon</mat-option>
-      
       </mat-select>
     </mat-form-field>
   </div>
@@ -42,82 +50,107 @@
         <mat-option value="POOL">Pool</mat-option>
         <mat-option value="ON HOLD">On Hold</mat-option>
         <mat-option value="DROP">Drop</mat-option>
-        <mat-option value="BETTER QUALIFIED FOR OTHER POSITION">Better Qualified for Other Position</mat-option>
-      
+        <mat-option value="BETTER QUALIFIED FOR OTHER POSITION"
+          >Better Qualified for Other Position</mat-option
+        >
       </mat-select>
     </mat-form-field>
   </div>
-  
 
-  <div class="filter" *ngIf="selectedFilter !== 'preferredLocation' && selectedFilter !== 'interviewStatus'">
+  <div
+    class="filter"
+    *ngIf="
+      selectedFilter !== 'preferredLocation' &&
+      selectedFilter !== 'interviewStatus'
+    "
+  >
     <mat-form-field>
-      <input matInput [(ngModel)]="searchText" placeholder="{{ selectedFilter === 'experience' ? 'Enter Experience' : 'Enter Notice Period' }}">
+      <input
+        matInput
+        [(ngModel)]="searchText"
+        placeholder="{{
+          selectedFilter === 'experience'
+            ? 'Enter Experience'
+            : 'Enter Notice Period'
+        }}"
+      />
     </mat-form-field>
   </div>
 
   <div class="filter">
-    <button mat-raised-button color="primary" (click)="onFilterChange()">Apply Filter</button>
-  </div><br>
+    <button mat-raised-button color="primary" (click)="onFilterChange()">
+      Apply Filter
+    </button>
+  </div>
+  <br />
 
   <div class="filter">
     <mat-form-field>
-      <input matInput [(ngModel)]="searchKeyword" placeholder="Search in Filter">
+      <input
+        matInput
+        [(ngModel)]="searchKeyword"
+        placeholder="Search in Filter"
+      />
     </mat-form-field>
   </div>
 
-    <div class="filter">
-    <button mat-raised-button color="primary">Search<mat-icon class="icon" >search</mat-icon> </button>
+  <div class="filter">
+    <button mat-raised-button color="primary">
+      Search<mat-icon class="icon">search</mat-icon>
+    </button>
   </div>
-
-  </div>    
+</div>
 
 <div class="table1" *ngIf="!showCandInfo">
-  <div class="info" >
+  <div class="info">
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="getTableDataSource()" class="mat-table table-container" >
-       
+      <table
+        mat-table
+        [dataSource]="getTableDataSource()"
+        class="mat-table table-container"
+      >
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>ID</th>
           <td mat-cell *matCellDef="let item">{{ item.id }}</td>
         </ng-container>
-  
+
         <ng-container matColumnDef="candidateName">
           <th mat-header-cell *matHeaderCellDef>Name</th>
           <td mat-cell *matCellDef="let item">{{ item.candidateName }}</td>
         </ng-container>
-  
+
         <ng-container matColumnDef="candidateEmail">
           <th mat-header-cell *matHeaderCellDef>Email</th>
           <td mat-cell *matCellDef="let item">{{ item.candidateEmail }}</td>
         </ng-container>
-  
+
         <ng-container matColumnDef="contactNumber">
           <th mat-header-cell *matHeaderCellDef>Ph No</th>
           <td mat-cell *matCellDef="let item">{{ item.contactNumber }}</td>
         </ng-container>
-  
+
         <ng-container matColumnDef="primarySkill">
           <th mat-header-cell *matHeaderCellDef>Primary Skill</th>
           <td mat-cell *matCellDef="let item">{{ item.primarySkill }}</td>
         </ng-container>
-  
+
         <ng-container matColumnDef="preferredLocation">
           <th mat-header-cell *matHeaderCellDef>Preferred Location</th>
           <td mat-cell *matCellDef="let item">{{ item.preferredLocation }}</td>
         </ng-container>
-  
+
         <ng-container matColumnDef="experience">
           <th mat-header-cell *matHeaderCellDef>Experience</th>
           <td mat-cell *matCellDef="let item">{{ item.experience }}</td>
         </ng-container>
-  
+
         <ng-container matColumnDef="referrerEmail">
           <th mat-header-cell *matHeaderCellDef>Referer Email</th>
           <td mat-cell *matCellDef="let item">{{ item.referrerEmail }}</td>
         </ng-container>
-  
+
         <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
           <td mat-cell *matCellDef="let item">
             <button (click)="interviewTheCandidate(item.id)">
               Interview this candidate
@@ -128,15 +161,15 @@
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="candidateInfo(row)"></tr>
-      
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          (click)="candidateInfo(row)"
+        ></tr>
       </table>
     </div>
   </div>
-</div> 
-
-
-
+</div>
 
 <div class="parent-container">
   <div class="cand-info" *ngIf="showCandInfo && !isUpdate">
@@ -147,7 +180,7 @@
       <p>Email: {{ candidate.candidateEmail }}</p>
       <p>Phone Number: {{ candidate.contactNumber }}</p>
       <p>Referrer Email: {{ candidate.referrerEmail }}</p>
-      <p>Experience: {{ candidate.experience}}</p>
+      <p>Experience: {{ candidate.experience }}</p>
       <p>Primary Skill: {{ candidate.primarySkill }}</p>
       <p>Notice Period: {{ candidate.noticePeriod }}</p>
       <p>Offers In Hand: {{ candidate.offerInHand }}</p>
@@ -160,13 +193,17 @@
       <p>Interview Status: {{ candidate.interviewStatus.interviewStatus }}</p>
     </div>
     <div class="cand-btn-group">
-      <button type="button" class="btn btn-secondary" (click)="onClick()">Update</button>
-      <button type="button" class="btn btn-danger" (click)="onClose()">Close</button>
+      <button type="button" class="btn btn-secondary" (click)="onClick()">
+        Update
+      </button>
+      <button type="button" class="btn btn-danger" (click)="onClose()">
+        Close
+      </button>
     </div>
   </div>
-  </div>
-  
-  <!-- <div class="center-container" *ngIf="isUpdate">
+</div>
+
+<!-- <div class="center-container" *ngIf="isUpdate">
     <div class="update-form">
   
     <form [formGroup]="updateForm">
@@ -208,58 +245,74 @@
   </div>
 </div> -->
 
+<div class="center-container" *ngIf="isUpdate">
+  <form [formGroup]="updateForm">
+    <h5 class="form-header">Update Candidate Details</h5>
+    <br />
 
-  <div class="center-container" *ngIf="isUpdate">
-    
-  
-    <form [formGroup]="updateForm">
+    <mat-form-field>
+      <mat-label>Business Unit</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="businessUnit"
+      /> </mat-form-field
+    ><br />
 
-        <h5 class="form-header">Update Candidate Details</h5><br>
-      
-      <mat-form-field>
-        <mat-label>Business Unit</mat-label>
-        <input matInput type="text" formControlName="businessUnit">
-      </mat-form-field><br>
-  
-      <mat-form-field>
-        <mat-label>Interviewed Position</mat-label>
-        <input matInput type="text" formControlName="interviewedPosition">
-      </mat-form-field><br>
-  
-      <mat-form-field>
-        <mat-label>Band</mat-label>
-        <input matInput type="text" formControlName="band">
-      </mat-form-field><br>
-  
-      <mat-form-field>
-        <mat-label>No Of Rounds</mat-label>
-        <input matInput type="number" formControlName="noOfRounds">
-      </mat-form-field><br>
-  
-      <mat-form-field>
-        <mat-label>Current Status</mat-label>
-        <mat-select formControlName="currentStatus">
-          <mat-option value="SELECT">SELECT</mat-option>
-          <mat-option value="POOL">POOL</mat-option>
-          <mat-option value="REJECT">REJECT</mat-option>
-          <mat-option value="DROP">DROP</mat-option>
-          <mat-option value="ON HOLD">ON HOLD</mat-option>
-          <mat-option value="BETTER QUALIFIED FOR OTHER POSITION">BETTER QUALIFIED FOR OTHER POSITION</mat-option>
-        </mat-select>
-      </mat-form-field><br>
-  
-      <mat-form-field>
-        <mat-label>Interview Status</mat-label>
-        <mat-select formControlName="interviewStatus">
-          <mat-option *ngFor="let option of interviewStatuses" [value]="option">{{ option }}</mat-option>
-        </mat-select>
-      </mat-form-field><br>
-  
-      <button mat-raised-button color="primary" (click)="updateCandidateDetails()">Update Candidate Details</button>
-    </form>
-  </div>
-  
+    <mat-form-field>
+      <mat-label>Interviewed Position</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="interviewedPosition"
+      /> </mat-form-field
+    ><br />
 
-  <!-- <img decoding="async" loading="lazy" class="alignnone size-full wp-image-41114" src="https://ceblog.s3.amazonaws.com/wp-content/uploads/2018/08/20142505/best-homepage-30.png" alt="best-homepage-dropbox" width="923" height="572" srcset="https://ceblog.s3.amazonaws.com/wp-content/uploads/2018/08/20142505/best-homepage-30.png 923w, https://ceblog.s3.amazonaws.com/wp-content/uploads/2018/08/20142505/best-homepage-30-300x186.png 300w, https://ceblog.s3.amazonaws.com/wp-content/uploads/2018/08/20142505/best-homepage-30-768x476.png 768w" sizes="(max-width: 923px) 100vw, 923px"> -->
-  
+    <mat-form-field>
+      <mat-label>Band</mat-label>
+      <input matInput type="text" formControlName="band" /> </mat-form-field
+    ><br />
 
+    <mat-form-field>
+      <mat-label>No Of Rounds</mat-label>
+      <input
+        matInput
+        type="number"
+        formControlName="noOfRounds"
+      /> </mat-form-field
+    ><br />
+
+    <mat-form-field>
+      <mat-label>Current Status</mat-label>
+      <mat-select formControlName="currentStatus">
+        <mat-option value="SELECT">SELECT</mat-option>
+        <mat-option value="POOL">POOL</mat-option>
+        <mat-option value="REJECT">REJECT</mat-option>
+        <mat-option value="DROP">DROP</mat-option>
+        <mat-option value="ON HOLD">ON HOLD</mat-option>
+        <mat-option value="BETTER QUALIFIED FOR OTHER POSITION"
+          >BETTER QUALIFIED FOR OTHER POSITION</mat-option
+        >
+      </mat-select> </mat-form-field
+    ><br />
+
+    <mat-form-field>
+      <mat-label>Interview Status</mat-label>
+      <mat-select formControlName="interviewStatus">
+        <mat-option *ngFor="let option of interviewStatuses" [value]="option">{{
+          option
+        }}</mat-option>
+      </mat-select> </mat-form-field
+    ><br />
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="updateCandidateDetails()"
+    >
+      Update Candidate Details
+    </button>
+  </form>
+</div>
+
+<!-- <img decoding="async" loading="lazy" class="alignnone size-full wp-image-41114" src="https://ceblog.s3.amazonaws.com/wp-content/uploads/2018/08/20142505/best-homepage-30.png" alt="best-homepage-dropbox" width="923" height="572" srcset="https://ceblog.s3.amazonaws.com/wp-content/uploads/2018/08/20142505/best-homepage-30.png 923w, https://ceblog.s3.amazonaws.com/wp-content/uploads/2018/08/20142505/best-homepage-30-300x186.png 300w, https://ceblog.s3.amazonaws.com/wp-content/uploads/2018/08/20142505/best-homepage-30-768x476.png 768w" sizes="(max-width: 923px) 100vw, 923px"> -->

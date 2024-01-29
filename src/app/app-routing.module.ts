@@ -5,85 +5,43 @@ import { LogoutComponent } from './logout/logout.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './services/auth-guard.service';
 
-import { NavigationComponent } from './navigation/navigation.component';
 import { JobOpeningsComponent } from './job-openings/job-openings.component';
 
 import { MyReferralsComponent } from './my-referrals/my-referrals.component';
 
 import { from } from 'rxjs';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { AppLayoutComponent } from './app-layout/app-layout.component';
+import { ReferAFriendComponent } from './refer-a-friend/refer-a-friend.component';
+import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
+import { ReferredCandidatesComponent } from './referred-candidates/referred-candidates.component';
+import { ReferredCandidateAdminComponent } from './referred-candidate-admin/referred-candidate-admin.component';
+import { JobManagementComponent } from './job-management/job-management.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
-  
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  
- 
-  {
-    path: 'manage-employee',
-    loadChildren: () =>
-      import('./manage-employee/manage-employee.module').then(
-        (m) => m.ManageEmployeeModule
-      ),
-  },
-  {path:'job-openings', 
-  loadChildren:()=> import('./job-openings/job-openings.module').then(
-    (m)=>m.JobOpeningsModule),
-  },
-  {
-    path: 'my-profile', 
-    loadChildren:()=>import('./my-profile/my-profile.module').then(
-      (m)=>m.MyProfileModule),
-  },
- 
-  {
-    path: 'my-referrals',
-    loadChildren: () =>
-      import('./my-referrals/my-referrals.module').then(
-        (m) => m.MyReferralsModule
-      ),
-  },
 
+  // { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   {
-    path: 'refer-a-friend',
-    loadChildren: () =>
-      import('./refer-a-friend/refer-a-friend.module').then(
-        (m) => m.ReferAFriendModule
-      ),
-  },
-  {
-    path: 'referred-candidate-admin',
-    loadChildren: () =>
-      import('./referred-candidate-admin/referred-candidate-admin.module').then(
-        (m) => m.ReferredCandidateAdminModule
-      ),
-  },
+    path: '',
+    component: AppLayoutComponent,
+    children: [
+      { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+      { path: 'refer-a-friend', component: ReferAFriendComponent },
+      { path: 'manage-employee', component: ManageEmployeeComponent },
+      { path: 'job-openings', component: JobOpeningsComponent },
+      { path: 'my-profile', component: MyProfileComponent },
+      { path: 'my-referrals', component: MyReferralsComponent },
+      { path: 'referred-candidates', component: ReferredCandidatesComponent },
+      {
+        path: 'referred-candidate-admin',
+        component: ReferredCandidateAdminComponent,
+      },
+      { path: 'job-management', component: JobManagementComponent },
 
-
-  {
-    path: 'referred-candidates',
-    loadChildren: () =>
-      import('./referred-candidates/referred-candidates.module').then(
-        (m) => m.ReferredCandidatesModule
-      ),
+      // { path: '', redirectTo: '/home', pathMatch: 'full' },
+    ],
   },
-
-  {
-    path: 'job-management',
-    loadChildren: () =>
-      import('./job-management/job-management.module').then(
-        (m) => m.JobManagementModule
-      ),
-  },
-
-  {
-    path: 'filter-candidates',
-    loadChildren: () =>
-      import('./filter-candidates/filter-candidates.module').then(
-        (m) => m.FilterCandidatesModule
-      ),
-  },
-
 ];
 
 @NgModule({

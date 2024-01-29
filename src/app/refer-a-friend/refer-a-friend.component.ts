@@ -1,4 +1,3 @@
-
 import { Component, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -12,7 +11,6 @@ import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
   selector: 'app-refer-a-friend',
   templateUrl: './refer-a-friend.component.html',
   styleUrl: './refer-a-friend.component.scss',
-
 })
 export class ReferAFriendComponent {
   refForm!: FormGroup;
@@ -25,10 +23,10 @@ export class ReferAFriendComponent {
   offerInHand!: boolean;
   showPdfModal: boolean = false;
   servingNoticePeriod!: boolean;
-  blacklisted!:any;
-  fileName!:any;
-  fileUpload:boolean=true;
-  
+  blacklisted!: any;
+  fileName!: any;
+  fileUpload: boolean = true;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -41,8 +39,8 @@ export class ReferAFriendComponent {
       candidateEmail: [''],
       experience: [''],
       primarySkill: [''],
-      blacklisted:[''],
-      fileName:[''],
+      blacklisted: [''],
+      fileName: [''],
       preferredLocation: [''],
       noticePeriod: [''],
       vouch: [''],
@@ -63,61 +61,61 @@ export class ReferAFriendComponent {
       // Check file format
       if (this.selectedFile.type !== 'application/pdf') {
         this.showErrorMessage('Invalid file format. Please select a PDF file.');
-        this.fileUpload=false;
+        this.fileUpload = false;
         return;
       }
 
       // Check file size
       const maxSizeInBytes = 2 * 1024 * 1024; // 2 MB
       if (this.selectedFile.size > maxSizeInBytes) {
-        this.showErrorMessage('File size exceeds 2 MB limit. Please choose a smaller file.');
-        this.fileUpload=false;
+        this.showErrorMessage(
+          'File size exceeds 2 MB limit. Please choose a smaller file.'
+        );
+        this.fileUpload = false;
         return;
       }
     }
   }
-  
+
   uploadPdf(): void {
-    if(this.fileUpload){
-    if (this.selectedFile) {
-      
-      this.authService.extractInfo(this.selectedFile).subscribe(
-        (jsonResumeData: any) => {
-          const refFormValue = { ...this.refForm.value };
-          refFormValue.contactNumber = jsonResumeData.phone;
-          refFormValue.candidateEmail = jsonResumeData.email;
-          refFormValue.candidateName = jsonResumeData.name;
-          refFormValue.experience = jsonResumeData.experience
-            ? Number(jsonResumeData.experience.split(' ')[0])
-            : '0';
-          refFormValue.primarySkill = jsonResumeData.primarySkill;
-          refFormValue.fileName=jsonResumeData.filename;
-          refFormValue.blacklisted=jsonResumeData.blacklisted;
-          this.refForm.patchValue(refFormValue);
-          this.extractedText = JSON.stringify(jsonResumeData, null, 2);
-          this.enableForm();
-        },
-        (error) => {
-          if (error instanceof HttpErrorResponse && error.status === 401) {
-            const errorMessage = error.error;
-            this.showErrorMessage(`${errorMessage.error}`);
-            this.onCannotReffer();
-            this.disableForm();
-            return;
+    if (this.fileUpload) {
+      if (this.selectedFile) {
+        this.authService.extractInfo(this.selectedFile).subscribe(
+          (jsonResumeData: any) => {
+            const refFormValue = { ...this.refForm.value };
+            refFormValue.contactNumber = jsonResumeData.phone;
+            refFormValue.candidateEmail = jsonResumeData.email;
+            refFormValue.candidateName = jsonResumeData.name;
+            refFormValue.experience = jsonResumeData.experience
+              ? Number(jsonResumeData.experience.split(' ')[0])
+              : '0';
+            refFormValue.primarySkill = jsonResumeData.primarySkill;
+            refFormValue.fileName = jsonResumeData.filename;
+            refFormValue.blacklisted = jsonResumeData.blacklisted;
+            this.refForm.patchValue(refFormValue);
+            this.extractedText = JSON.stringify(jsonResumeData, null, 2);
+            this.enableForm();
+          },
+          (error) => {
+            if (error instanceof HttpErrorResponse && error.status === 401) {
+              const errorMessage = error.error;
+              this.showErrorMessage(`${errorMessage.error}`);
+              this.onCannotReffer();
+              this.disableForm();
+              return;
+            }
           }
-        }
-  
-      );
+        );
+      } else {
+        this.showErrorMessage('Please choose a valid PDF file.');
+        this.disableForm();
+        return;
+      }
     } else {
-      this.showErrorMessage('Please choose a valid PDF file.');
-      this.disableForm();
+      this.showErrorMessage('Re-Upload valid pdf');
+      this.fileUpload = true;
+      this.selectedFile = null;
       return;
-    }
-  }else{
-    this.showErrorMessage('Re-Upload valid pdf');
-    this.fileUpload=true;
-    this.selectedFile = null;
-    return;
     }
   }
   disableForm() {
@@ -138,17 +136,17 @@ export class ReferAFriendComponent {
       this.refForm.get('offerInHand')?.setValue(this.offerInHand === true);
       const serve = this.refForm.get('servingNoticePeriod');
       const noticePeriodValue = this.refForm.get('noticePeriod');
-      if(noticePeriodValue && serve){
-        if(serve.value=="false"){
+      if (noticePeriodValue && serve) {
+        if (serve.value == 'false') {
           const noticePeriodV = noticePeriodValue.value;
           this.refForm.patchValue({
-            noticePeriodLeft: noticePeriodV
+            noticePeriodLeft: noticePeriodV,
           });
           // console.log('Form value before patch:', this.refForm.value);
           this.refForm.get('noticePeriodLeft')?.setValue(noticePeriodV);
-      }}
-      else{
-        console.log("Notice Period Left");
+        }
+      } else {
+        // console.log("Notice Period Left");
       }
       const formData = this.refForm.value;
       this.authService.saveCandidate(googleToken, formData).subscribe(
@@ -169,12 +167,11 @@ export class ReferAFriendComponent {
           }
         }
       );
-    }
-    else {
+    } else {
       this.showErrorMessage('Please fill in all fields before submitting.');
     }
   }
-  showSuccessMessage() {    
+  showSuccessMessage() {
     this.showErrorMessage('Form submitted successfully!');
     this.closeForm();
     this.router.navigate(['/home']);
@@ -192,9 +189,7 @@ export class ReferAFriendComponent {
     const dialogRef = this.dialog.open(ErrorMessageDialogComponent, {
       data: { message: message },
     });
-    dialogRef.afterClosed().subscribe((result) => {
-
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   showErrorDialog(errorMessage: string): void {
