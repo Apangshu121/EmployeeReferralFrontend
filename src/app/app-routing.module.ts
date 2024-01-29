@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -17,6 +18,7 @@ import { ManageEmployeeComponent } from './manage-employee/manage-employee.compo
 import { ReferredCandidatesComponent } from './referred-candidates/referred-candidates.component';
 import { ReferredCandidateAdminComponent } from './referred-candidate-admin/referred-candidate-admin.component';
 import { JobManagementComponent } from './job-management/job-management.component';
+import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
@@ -38,7 +40,7 @@ const routes: Routes = [
         component: ReferredCandidateAdminComponent,
       },
       { path: 'job-management', component: JobManagementComponent },
-
+{path:'referral-tally',component:ReferralsTallyComponent}
       // { path: '', redirectTo: '/home', pathMatch: 'full' },
     ],
   },

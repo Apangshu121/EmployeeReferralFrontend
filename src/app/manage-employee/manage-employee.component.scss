@@ -11,12 +11,12 @@
     color: #33006F;
   }
 
-  .search-container {
-    margin-left: 200px;
-    margin-top: 20px;
-    width: 170px;
-    height: 70px;
-  }
+  // .search-container {
+  //   margin-left: 200px;
+  //   margin-top: 20px;
+  //   width: 170px;
+  //   height: 70px;
+  // }
   
 
 .info1{
@@ -90,4 +90,9 @@ select {
 
 button {
   margin-right: 8px;
+}
+.search-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }

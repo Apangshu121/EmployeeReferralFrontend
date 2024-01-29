@@ -49,9 +49,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { JobManagementComponent } from './job-management/job-management.component';
-
-import { ReferredCandidateAdminComponent } from './referred-candidate-admin/referred-candidate-admin.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
+import { ReferredCandidateAdminComponent } from './referred-candidate-admin/referred-candidate-admin.component';
+import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +68,7 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
     ErrorMessageDialogComponent,
     ErrorDialogComponent,
     ReferredCandidatesComponent,
-
+ReferralsTallyComponent,
     JobManagementComponent,
     ReferredCandidateAdminComponent,
     AppLayoutComponent,

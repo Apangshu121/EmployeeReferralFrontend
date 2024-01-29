@@ -66,6 +66,26 @@
     <button
       mat-button
       class="menu-button"
+      *ngIf="isRecruiter"
+      [routerLink]="'referral-tally'"
+    >
+      <mat-icon>poll</mat-icon>
+      <span>All Referrals Tally</span>
+    </button>
+
+    <button
+      mat-button
+      class="menu-button"
+      *ngIf="isSenior"
+      [routerLink]="'job-management'"
+    >
+    <mat-icon>business_center</mat-icon>
+      <span>Job Management</span>
+    </button>
+
+    <button
+      mat-button
+      class="menu-button"
       *ngIf="adminFlag"
       [routerLink]="'referred-candidate-admin'"
     >

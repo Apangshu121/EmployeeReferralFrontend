@@ -15,7 +15,7 @@ export class AppLayoutComponent implements OnInit {
   adminFlag: boolean = false;
   referAFriend = false;
 
-  isBuhead = false;
+  // isBuhead = false;
   isSenior = false;
   isRecruiter = false;
 

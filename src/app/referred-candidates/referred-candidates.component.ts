@@ -51,38 +51,43 @@ export class ReferredCandidatesComponent implements OnInit {
   isOpenSearch = false;
   searchKeyword!: string;
   searchResults: any;
+  isFilterSearch=false;
+  filterSearchResults:any;
+  isInterview=true;
+  isfilterSearchButton=false;
+  
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router,
-    private dialog: MatDialog
-  ) {
-    this.updateForm = this.fb.group({
-      businessUnit: ['', Validators.required],
-      interviewedPosition: ['', Validators.required],
-      band: ['', Validators.required],
-      currentStatus: ['SELECT', Validators.required],
-      interviewStatus: ['CODELYSER SELECT', Validators.required],
-      noOfRounds: [0, Validators.required],
-    });
-  }
+
+constructor(private fb: FormBuilder, private authService : AuthService, private router: Router,private dialog: MatDialog){
+
+  this.updateForm = this.fb.group({
+    businessUnit: ['', Validators.required],
+    interviewedPosition: ['', Validators.required],
+    band: ['', Validators.required],
+    currentStatus: ['SELECT', Validators.required],
+    interviewStatus: ['CODELYSER SELECT', Validators.required],
+    noOfRounds: [0, Validators.required],
+  });
+
+}
 
   ngOnInit() {
     this.getAllReferredCandidates();
-
-    this.interviewStatuses.push('CODELYSER SELECT');
-    this.interviewStatuses.push('CODELYSER REJECT');
-
+   
+    
+  
     this.updateForm.get('noOfRounds')!.valueChanges.subscribe((value) => {
+      this.interviewStatuses=[];
+      this.interviewStatuses.push('CODELYSER SELECT');
+      this.interviewStatuses.push('CODELYSER REJECT');
       this.generateInterviewStatusOptions(value);
     });
   }
 
   generateInterviewStatusOptions(noOfRounds: number): void {
     // this.interviewStatuses = [];
-
-    for (let i = 1; i <= noOfRounds; i++) {
+    
+    for (let i = 1; i < noOfRounds; i++) {
       this.interviewStatuses.push(`R${i} SELECT`);
       this.interviewStatuses.push(`R${i} REJECT`);
     }
@@ -103,12 +108,26 @@ export class ReferredCandidatesComponent implements OnInit {
       this.showErrorMessage('error for google Token');
     }
   }
+  private showErrorMessage(message: string): void {
+    const dialogRef = this.dialog.open(ErrorMessageDialogComponent, {
+      data: { message: message },
+    });
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
+
+  showErrorDialog(errorMessage: string): void {
+    this.dialog.open(ErrorDialogComponent, {
+      data: errorMessage,
+    });
+  }
 
   onClose() {
     this.showCandInfo = false;
   }
 
-  interviewTheCandidate(candidateId: number) {
+  interviewTheCandidate(candidateId : number, index:number){
+    // candidate.interviewed = true;
+    console.log(index);
     const googleToken = this.authService.getToken();
     if (googleToken) {
       this.authService
@@ -125,6 +144,8 @@ export class ReferredCandidatesComponent implements OnInit {
     } else {
       this.showErrorMessage('You Are Not Authorized');
     }
+    this.candidateInfo(index);
+
   }
 
   sendMail(id: number) {
@@ -149,18 +170,22 @@ export class ReferredCandidatesComponent implements OnInit {
   getTableDataSource(): any[] {
     if (this.isFilter) {
       return this.filteredCandidates;
-    } else if (this.isSearch) {
-      return this.searchResults.SearchedCandidates;
-    } else {
+    } else if(this.isSearch){
+      return this.searchResults;
+    } else if(this.isFilterSearch){
+      return this.filterSearchResults;
+    }
+    else {
       return this.data.candidates;
     }
   }
 
-  candidateInfo(index: number) {
-    // console.log('Hello');
-    this.showCandInfo = true;
-    this.candidate = index;
-    // console.log(this.candidate);
+  candidateInfo(index : number){
+    this.isOpenfilter=false;
+    console.log("Hello")
+    this.showCandInfo=true;
+    this.candidate=index;
+    console.log(this.candidate);
   }
 
   updateCandidateDetails() {
@@ -194,8 +219,10 @@ export class ReferredCandidatesComponent implements OnInit {
     }
   }
 
-  onClick() {
+
+  onClick(candidateData : any) {
     this.isUpdate = true;
+    this.updateForm.patchValue(candidateData);
   }
 
   getCandDetailsById(candId: number) {
@@ -214,8 +241,9 @@ export class ReferredCandidatesComponent implements OnInit {
     }
   }
 
-  onFilterChange() {
-    this.isFilter = true;
+  onFilterChange(){
+    this.isFilter=true;
+    this.isfilterSearchButton=true;
     const googleToken = this.authService.getToken();
     if (googleToken) {
       if (this.selectedFilter && this.searchText) {
@@ -246,29 +274,57 @@ export class ReferredCandidatesComponent implements OnInit {
   onSearchClicked() {
     this.isSearch = true;
     const googleToken = this.authService.getToken();
-    if (googleToken) {
-      this.authService
-        .searchCandidates(googleToken, this.searchKeyword)
-        .subscribe(
-          (response) => {
-            this.searchResults = response;
-            //this.searchResults=this.searchResults.searchCandidates
-          },
-          (error) => {
-            // console.log(error);
-          }
-        );
+    if(googleToken){
+      if(this.searchKeyword!=""){
+      this.authService.searchCandidates(googleToken,this.searchKeyword).subscribe(
+        (response)=>{
+          this.searchResults = response;
+          this.searchResults=this.searchResults.SearchedCandidates;
+
+        },
+        (error) =>{
+          console.log(error);
+        });
+    }
+    else{
+      this.searchResults=this.data.candidates;
+      console.log("keyword" , this.searchKeyword);
+      console.log(this.searchResults)
+    }
+    
+  }
+  }
+  onFilterSearch(){
+    this.isFilter=false;
+    this.isFilterSearch=true;
+    const googleToken = this.authService.getToken();
+    if(googleToken){
+      if(this.searchKeyword!=""){
+      this.authService.filterSearch(googleToken,this.selectedFilter,this.searchText,this.searchKeyword).subscribe(
+        (response)=>
+        {
+          this.filterSearchResults=response;
+          this.filterSearchResults=this.filterSearchResults.FilteredCandidates;
+          console.log(this.filterSearchResults);
+        },
+        (error)=>{
+          alert(error);
+        });
+    }
+    else{
+      this.filterSearchResults=this.filteredCandidates
     }
   }
-  private showErrorMessage(message: string): void {
-    const dialogRef = this.dialog.open(ErrorMessageDialogComponent, {
-      data: { message: message },
-    });
-    dialogRef.afterClosed().subscribe((result) => {});
+    else{
+      alert("Not Authorized");
+    }
   }
-  showErrorDialog(errorMessage: string): void {
-    this.dialog.open(ErrorDialogComponent, {
-      data: errorMessage,
-    });
+
+  downloadResume(candId : number){
+      this.authService.downloadResume(candId).subscribe((content) => {
+        this.authService.saveFile(content, 'resume.pdf')
+        console.log("resume.pdf")
+      });
+    }  
+
   }
-}
