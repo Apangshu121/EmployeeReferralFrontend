@@ -19,6 +19,7 @@ import { ReferredCandidatesComponent } from './referred-candidates/referred-cand
 import { ReferredCandidateAdminComponent } from './referred-candidate-admin/referred-candidate-admin.component';
 import { JobManagementComponent } from './job-management/job-management.component';
 import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.component';
+import { BuSelectedCandidatesComponent } from './bu-selected-candidates/bu-selected-candidates.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
@@ -35,6 +36,7 @@ const routes: Routes = [
       { path: 'my-profile', component: MyProfileComponent },
       { path: 'my-referrals', component: MyReferralsComponent },
       { path: 'referred-candidates', component: ReferredCandidatesComponent },
+      { path:'bu-selected-candidates', component:BuSelectedCandidatesComponent},
       {
         path: 'referred-candidate-admin',
         component: ReferredCandidateAdminComponent,

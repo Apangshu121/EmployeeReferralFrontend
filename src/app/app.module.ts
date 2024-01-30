@@ -52,6 +52,7 @@ import { JobManagementComponent } from './job-management/job-management.componen
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { ReferredCandidateAdminComponent } from './referred-candidate-admin/referred-candidate-admin.component';
 import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.component';
+import { BuSelectedCandidatesComponent } from './bu-selected-candidates/bu-selected-candidates.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,6 @@ import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.compo
     LogoutComponent,
     HomeComponent,
     JobOpeningsComponent,
-
     MyReferralsComponent,
     ReferAFriendComponent,
     ManageEmployeeComponent,
@@ -72,6 +72,7 @@ ReferralsTallyComponent,
     JobManagementComponent,
     ReferredCandidateAdminComponent,
     AppLayoutComponent,
+    BuSelectedCandidatesComponent,
   ],
   imports: [
     BrowserModule,

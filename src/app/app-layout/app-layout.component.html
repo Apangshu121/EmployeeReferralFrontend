@@ -86,6 +86,16 @@
     <button
       mat-button
       class="menu-button"
+      *ngIf="isSenior"
+      [routerLink]="'bu-selected-candidates'"
+    >
+    <mat-icon>business_center</mat-icon>
+      <span>Selected Candidates</span>
+    </button>
+
+    <button
+      mat-button
+      class="menu-button"
       *ngIf="adminFlag"
       [routerLink]="'referred-candidate-admin'"
     >

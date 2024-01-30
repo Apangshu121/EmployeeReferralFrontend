@@ -2,22 +2,22 @@
 
 <div class="cont">
 <h3 *ngIf="!isAdd && !isEdit">Job Posts</h3>
-<button mat-raised-button color="warn" (click)="onClose()"
-class="close-button" *ngIf="showJobPosts && !isEdit && !isAdd && !isJob">Close</button>
+<button mat-raised-button color="primary" (click)="createSheet()"
+class="close-button" *ngIf="showJobPosts && !isEdit && !isAdd && !isJob"><mat-icon>add</mat-icon>Add Job</button>
   <div class="center-container">
-    <mat-card class="square-card" *ngIf="!isAdd && !showJobPosts">
+    <!-- <mat-card class="square-card" *ngIf="!isAdd && !showJobPosts">
       <mat-card-content>
 
         <img src="assets/add_job.png" (click)="createSheet()">
        </mat-card-content>
-    </mat-card>
+    </mat-card> -->
 
     <div class="center-container">
-      <mat-card class="square-card" *ngIf="!isAdd && !showJobPosts">
+      <!-- <mat-card class="square-card" *ngIf="!isAdd && !showJobPosts">
         <mat-card-content>
           <img src="assets/show_job.png" (click)="showDetails()">
               </mat-card-content>
-      </mat-card>
+      </mat-card> -->
 
       
     
