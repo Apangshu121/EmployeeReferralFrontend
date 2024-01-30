@@ -68,7 +68,7 @@ import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.compo
     ErrorMessageDialogComponent,
     ErrorDialogComponent,
     ReferredCandidatesComponent,
-ReferralsTallyComponent,
+    ReferralsTallyComponent,
     JobManagementComponent,
     ReferredCandidateAdminComponent,
     AppLayoutComponent,
