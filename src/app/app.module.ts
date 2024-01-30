@@ -68,7 +68,7 @@ import { BuSelectedCandidatesComponent } from './bu-selected-candidates/bu-selec
     ErrorMessageDialogComponent,
     ErrorDialogComponent,
     ReferredCandidatesComponent,
-ReferralsTallyComponent,
+    ReferralsTallyComponent,
     JobManagementComponent,
     ReferredCandidateAdminComponent,
     AppLayoutComponent,

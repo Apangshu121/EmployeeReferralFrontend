@@ -10,7 +10,13 @@ export class MyReferralsComponent {
   constructor(private authService: AuthService) {}
 
   referredCandidates!: [{ [key: string]: string }];
-  displayedColumns: string[] = ['name', 'interviewPosition', 'interviewStatus'];
+  displayedColumns: string[] = [
+    'name',
+    'dateOfReferral',
+    'currentStatus',
+    'interviewPosition',
+    'interviewStatus',
+  ];
 
   ngOnInit(): void {
     this.getMyReferrals();

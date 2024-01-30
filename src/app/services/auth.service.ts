@@ -1,5 +1,3 @@
-
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
@@ -8,6 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Tally } from '../my-profile/my-profile.component';
+import { AdminUpdateDTO } from '../referred-candidate-admin/admin-update-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -78,11 +77,15 @@ export class AuthService {
     return this.httpClient.get(this.path + 'user/getUserDetails', { headers });
   }
 
- 
   getTallyData(googleToken: string): Observable<Tally> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${googleToken}`);
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${googleToken}`
+    );
 
-    return this.httpClient.get<Tally>(this.path + 'user/getReferralTally', { headers });
+    return this.httpClient.get<Tally>(this.path + 'user/getReferralTally', {
+      headers,
+    });
   }
 
   getAllEmployees(googleToken: string): Observable<any[]> {
@@ -123,8 +126,6 @@ export class AuthService {
     );
   }
 
-
-
   getAllReferredCandidates(googleToken: string): Observable<any[]> {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + googleToken,
@@ -135,6 +136,36 @@ export class AuthService {
       })
       .pipe();
   }
+
+  editReferredCandidate(
+    id: number,
+    googleToken: string,
+    adminUpdateDTO: AdminUpdateDTO
+  ): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+
+    return this.httpClient.put<any>(
+      `${this.path}admin/users/editReferredCandidate/${id}`,
+      adminUpdateDTO,
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  // editReferredCandidate(id: number, googleToken: string): Observable<any> {
+  //   const headers = new HttpHeaders({
+  //     Authorization: 'Bearer ' + googleToken,
+  //   });
+
+  //   return this.httpClient
+  //     .put<any>(`${this.path}admin/users/editReferredCandidate/${id}`, null, {
+  //       headers: headers,
+  //     })
+  //     .pipe();
+  // }
 
   updateCandidateDetails(
     googleToken: string,
@@ -190,7 +221,7 @@ export class AuthService {
         })
       );
   }
-  
+
   createUser(user: any): Observable<any> {
     return this.httpClient.post<any>(
       this.path + 'api/referredCandidates/add',
@@ -216,49 +247,72 @@ export class AuthService {
     );
   }
 
-  interviewTheCandidate(googleToken: string, id: number){
+  interviewTheCandidate(googleToken: string, id: number) {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + googleToken,
     });
     return this.httpClient.put<any>(
-      `${this.path}api/referredCandidates/selectReferredCandidateForInterview/${id}`,id,{
-        headers
-      });
+      `${this.path}api/referredCandidates/selectReferredCandidateForInterview/${id}`,
+      id,
+      {
+        headers,
+      }
+    );
   }
-  getCandDetailsById(googleToken: string, id: number){
+  getCandDetailsById(googleToken: string, id: number) {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + googleToken,
     });
-    return this.httpClient.get<any>(`${this.path}api/referredCandidates/get/${id}`,{headers});
+    return this.httpClient.get<any>(
+      `${this.path}api/referredCandidates/get/${id}`,
+      { headers }
+    );
   }
 
-  filterCandidates(googleToken: string, filterType: string, value: any): Observable<any> {
+  filterCandidates(
+    googleToken: string,
+    filterType: string,
+    value: any
+  ): Observable<any> {
     console.log(filterType, value);
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + googleToken,
     });
-    return this.httpClient.get(`${this.path}api/referredCandidates/filter/${filterType}/${value}`,{headers});
-    
+    return this.httpClient.get(
+      `${this.path}api/referredCandidates/filter/${filterType}/${value}`,
+      { headers }
+    );
   }
 
-  searchCandidates(googleToken:string, searchKeyword: string){
+  searchCandidates(googleToken: string, searchKeyword: string) {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + googleToken,
     });
     return this.httpClient
-      .get<any[]>(`${this.path}api/referredCandidates/getAll?keyword=${searchKeyword}`, {
-        headers: headers,
-      })
+      .get<any[]>(
+        `${this.path}api/referredCandidates/getAll?keyword=${searchKeyword}`,
+        {
+          headers: headers,
+        }
+      )
       .pipe();
   }
-  filterSearch(googleToken:string, filterType: string, value: any,searchKeyword: string){
+  filterSearch(
+    googleToken: string,
+    filterType: string,
+    value: any,
+    searchKeyword: string
+  ) {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + googleToken,
     });
-    return this.httpClient.get(`${this.path}api/referredCandidates/filter/${filterType}/${value}?keyword=${searchKeyword}`,{headers});
+    return this.httpClient.get(
+      `${this.path}api/referredCandidates/filter/${filterType}/${value}?keyword=${searchKeyword}`,
+      { headers }
+    );
   }
-  
-  search(googleToken:string, searchKeyword: string){
+
+  search(googleToken: string, searchKeyword: string) {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + googleToken,
     });
@@ -269,11 +323,16 @@ export class AuthService {
       .pipe();
   }
 
-  downloadResume(id:number){
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept': 'application/pdf' });
+  downloadResume(id: number) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/pdf',
+    });
 
-
-    return this.httpClient.get(`${this.path}api/referredCandidates/download/${id}`,{ headers, responseType: 'arraybuffer' });
+    return this.httpClient.get(
+      `${this.path}api/referredCandidates/download/${id}`,
+      { headers, responseType: 'arraybuffer' }
+    );
   }
 
   saveFile(content: ArrayBuffer, fileName: string) {
@@ -281,15 +340,16 @@ export class AuthService {
     saveAs(blob, fileName);
   }
 
-  getAllReferralsTally(googleToken: string){
+  getAllReferralsTally(googleToken: string) {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + googleToken,
     });
-    return this.httpClient.get(`${this.path}user/getAllReferralsTally`,{headers});
+    return this.httpClient.get(`${this.path}user/getAllReferralsTally`, {
+      headers,
+    });
   }
 
-
-  searchUsers(googleToken:string, searchKeyword: string){
+  searchUsers(googleToken: string, searchKeyword: string) {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + googleToken,
     });
