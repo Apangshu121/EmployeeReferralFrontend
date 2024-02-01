@@ -10,7 +10,7 @@ import { JobOpeningsComponent } from './job-openings/job-openings.component';
 import { MyReferralsComponent } from './my-referrals/my-referrals.component';
 
 import { from } from 'rxjs';
-import { MyProfileComponent } from './my-profile/my-profile.component';
+
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { ReferAFriendComponent } from './refer-a-friend/refer-a-friend.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
@@ -32,7 +32,7 @@ const routes: Routes = [
       { path: 'refer-a-friend', component: ReferAFriendComponent },
       { path: 'manage-employee', component: ManageEmployeeComponent },
       { path: 'job-openings', component: JobOpeningsComponent },
-      { path: 'my-profile', component: MyProfileComponent },
+
       { path: 'my-referrals', component: MyReferralsComponent },
       { path: 'referred-candidates', component: ReferredCandidatesComponent },
       {

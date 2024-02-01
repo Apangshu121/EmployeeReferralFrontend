@@ -3,6 +3,13 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
+export interface Tally {
+  name: string;
+  totalReferrals: number;
+  select: number;
+  reject: number;
+  inProgress: number;
+}
 
 @Component({
   selector: 'app-app-layout',
@@ -40,9 +47,9 @@ export class AppLayoutComponent implements OnInit {
   ) {}
   ngOnInit() {
     const googleToken = this.authService.getToken();
-    console.log(googleToken);
+    // console.log(googleToken);
     if (googleToken) {
-      console.log(googleToken);
+      // console.log(googleToken);
       this.authService.getNameOfUser(googleToken).subscribe(
         (data) => {
           console.log(data.role);
@@ -62,6 +69,7 @@ export class AppLayoutComponent implements OnInit {
           console.log('error fetching Username', error);
         }
       );
+      // this.profile();
     } else {
       console.error('Authentication token not Available');
     }
@@ -71,5 +79,22 @@ export class AppLayoutComponent implements OnInit {
     this._ngZone.run(() => {
       this.router.navigate(['']).then(() => window.location.reload());
     });
+  }
+  tallyData: Tally | null = null; // Initialize with null or default values
+
+  profile() {
+    // Call the service to fetch Tally data from the API
+    const googleToken = this.authService.getToken();
+    if (googleToken) {
+      this.authService.getTallyData(googleToken).subscribe(
+        (response: any) => {
+          this.tallyData = response.Tally;
+          console.log(this.tallyData);
+        },
+        (error) => {
+          console.error('Error fetching Tally data:', error);
+        }
+      );
+    }
   }
 }

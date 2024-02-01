@@ -21,7 +21,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MyReferralsComponent } from './my-referrals/my-referrals.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-
+import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 
@@ -33,11 +33,10 @@ import { ManageEmployeeComponent } from './manage-employee/manage-employee.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RouterModule, Routes } from '@angular/router';
-import { MyProfileComponent } from './my-profile/my-profile.component';
+
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ErrorMessageDialogComponent } from './error-message-dialog/error-message-dialog.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
-
 // const routes: Routes = [
 //   { path: 'my-referrals', component: MyReferralsComponent },
 //   // Add more routes as needed
@@ -63,7 +62,7 @@ import { BuSelectedCandidatesComponent } from './bu-selected-candidates/bu-selec
     MyReferralsComponent,
     ReferAFriendComponent,
     ManageEmployeeComponent,
-    MyProfileComponent,
+
     LandingPageComponent,
     ErrorMessageDialogComponent,
     ErrorDialogComponent,
@@ -94,7 +93,7 @@ import { BuSelectedCandidatesComponent } from './bu-selected-candidates/bu-selec
     MatBadgeModule,
     MatCardModule,
     MatToolbarModule,
-
+    MatMenuModule,
     MatDividerModule,
     FormsModule,
     ReactiveFormsModule,
