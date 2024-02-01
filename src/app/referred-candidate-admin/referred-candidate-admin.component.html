@@ -1,1 +1,141 @@
-<p>admin</p>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="candidateName">
+      <th mat-header-cell *matHeaderCellDef>Candidate Name</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="editingRowIndex !== element.index; else editMode">
+          {{ element.candidateName }}
+        </div>
+        <ng-template #editMode>
+          <input [(ngModel)]="element.candidateName" />
+        </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="willingToRelocate">
+      <th mat-header-cell *matHeaderCellDef>Willing to Relocate</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="editingRowIndex !== element.index; else editMode">
+          {{ element.willingToRelocate ? 'Yes' : 'No' }}
+        </div>
+        <ng-template #editMode>
+          <mat-checkbox [(ngModel)]="element.willingToRelocate"></mat-checkbox>
+        </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="offerInHand">
+      <th mat-header-cell *matHeaderCellDef>Offer in Hand</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="editingRowIndex !== element.index; else editMode">
+          {{ element.offerInHand ? 'Yes' : 'No' }}
+        </div>
+        <ng-template #editMode>
+          <mat-checkbox [(ngModel)]="element.offerInHand"></mat-checkbox>
+        </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="servingNoticePeriod">
+      <th mat-header-cell *matHeaderCellDef>Serving Notice Period</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="editingRowIndex !== element.index; else editMode">
+          {{ element.servingNoticePeriod ? 'Yes' : 'No' }}
+        </div>
+        <ng-template #editMode>
+          <mat-checkbox [(ngModel)]="element.servingNoticePeriod"></mat-checkbox>
+        </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="primarySkill">
+      <th mat-header-cell *matHeaderCellDef>Primary Skill</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="editingRowIndex !== element.index; else editMode">
+          {{ element.primarySkill }}
+        </div>
+        <ng-template #editMode>
+          <input [(ngModel)]="element.primarySkill" />
+        </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="experience">
+      <th mat-header-cell *matHeaderCellDef>Experience</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="editingRowIndex !== element.index; else editMode">
+          {{ element.experience }}
+        </div>
+        <ng-template #editMode>
+          <input [(ngModel)]="element.experience" />
+        </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="contactNumber">
+      <th mat-header-cell *matHeaderCellDef>Contact Number</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="editingRowIndex !== element.index; else editMode">
+          {{ element.contactNumber }}
+        </div>
+        <ng-template #editMode>
+          <input [(ngModel)]="element.contactNumber" />
+        </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="candidateEmail">
+      <th mat-header-cell *matHeaderCellDef>Candidate Email</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="editingRowIndex !== element.index; else editMode">
+          {{ element.candidateEmail }}
+        </div>
+        <ng-template #editMode>
+          <input [(ngModel)]="element.candidateEmail" />
+        </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="preferredLocation">
+      <th mat-header-cell *matHeaderCellDef>Preferred Location</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="editingRowIndex !== element.index; else editMode">
+          {{ element.preferredLocation }}
+        </div>
+        <ng-template #editMode>
+          <input [(ngModel)]="element.preferredLocation" />
+        </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="noticePeriodLeft">
+      <th mat-header-cell *matHeaderCellDef>Notice Period Left</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="editingRowIndex !== element.index; else editMode">
+          {{ element.noticePeriodLeft }}
+        </div>
+        <ng-template #editMode>
+          <input [(ngModel)]="element.noticePeriodLeft" />
+        </ng-template>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <button *ngIf="editingRowIndex !== element.index" mat-icon-button (click)="editRow(element.index)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button *ngIf="editingRowIndex === element.index" mat-icon-button (click)="saveRow(element.index)">
+          <mat-icon>save</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  
+  
