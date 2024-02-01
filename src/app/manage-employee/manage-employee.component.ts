@@ -13,7 +13,9 @@ export class ManageEmployeeComponent implements OnInit {
   update: boolean = false;
   editUserFlag: boolean = true;
   isAdmin: boolean = false;
+  editFlag = false;
   bu!: string;
+
   user: any;
   displayedColumns: string[] = [
     'id',
@@ -39,10 +41,11 @@ export class ManageEmployeeComponent implements OnInit {
         this.authService.search(googleToken, this.searchQuery).subscribe(
           (response) => {
             this.searchResults = response;
+            console.log(response);
 
             // console.log("query: ",this.searchQuery);
 
-            // console.log(this.searchResults.SearchedCandidates);
+            console.log(this.searchResults.SearchedCandidates);
             this.searchResults = this.searchResults.SearchedCandidates;
             // console.log(this.searchResults);
             this.editFlag = true;

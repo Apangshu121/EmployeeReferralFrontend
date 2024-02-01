@@ -232,13 +232,13 @@ export class AuthService {
     googleToken: any,
     userEmail: string,
     newRole: string,
-    bu:string
+    bu: string
   ): Observable<any> {
     const header = new HttpHeaders().set(
       'Authorization',
       'Bearer ' + googleToken
     );
-    const modifiedUser = { role: newRole , businessUnit:bu};
+    const modifiedUser = { role: newRole, businessUnit: bu };
 
     return this.httpClient.put<any>(
       this.path + `admin/users/modify/${userEmail}`,
@@ -360,17 +360,21 @@ export class AuthService {
       .pipe();
   }
 
-  getSelectedCandidates(googleToken : string){
+  getSelectedCandidates(googleToken: string) {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + googleToken,
     });
-    return this.httpClient.get<any>(`${this.path}senior/getCandidatesOfBusinessUnit`,{headers}).pipe();
+    return this.httpClient
+      .get<any>(`${this.path}senior/getCandidatesOfBusinessUnit`, { headers })
+      .pipe();
   }
-  getRoundTallyOfUser(googleToken:string){
+  getRoundTallyOfUser(googleToken: string) {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + googleToken,
     });
-    return this.httpClient.get<any>(`${this.path}api/referredCandidates/statusTally`,{headers});
+    return this.httpClient.get<any>(
+      `${this.path}api/referredCandidates/statusTally`,
+      { headers }
+    );
   }
-
 }

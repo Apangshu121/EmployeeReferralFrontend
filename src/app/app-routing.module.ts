@@ -39,10 +39,7 @@ const routes: Routes = [
         path: 'bu-selected-candidates',
         component: BuSelectedCandidatesComponent,
       },
-      {
-        path: 'referred-candidate-admin',
-        component: ReferredCandidateAdminComponent,
-      },
+
       { path: 'job-management', component: JobManagementComponent },
       { path: 'referral-tally', component: ReferralsTallyComponent },
 
