@@ -69,7 +69,7 @@ export class AppLayoutComponent implements OnInit {
           console.log('error fetching Username', error);
         }
       );
-      // this.profile();
+      this.profile();
     } else {
       console.error('Authentication token not Available');
     }
