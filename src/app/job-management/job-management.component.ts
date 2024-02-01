@@ -22,7 +22,7 @@ import { ErrorMessageDialogComponent } from '../error-message-dialog/error-messa
 })
 export class JobManagementComponent implements OnInit {
   data!: any[];
-  showJobPosts = false;
+  showJobPosts = true;
   isEdit = false;
   isAdd = false;
   // isCard=true;

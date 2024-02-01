@@ -1,20 +1,33 @@
+// .center-container {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   width: 110%;
+//   height: 110.5vh; /* Set height to 100% of viewport height */
+//   background-image: url('../../assets/login1.jpg'); /* Replace with the path to your background image */
+//   background-size: cover;
+//   background-position: center;
+//   margin-top: -4rem;
+//   margin-left: -8rem;
+//   margin-right: -3rem;
+//   // margin: -8rem;
+//   // overflow: hidden;
+//   overflow-x: hidden;
+//   overflow-y: hidden;
+// }
+
 .center-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 110%;
-  height: 110.5vh; /* Set height to 100% of viewport height */
-  background-image: url('../../assets/login1.jpg'); /* Replace with the path to your background image */
+  min-height: 100vh; /* Use min-height instead of height for responsiveness */
+  background-image: url('../../assets/login1.jpg');
   background-size: cover;
   background-position: center;
-  margin-top: -4rem;
-  margin-left: -8rem;
-  margin-right: -3rem;
-  // margin: -8rem;
-  // overflow: hidden;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow: hidden;
 }
+
+
 .login-card {
   align-self: center;
   max-width: 400px; /* Adjust the maximum width of the card as needed */

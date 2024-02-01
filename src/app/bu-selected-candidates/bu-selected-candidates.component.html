@@ -1,0 +1,53 @@
+<div class="table1">
+    <div class="info">
+      <div class="mat-elevation-z8">
+        <table
+          mat-table
+          [dataSource]="selectedCandidates.candidates"
+          class="mat-table table-container"
+        >
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let item">{{ item.id }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="candidateName">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let item">{{ item.candidateName }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="candidateEmail">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let item">{{ item.candidateEmail }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="contactNumber">
+            <th mat-header-cell *matHeaderCellDef>Ph No</th>
+            <td mat-cell *matCellDef="let item">{{ item.contactNumber }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="primarySkill">
+            <th mat-header-cell *matHeaderCellDef>Primary Skill</th>
+            <td mat-cell *matCellDef="let item">{{ item.primarySkill }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="preferredLocation">
+            <th mat-header-cell *matHeaderCellDef>Preferred Location</th>
+            <td mat-cell *matCellDef="let item">{{ item.preferredLocation }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="experience">
+            <th mat-header-cell *matHeaderCellDef>Experience</th>
+            <td mat-cell *matCellDef="let item">{{ item.experience }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="referrerEmail">
+            <th mat-header-cell *matHeaderCellDef>Referer Email</th>
+            <td mat-cell *matCellDef="let item">{{ item.referrerEmail }}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"  [ngClass]="{'odd-row': i % 2 === 0, 'even-row': i % 2 !== 0}"></tr>
+        </table>
+      </div>
+    </div>
+  </div>  

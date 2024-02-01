@@ -1,14 +1,12 @@
 .heading {
-    font-size: 34px;
+    font-family: "Geomanist",Helvetica,Arial,Sans-Serif;
     color: #333;
     text-align: center;
-  margin-top: 20px;
-    margin-bottom: 20px;
-    // font-size: large;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: large;
     font-weight: bold;
-    font-style: italic;
     // color: cadetblue;
-    color: #33006F;
   }
 
 .info1{
@@ -18,10 +16,10 @@
   align-self: center;
 }
 .table1 {
-margin: 0 auto;
+// margin: 0 auto;
 display: flex;
 justify-content: center;
-width: 80%;
+width: 100%;
 }
 .mat-mdc-table .mat-mdc-header-cell{
   background: #e9e9f4;

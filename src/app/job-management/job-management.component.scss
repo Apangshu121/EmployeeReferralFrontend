@@ -4,14 +4,14 @@
   align-items: center;
 }
 
-h3{
+h2{
   text-align: center;
-  color: crimson;
+  color: #0F1035;
 }
 
 .square-card {
   border-radius: 10px;
-  background-color: #DCD6F7;
+  background-color: #7FC7D9;
   
   
   padding: 1cm;
@@ -52,12 +52,9 @@ h3{
     
     padding: 8px; 
 
-    // &.mat-header-cell {
-    //   background-color: #6ad4f768; /* Background color for header cells */
-    // }
 
     &:hover {
-      background-color: rgba(248, 244, 244, 0.575); /* Background color on hover for data cells */
+      background-color: rgb(250, 248, 242); /* Background color on hover for data cells */
     }
   }
   td{
@@ -65,7 +62,7 @@ h3{
   }
   
   th{
-    background-color: rgba(0, 255, 179, 0.63);
+    background-color: #7FC7D9;
     text-align: center;
     
     padding: 8px;
@@ -122,7 +119,7 @@ form {
 }
 
 .form-header {
-  background-color: #52616B;
+  background-color: #7FC7D9;
   margin-bottom: 20px;
   color: #fff; 
   padding: 10px;
@@ -145,7 +142,21 @@ button {
   width: 45%;
   align-items: center;
   justify-content: center;
-  background-color: #C9D6DF;
+  background-color: #DCF2F1;
+}
+
+.odd-row {
+  background-color: white; /* Set the background color for odd rows */
+}
+
+.even-row {
+  background-color: #f0f0f0; /* Set the background color for even rows */
+}
+.header-row{
+  background-color: #7FC7D9;
+  &:hover {
+    background-color: #35bcde; /* Background color on hover for data cells */
+  }
 }
 
 

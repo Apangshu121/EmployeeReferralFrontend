@@ -1,1 +1,37 @@
-<app-landing-page></app-landing-page>
+<!-- <app-landing-page></app-landing-page> -->
+
+
+<div class="card-container">
+<mat-card class="cards">
+    <div class="card-content">No of Referrals: {{tallyData.totalReferrals}}</div>
+</mat-card>
+<mat-card class="cards">
+    <div class="card-content">Selected: {{ tallyData.select }}</div>
+</mat-card>
+<mat-card class="cards">
+    <div class="card-content">Rejected: {{ tallyData.reject }}</div>
+</mat-card>
+<mat-card class="cards">
+    <div class="card-content">In Progress: {{ tallyData.inProgress }}</div>
+</mat-card>
+
+</div>
+
+<div class="card-container">
+
+    <mat-card class="cards">
+        <div class="card-content">R1 Select: {{roundStatus.r1}} </div>
+    </mat-card>
+    <mat-card class="cards">
+        <div class="card-content">R2 Select: {{roundStatus.r2}} </div>
+    </mat-card>
+    <mat-card class="cards">
+        <div class="card-content">R3 Select: {{roundStatus.r2}} </div>
+    </mat-card>
+    <!-- <mat-card class="cards">
+        <div ></div>
+    </mat-card> -->
+    
+</div>
+
+    <app-my-referrals></app-my-referrals>

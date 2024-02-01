@@ -19,6 +19,7 @@ export class ReferAFriendComponent {
   pdfSrc: string | null = null;
   preferredLocation: any;
   profileSource: any;
+  businessUnit:any;
   noticePeriod: any;
   offerInHand!: boolean;
   showPdfModal: boolean = false;
@@ -39,6 +40,7 @@ export class ReferAFriendComponent {
       candidateEmail: [''],
       experience: [''],
       primarySkill: [''],
+      businessUnit:[''],
       blacklisted: [''],
       fileName: [''],
       preferredLocation: [''],

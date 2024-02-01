@@ -34,7 +34,6 @@ export class ReferredCandidatesComponent implements OnInit {
   filteredCandidates: any[] = [];
   isFilter = false;
   displayedColumns: string[] = [
-    'id',
     'candidateName',
     'candidateEmail',
     'contactNumber',
@@ -125,7 +124,6 @@ export class ReferredCandidatesComponent implements OnInit {
   }
 
   interviewTheCandidate(candidateId: number, index: number) {
-    // candidate.interviewed = true;
     console.log(index);
     const googleToken = this.authService.getToken();
     if (googleToken) {
@@ -133,8 +131,11 @@ export class ReferredCandidatesComponent implements OnInit {
         .interviewTheCandidate(googleToken, candidateId)
         .subscribe(
           (response) => {
-            const errorMessage = response.message;
-            this.showErrorDialog(errorMessage);
+            // const errorMessage = "Candidate is selected for the interview \nPlease update the details";
+            // this.showErrorDialog(errorMessage);
+            alert(
+              'Candidate is selected for the interview \nPlease update the details'
+            );
           },
           (error) => {
             this.showErrorDialog(error);

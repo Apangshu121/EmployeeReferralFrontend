@@ -13,8 +13,7 @@ export class ManageEmployeeComponent implements OnInit {
   update: boolean = false;
   editUserFlag: boolean = true;
   isAdmin: boolean = false;
-  editFlag = false;
-
+  bu!: string;
   user: any;
   displayedColumns: string[] = [
     'id',
@@ -122,7 +121,7 @@ export class ManageEmployeeComponent implements OnInit {
         )
       ) {
         this.authService
-          .updateRole(googleToken, userEmail, this.selectedRole)
+          .updateRole(googleToken, userEmail, this.selectedRole, this.bu)
           .subscribe(
             (response) => {
               // console.log(user.email);
