@@ -53,6 +53,7 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
 
 import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.component';
 import { BuSelectedCandidatesComponent } from './bu-selected-candidates/bu-selected-candidates.component';
+import { ReferredCandidateAdminComponent } from './referred-candidate-admin/referred-candidate-admin.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { BuSelectedCandidatesComponent } from './bu-selected-candidates/bu-selec
 
     AppLayoutComponent,
     BuSelectedCandidatesComponent,
+    ReferredCandidateAdminComponent,
   ],
   imports: [
     BrowserModule,

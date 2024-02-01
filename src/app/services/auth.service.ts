@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Tally } from '../my-profile/my-profile.component';
+import { AdminUpdateDTO } from '../referred-candidate-admin/admin-update-dtos';
 
 @Injectable({
   providedIn: 'root',
@@ -136,23 +137,23 @@ export class AuthService {
       .pipe();
   }
 
-  // editReferredCandidate(
-  //   id: number,
-  //   googleToken: string,
-  //   adminUpdateDTO: AdminUpdateDTO
-  // ): Observable<any> {
-  //   const headers = new HttpHeaders({
-  //     Authorization: 'Bearer ' + googleToken,
-  //   });
+  editReferredCandidate(
+    id: number,
+    googleToken: string,
+    adminUpdateDTO: AdminUpdateDTO
+  ): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
 
-  //   return this.httpClient.put<any>(
-  //     `${this.path}admin/users/editReferredCandidate/${id}`,
-  //     adminUpdateDTO,
-  //     {
-  //       headers: headers,
-  //     }
-  //   );
-  // }
+    return this.httpClient.put<any>(
+      `${this.path}admin/users/editReferredCandidate/${id}`,
+      adminUpdateDTO,
+      {
+        headers: headers,
+      }
+    );
+  }
 
   // editReferredCandidate(id: number, googleToken: string): Observable<any> {
   //   const headers = new HttpHeaders({

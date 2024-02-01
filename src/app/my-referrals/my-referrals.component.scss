@@ -6,6 +6,7 @@
     margin-bottom: 10px;
     font-size: large;
     font-weight: bold;
+    flex: 1;
     // color: cadetblue;
   }
 
@@ -30,4 +31,26 @@ td{
   vertical-align: middle;
 }
 
+.refer-button {
+  text-align: right;
+  margin-right: 1cm;
+}
 
+// .refer{
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// }
+
+// .refer {
+//   display: flex;
+  
+// }
+
+// .heading {
+//   flex: 1; /* Takes remaining space */
+// }
+
+// .refer-button {
+//   text-align: right;
+// }

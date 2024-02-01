@@ -12,6 +12,10 @@ mat-toolbar{
   flex: 1 1 auto;
 }
 
+.custom-toolbar {
+  border-bottom: 2px solid #ccc; /* Adjust the color and size as needed */
+}
+
 mat-sidenav{
   font-family: "Geomanist",Helvetica,Arial,Sans-Serif;
   margin: 16px;
