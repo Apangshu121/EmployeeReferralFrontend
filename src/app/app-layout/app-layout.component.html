@@ -27,7 +27,7 @@
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with logout icon"
-    [routerLink]="''"
+    (click)="logout()"
   >
     <mat-icon>logout</mat-icon>
   </button>
@@ -79,18 +79,8 @@
       *ngIf="isSenior"
       [routerLink]="'job-management'"
     >
-    <mat-icon>business_center</mat-icon>
+      <mat-icon>business_center</mat-icon>
       <span>Job Management</span>
-    </button>
-
-    <button
-      mat-button
-      class="menu-button"
-      *ngIf="adminFlag"
-      [routerLink]="'referred-candidate-admin'"
-    >
-      <mat-icon>dashboard</mat-icon>
-      <span>Referred Candidates</span>
     </button>
 
     <button

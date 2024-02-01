@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LogoutComponent } from './logout/logout.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 
@@ -50,13 +50,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { JobManagementComponent } from './job-management/job-management.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
-import { ReferredCandidateAdminComponent } from './referred-candidate-admin/referred-candidate-admin.component';
+
 import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LogoutComponent,
+
     HomeComponent,
     JobOpeningsComponent,
 
@@ -70,7 +70,7 @@ import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.compo
     ReferredCandidatesComponent,
     ReferralsTallyComponent,
     JobManagementComponent,
-    ReferredCandidateAdminComponent,
+
     AppLayoutComponent,
   ],
   imports: [

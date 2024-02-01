@@ -1,8 +1,7 @@
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
+
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './services/auth-guard.service';
 
@@ -16,7 +15,7 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { ReferAFriendComponent } from './refer-a-friend/refer-a-friend.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
 import { ReferredCandidatesComponent } from './referred-candidates/referred-candidates.component';
-import { ReferredCandidateAdminComponent } from './referred-candidate-admin/referred-candidate-admin.component';
+// import { ReferredCandidateAdminComponent } from './referred-candidate-admin/referred-candidate-admin.component';
 import { JobManagementComponent } from './job-management/job-management.component';
 import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.component';
 
@@ -35,12 +34,10 @@ const routes: Routes = [
       { path: 'my-profile', component: MyProfileComponent },
       { path: 'my-referrals', component: MyReferralsComponent },
       { path: 'referred-candidates', component: ReferredCandidatesComponent },
-      {
-        path: 'referred-candidate-admin',
-        component: ReferredCandidateAdminComponent,
-      },
+
       { path: 'job-management', component: JobManagementComponent },
-{path:'referral-tally',component:ReferralsTallyComponent}
+      { path: 'referral-tally', component: ReferralsTallyComponent },
+
       // { path: '', redirectTo: '/home', pathMatch: 'full' },
     ],
   },

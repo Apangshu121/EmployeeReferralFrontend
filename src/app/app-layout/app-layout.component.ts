@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -35,7 +35,8 @@ export class AppLayoutComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private observer: BreakpointObserver
+    private observer: BreakpointObserver,
+    private _ngZone: NgZone
   ) {}
   ngOnInit() {
     const googleToken = this.authService.getToken();
@@ -64,5 +65,11 @@ export class AppLayoutComponent implements OnInit {
     } else {
       console.error('Authentication token not Available');
     }
+  }
+  public logout() {
+    this.authService.signOutExternal();
+    this._ngZone.run(() => {
+      this.router.navigate(['']).then(() => window.location.reload());
+    });
   }
 }

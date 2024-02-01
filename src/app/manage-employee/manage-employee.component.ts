@@ -13,69 +13,53 @@ export class ManageEmployeeComponent implements OnInit {
   update: boolean = false;
   editUserFlag: boolean = true;
   isAdmin: boolean = false;
+  editFlag = false;
 
   user: any;
-  displayedColumns: string[] = ['id', 'name', 'email', 'role', 'updateRole'];
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'email',
+    'role',
+    'businessUnit',
+    'updateRole',
+  ];
   getColumnAlignment(value: any): string {
     // Check the data type of the 'id' column and return the appropriate CSS class
     return typeof value === 'number' ? 'align-right' : 'align-left';
   }
   constructor(private authService: AuthService) {}
 
-  searchQuery!:string;
+  searchQuery!: string;
   searchResults: any;
-  onSearch(){
+  onSearch() {
     const googleToken = this.authService.getToken();
-    if(googleToken){
-      if(this.searchQuery!=""){
-      this.editUserFlag=false;
-      this.authService.search(googleToken,this.searchQuery).subscribe(
-        (response)=> {
-        this.searchResults=response;
-        // console.log("query: ",this.searchQuery);
-        
-        // console.log(this.searchResults.SearchedCandidates);
-        this.searchResults=this.searchResults.SearchedCandidates;
-       // console.log(this.searchResults);
-        
-        // this.searchResults = response['Searched Candidates'] || [];
-        },
-        (error)=>{
-          alert("error while fetching data"+ error);
-        }
+    if (googleToken) {
+      if (this.searchQuery != '') {
+        this.editUserFlag = false;
+        this.authService.search(googleToken, this.searchQuery).subscribe(
+          (response) => {
+            this.searchResults = response;
+
+            // console.log("query: ",this.searchQuery);
+
+            // console.log(this.searchResults.SearchedCandidates);
+            this.searchResults = this.searchResults.SearchedCandidates;
+            // console.log(this.searchResults);
+            this.editFlag = true;
+          },
+          (error) => {
+            alert('error while fetching data' + error);
+          }
         );
+      } else {
+        console.log(this.user);
+        this.searchResults = this.user.Users;
       }
-      else{
-        console.log(this.user)
-        this.searchResults=this.user.Users;
-      }
-    }
-    else{
-      alert("error for google Token");
+    } else {
+      alert('error for google Token');
     }
   }
-  // \onSearchClicked(){
-  //   this.isSearch=true;
-  //   const googleToken = this.authService.getToken();
-  //   if(googleToken){
-  //     this.authService.searchCandidates(googleToken,this.searchKeyword).subscribe(
-  //       (response)=>{
-  //         this.searchResults = response;
-  //         //this.searchResults=this.searchResults.searchCandidates
-  //       },
-  //       (error) =>{
-  //         console.log(error);
-  //       });
-  //   }
-  // }
-
-
-  // onSearch(query: string): void {
-  //   this.authService.search(query)
-  //     .subscribe(results => {
-  //       this.searchResults = results;
-  //     });
-  // }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -121,6 +105,7 @@ export class ManageEmployeeComponent implements OnInit {
   openEditCard(user: any): void {
     this.update = true;
     this.editUserFlag = false;
+    this.editFlag = false;
     this.selectedUser = user;
     this.selectedRole = user.role; // Set the default role to the current role
   }
@@ -154,6 +139,7 @@ export class ManageEmployeeComponent implements OnInit {
     }
     this.editUserFlag = true;
     this.update = false;
+    // this.editFlag = true;
   }
   close(): void {
     this.editUserFlag = true;
