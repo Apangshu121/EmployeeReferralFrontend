@@ -1,36 +1,94 @@
-<div class="JobOpenings">
-  <div class="=cards" *ngIf="!isJob">
-    <div class="card" *ngFor="let item of data; let i = index">
-      <p>Job Id : {{ item.JobId }}</p>
-      <p>Role : {{ item.Role }}</p>
-      <p>Years Of Experience: {{ item.YearsOfExperience }}</p>
-      <p>Tech Stack : {{ item.TechStack }}</p>
-      <p class="button" (click)="onMore(i)">More</p>
+<div>
+  <img
+    class="job-openings-pic"
+    src="../../assets/Job_Opening.png"
+    alt="Company Logo"
+  />
+</div>
+<div style="background-color: #fffefe">
+  <div class="search-box" *ngIf="!isJob">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search for Jobs"
+      (ngModelChange)="onSearch()"
+      class="search-input"
+    />
+  </div>
+
+  <div class="cards" *ngIf="!isJob">
+    <div class="card" *ngFor="let item of filteredData; let i = index">
+      <div class="job-details">
+        <div class="icon-and-role">
+          <div class="circle-icon">
+            {{ item.Role.charAt(0).toUpperCase() }}
+          </div>
+          <div>
+            <div class="role">{{ item.Role }}</div>
+            <div class="experience">
+              Experience: {{ item.YearsOfExperience }} years
+            </div>
+          </div>
+        </div>
+        <div class="tech-stack">Skills Required: {{ item.TechStack }}</div>
+        <div class="button" (click)="onMore(i)">More</div>
+      </div>
+    </div>
+    <div *ngIf="filteredData.length === 0 && searchTerm.length > 0">
+      No matching jobs found.
+    </div>
+  </div>
+
+  <div class="JobOpenings">
+    <div class="cards" *ngIf="!isJob">
+      <div class="card" *ngFor="let item of data; let i = index">
+        <div class="job-details">
+          <div class="icon-and-role">
+            <div class="circle-icon">
+              {{ item.Role.charAt(0).toUpperCase() }}
+            </div>
+            <div>
+              <div class="role">{{ item.Role }}</div>
+              <div class="experience">
+                Experience: {{ item.YearsOfExperience }} years
+              </div>
+            </div>
+          </div>
+          <div class="tech-stack">Skills Required: {{ item.TechStack }}</div>
+          <div class="button" (click)="onMore(i)">More</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="box" *ngIf="isJob">
+    <mat-icon (click)="onClose()">arrow_back</mat-icon>
     <div class="details">
-      <p>Job Id : {{ jobData.JobId }}</p>
-      <p>Role : {{ jobData.Role }}</p>
-      <p>Years Of Experience: {{ jobData.YearsOfExperience }}</p>
-      <p>Tech Stack : {{ jobData.TechStack }}</p>
-      <p>Description : {{ jobData.Description }}</p>
-      <p>Band : {{ jobData.Band }}</p>
-      <p>Business Unit : {{ jobData.BU }}</p>
-      <p
-        (click)="onClose()"
-        style="
-          font-weight: bold;
-          width: 100px;
-          color: #0d016b;
-          padding: 8px 12px;
-          cursor: pointer;
-          margin-top: 10px;
-        "
-      >
-        Close
-      </p>
+      <div class="experience-role">
+        <div class="experience-required">
+          <b>Experience Required:</b>
+          {{ jobData.YearsOfExperience }} years
+        </div>
+        <div class="experience-required">
+          <b>Role:</b>
+          {{ jobData.Role }}
+        </div>
+        <div class="experience-required">
+          <b>Skills Required:</b>
+          {{ jobData.TechStack }}
+        </div>
+      </div>
+      <div class="job-description">
+        <b>About Role:</b>
+        {{ jobData.Description }} <br />
+        <br />
+        <b>Band:</b>
+        {{ jobData.Band }} <br />
+        <br />
+        <b>Business Unit:</b>
+        {{ jobData.BU
+        }}<span class="refer" [routerLink]="'/refer-a-friend'">Refer</span>
+      </div>
     </div>
   </div>
 </div>

@@ -1,6 +1,7 @@
 
 mat-toolbar{
   // background-color: #7FC7D9;
+  background-color: white;
   color: #0D016B;
   height: 2cm;
   font-family: "Geomanist",Helvetica,Arial,Sans-Serif;
@@ -9,6 +10,10 @@ mat-toolbar{
 
 .example-spacer {
   flex: 1 1 auto;
+}
+
+.custom-toolbar {
+  border-bottom: 2px solid #ccc; /* Adjust the color and size as needed */
 }
 
 mat-sidenav{

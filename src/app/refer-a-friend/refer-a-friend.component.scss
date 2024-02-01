@@ -1,90 +1,46 @@
-
-// .form-container {
-//     padding: 20px; 
-//     background-color: #f0f0f0; 
-//     border: 1px solid #ccc; 
-//     border-radius: 8px;   
-//     } 
-// h2{
-//     text-align: center;
-//     font-style: italic;
-//     color: purple;
-// }
-// .label-container {
-//     margin: 0 auto; // This will center the container horizontally
-//     max-width: 500px; // Adjust the max-width as needed
-  
-//     display: flex;
-//     flex-direction: row; 
-    
-//     // display: flex;
-//     // margin-left: 300px;
-//     margin-top: 15px;
-    
-//     input{
-//     margin-left:10px; 
-//     flex: 1;
-//       }
-//       .dropdown{
-//         margin-left: 10px;
-//         // flex: 1;
-//       }
-// }
-  
-//   button {
-//     background-color: #7e57c2;
-//     border: none;
-//     border-radius: 8px;
-//     padding: 8px 16px;
-//     color: #fff;
-//     cursor: pointer;
-//     transition: background-color 0.3s ease;
-//     margin-right: 10px;
-//     margin-left: 10px;
-//     width: 80px;
-  
-//     &:hover {
-//       background-color: #5e35b1;
-//     }
-//   }
-//   .label-container .required {
-//     color: red;
-//     font-size: 14px;
-//     margin-left: 2px; /* Adjust the spacing as needed */
-//   }
-
-
-/* Style the form container */
+.refer-card{
+  color: rgb(10, 56, 92);
+  // background-color: #f6eef6;
+  background-color: #fafafa;
+  padding-bottom: 20px;
+}
 .form-container {
+  color: rgb(10, 56, 92);
   max-width: 600px;
   margin: auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  // background-color: #f6eef6;
 }
 
 /* Style form labels */
 .label-container {
+  color: rgb(10, 56, 92);
   margin-bottom: 15px;
 }
 
 .label-container label {
+  color: rgb(10, 56, 92);
   display: block;
   margin-bottom: 5px;
 }
 
 /* Style form inputs */
 .input-container {
+  color: rgb(10, 56, 92);
   position: relative;
 }
 
 .input-container input,
 .input-container select,
 .input-container textarea {
+  color: rgb(10, 56, 92);
+  // background-color: white;
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
-  border: 1px solid #ccc;
+  border: 1px solid #fafafa;
   border-radius: 4px;
   margin-top: 5px;
 }
@@ -92,15 +48,17 @@
 /* Style checkboxes and radio buttons */
 .input-container input[type="checkbox"],
 .input-container input[type="radio"] {
+  color: rgb(10, 56, 92);
   margin-top: 0;
   margin-right: 5px;
 }
 
 /* Style form buttons */
 button {
+  color: rgb(10, 56, 92);
   // background-color: #220af8;
   color: #fff;
-  padding: 10px;
+  // padding: 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -108,16 +66,19 @@ button {
 
 /* Style the result section */
 #result {
+  color: rgb(10, 56, 92);
   margin-top: 20px;
 }
 
 /* Style the PDF viewer */
 #pdfViewer {
+  color: rgb(10, 56, 92);
   border: 1px solid #ccc;
 }
 
 /* Style the modal for PDF viewer */
 #pdfViewerModal {
+  color: rgb(10, 56, 92);
   display: none;
   position: fixed;
   top: 0;
@@ -126,7 +87,5 @@ button {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
 }
-// form{
-//   padding: 20px;
-// }
+
 

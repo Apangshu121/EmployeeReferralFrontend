@@ -64,7 +64,7 @@ export class ReferAFriendComponent {
       if (this.selectedFile.type !== 'application/pdf') {
         this.showErrorMessage('Invalid file format. Please select a PDF file.');
         this.fileUpload = false;
-        return;
+        // return;
       }
 
       // Check file size
@@ -74,7 +74,7 @@ export class ReferAFriendComponent {
           'File size exceeds 2 MB limit. Please choose a smaller file.'
         );
         this.fileUpload = false;
-        return;
+        // return;
       }
     }
   }
@@ -104,20 +104,20 @@ export class ReferAFriendComponent {
               this.showErrorMessage(`${errorMessage.error}`);
               this.onCannotReffer();
               this.disableForm();
-              return;
+              // return;
             }
           }
         );
       } else {
         this.showErrorMessage('Please choose a valid PDF file.');
         this.disableForm();
-        return;
+        // return;
       }
     } else {
       this.showErrorMessage('Re-Upload valid pdf');
       this.fileUpload = true;
       this.selectedFile = null;
-      return;
+      // return;
     }
   }
   disableForm() {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-referrals',
@@ -7,7 +8,7 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './my-referrals.component.scss',
 })
 export class MyReferralsComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   referredCandidates!: [{ [key: string]: string }];
   displayedColumns: string[] = [
@@ -38,5 +39,8 @@ export class MyReferralsComponent {
         }
       );
     }
+  }
+  refer(){
+    this.router.navigate(['refer-a-friend']);
   }
 }

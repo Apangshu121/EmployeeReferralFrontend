@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar class="custom-toolbar">
   <!-- <button
     mat-icon-button
     *ngIf="sidenav.mode === 'over'"
@@ -16,15 +16,36 @@
   /></span>
   <span class="example-spacer"></span>
 
-  <span [routerLink]="'home'" class="nav-text">Home    </span>
-  <span [routerLink]="'referred-candidates'" class="nav-text" *ngIf="isRecruiter">Dashboard</span>
-  <span [routerLink]="'referral-tally'" class="nav-text" *ngIf="isRecruiter">Tally</span>
-  <span [routerLink]="'bu-selected-candidates'" class="nav-text" *ngIf="isSenior">Selected Candidates </span>
-  <span [routerLink]="'job-management'" class="nav-text" *ngIf="isSenior">Job Management</span>
+  <span [routerLink]="'home'" class="nav-text">Home </span>
+  <span
+    [routerLink]="'referred-candidates'"
+    class="nav-text"
+    *ngIf="isRecruiter"
+    >Dashboard</span
+  >
+  <span [routerLink]="'referral-tally'" class="nav-text" *ngIf="isRecruiter"
+    >Tally</span
+  >
+  <span
+    [routerLink]="'bu-selected-candidates'"
+    class="nav-text"
+    *ngIf="isSenior"
+    >Selected Candidates
+  </span>
+  <span [routerLink]="'job-management'" class="nav-text" *ngIf="isSenior"
+    >Job Management</span
+  >
   <span [routerLink]="'job-openings'" class="nav-text">Job Openings</span>
-  <span [routerLink]="'manage-employee'" class="nav-text" *ngIf="adminFlag">Manage Employees</span>
-  <span [routerLink]="'referred-candidate-admin'" class="nav-text" *ngIf="adminFlag">Candidates</span>
-  
+  <span [routerLink]="'manage-employee'" class="nav-text" *ngIf="adminFlag"
+    >Manage Employees</span
+  >
+  <span
+    [routerLink]="'referred-candidate-admin'"
+    class="nav-text"
+    *ngIf="adminFlag"
+    >Edit</span
+  >
+
   <button
     mat-icon-button
     class="example-icon favorite-icon"
@@ -37,7 +58,7 @@
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with logout icon"
-    [routerLink]="''"
+    (click)="logout()"
   >
     <mat-icon>logout</mat-icon>
   </button>
@@ -89,7 +110,7 @@
       *ngIf="isSenior"
       [routerLink]="'job-management'"
     >
-    <mat-icon>business_center</mat-icon>
+      <mat-icon>business_center</mat-icon>
       <span>Job Management</span>
     </button>
 
@@ -99,7 +120,7 @@
       *ngIf="isSenior"
       [routerLink]="'bu-selected-candidates'"
     >
-    <mat-icon>check_circle</mat-icon>
+      <mat-icon>check_circle</mat-icon>
       <span>Selected Candidates</span>
     </button>
 

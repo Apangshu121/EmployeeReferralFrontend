@@ -1,14 +1,14 @@
-.info1{
-    margin : 1cm;
-    width:100%;
-    justify-content: center;
-    align-self: center;
-}
+// .info1{
+//     // margin : 1cm;
+//     width:100%;
+//     justify-content: center;
+//     align-self: center;
+// }
 .table1 {
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  width: 80%;
+  margin: 10px;
+  // display: flex;
+  // justify-content: center;
+ 
 }
 
 .candInfo {
@@ -30,41 +30,6 @@
   
   padding: 20px;
 }
-
-
-
-/* Style the table header */
-// .table-container th {
-//   background-color: #526D82;
-//   color: #fff; /* Light gray background */
-//   text-align: left; /* Align header text to the left */
-//   padding: 12px;
-// }
-
-/* Style the table rows */
-// .table-container td {
-//   padding: 8px;
-//   background-color: #DDE6ED;
-// }
-
-/* Style alternate rows for better readability */
-// .table-container tbody tr:nth-child(even) {
-//   background-color: #f9f9f9; /* Lighter gray background for even rows */
-// }
-
-/* Align numbers to the right */
-// .table-container td.number {
-//   text-align: right;
-// }
-
-/* Button styling */
-// .table-container .btn-primary {
-//   background-color: #007bff; /* Bootstrap primary button color */
-//   color: #fff; /* Button text color */
-//   border: none;
-//   padding: 8px 12px;
-//   cursor: pointer;
-// }
 
 
 .parent-container {
@@ -166,7 +131,7 @@ mat-form-field {
 }
 
 .table-container th {
-    background-color: rgb(247, 204, 247);
+    background-color: #e9e9f4;
     // color: #fff; /* Light gray background */
     margin-left: 2cm;
     text-align: left;

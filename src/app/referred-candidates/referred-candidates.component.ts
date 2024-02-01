@@ -34,7 +34,6 @@ export class ReferredCandidatesComponent implements OnInit {
   filteredCandidates: any[] = [];
   isFilter = false;
   displayedColumns: string[] = [
-    
     'candidateName',
     'candidateEmail',
     'contactNumber',
@@ -51,33 +50,32 @@ export class ReferredCandidatesComponent implements OnInit {
   isOpenSearch = false;
   searchKeyword!: string;
   searchResults: any;
-  isFilterSearch=false;
-  filterSearchResults:any;
-  isInterview=true;
-  isfilterSearchButton=false;
-  
+  isFilterSearch = false;
+  filterSearchResults: any;
+  isInterview = true;
+  isfilterSearchButton = false;
 
-
-constructor(private fb: FormBuilder, private authService : AuthService, private router: Router,private dialog: MatDialog){
-
-  this.updateForm = this.fb.group({
-    businessUnit: ['', Validators.required],
-    interviewedPosition: ['', Validators.required],
-    band: ['', Validators.required],
-    currentStatus: ['SELECT', Validators.required],
-    interviewStatus: ['CODELYSER SELECT', Validators.required],
-    noOfRounds: [0, Validators.required],
-  });
-
-}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {
+    this.updateForm = this.fb.group({
+      businessUnit: ['', Validators.required],
+      interviewedPosition: ['', Validators.required],
+      band: ['', Validators.required],
+      currentStatus: ['SELECT', Validators.required],
+      interviewStatus: ['CODELYSER SELECT', Validators.required],
+      noOfRounds: [0, Validators.required],
+    });
+  }
 
   ngOnInit() {
     this.getAllReferredCandidates();
-   
-    
-  
+
     this.updateForm.get('noOfRounds')!.valueChanges.subscribe((value) => {
-      this.interviewStatuses=[];
+      this.interviewStatuses = [];
       this.interviewStatuses.push('CODELYSER SELECT');
       this.interviewStatuses.push('CODELYSER REJECT');
       this.generateInterviewStatusOptions(value);
@@ -86,7 +84,7 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
 
   generateInterviewStatusOptions(noOfRounds: number): void {
     // this.interviewStatuses = [];
-    
+
     for (let i = 1; i < noOfRounds; i++) {
       this.interviewStatuses.push(`R${i} SELECT`);
       this.interviewStatuses.push(`R${i} REJECT`);
@@ -125,7 +123,7 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
     this.showCandInfo = false;
   }
 
-  interviewTheCandidate(candidateId : number, index:number){
+  interviewTheCandidate(candidateId: number, index: number) {
     console.log(index);
     const googleToken = this.authService.getToken();
     if (googleToken) {
@@ -135,7 +133,9 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
           (response) => {
             // const errorMessage = "Candidate is selected for the interview \nPlease update the details";
             // this.showErrorDialog(errorMessage);
-            alert("Candidate is selected for the interview \nPlease update the details");
+            alert(
+              'Candidate is selected for the interview \nPlease update the details'
+            );
           },
           (error) => {
             this.showErrorDialog(error);
@@ -145,7 +145,6 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
       this.showErrorMessage('You Are Not Authorized');
     }
     this.candidateInfo(index);
-
   }
 
   sendMail(id: number) {
@@ -170,21 +169,20 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
   getTableDataSource(): any[] {
     if (this.isFilter) {
       return this.filteredCandidates;
-    } else if(this.isSearch){
+    } else if (this.isSearch) {
       return this.searchResults;
-    } else if(this.isFilterSearch){
+    } else if (this.isFilterSearch) {
       return this.filterSearchResults;
-    }
-    else {
+    } else {
       return this.data.candidates;
     }
   }
 
-  candidateInfo(index : number){
-    this.isOpenfilter=false;
-    console.log("Hello")
-    this.showCandInfo=true;
-    this.candidate=index;
+  candidateInfo(index: number) {
+    this.isOpenfilter = false;
+    console.log('Hello');
+    this.showCandInfo = true;
+    this.candidate = index;
     console.log(this.candidate);
   }
 
@@ -219,8 +217,7 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
     }
   }
 
-
-  onClick(candidateData : any) {
+  onClick(candidateData: any) {
     this.isUpdate = true;
     this.updateForm.patchValue(candidateData);
   }
@@ -241,9 +238,9 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
     }
   }
 
-  onFilterChange(){
-    this.isFilter=true;
-    this.isfilterSearchButton=true;
+  onFilterChange() {
+    this.isFilter = true;
+    this.isfilterSearchButton = true;
     const googleToken = this.authService.getToken();
     if (googleToken) {
       if (this.selectedFilter && this.searchText) {
@@ -274,57 +271,62 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
   onSearchClicked() {
     this.isSearch = true;
     const googleToken = this.authService.getToken();
-    if(googleToken){
-      if(this.searchKeyword!=""){
-      this.authService.searchCandidates(googleToken,this.searchKeyword).subscribe(
-        (response)=>{
-          this.searchResults = response;
-          this.searchResults=this.searchResults.SearchedCandidates;
-
-        },
-        (error) =>{
-          console.log(error);
-        });
+    if (googleToken) {
+      if (this.searchKeyword != '') {
+        this.authService
+          .searchCandidates(googleToken, this.searchKeyword)
+          .subscribe(
+            (response) => {
+              this.searchResults = response;
+              this.searchResults = this.searchResults.SearchedCandidates;
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+      } else {
+        this.searchResults = this.data.candidates;
+        console.log('keyword', this.searchKeyword);
+        console.log(this.searchResults);
+      }
     }
-    else{
-      this.searchResults=this.data.candidates;
-      console.log("keyword" , this.searchKeyword);
-      console.log(this.searchResults)
-    }
-    
   }
-  }
-  onFilterSearch(){
-    this.isFilter=false;
-    this.isFilterSearch=true;
+  onFilterSearch() {
+    this.isFilter = false;
+    this.isFilterSearch = true;
     const googleToken = this.authService.getToken();
-    if(googleToken){
-      if(this.searchKeyword!=""){
-      this.authService.filterSearch(googleToken,this.selectedFilter,this.searchText,this.searchKeyword).subscribe(
-        (response)=>
-        {
-          this.filterSearchResults=response;
-          this.filterSearchResults=this.filterSearchResults.FilteredCandidates;
-          console.log(this.filterSearchResults);
-        },
-        (error)=>{
-          alert(error);
-        });
-    }
-    else{
-      this.filterSearchResults=this.filteredCandidates
-    }
-  }
-    else{
-      alert("Not Authorized");
+    if (googleToken) {
+      if (this.searchKeyword != '') {
+        this.authService
+          .filterSearch(
+            googleToken,
+            this.selectedFilter,
+            this.searchText,
+            this.searchKeyword
+          )
+          .subscribe(
+            (response) => {
+              this.filterSearchResults = response;
+              this.filterSearchResults =
+                this.filterSearchResults.FilteredCandidates;
+              console.log(this.filterSearchResults);
+            },
+            (error) => {
+              alert(error);
+            }
+          );
+      } else {
+        this.filterSearchResults = this.filteredCandidates;
+      }
+    } else {
+      alert('Not Authorized');
     }
   }
 
-  downloadResume(candId : number){
-      this.authService.downloadResume(candId).subscribe((content) => {
-        this.authService.saveFile(content, 'resume.pdf')
-        console.log("resume.pdf")
-      });
-    }  
-
+  downloadResume(candId: number) {
+    this.authService.downloadResume(candId).subscribe((content) => {
+      this.authService.saveFile(content, 'resume.pdf');
+      console.log('resume.pdf');
+    });
   }
+}

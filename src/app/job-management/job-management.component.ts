@@ -38,18 +38,20 @@ export class JobManagementComponent implements OnInit {
   isSideNavCollapsed = false;
   screenWidth = 0;
 
-  
-  ngOnInit() : any{
+  ngOnInit(): any {
     // console.log("BuHead");
-    this.dataService.getData().subscribe((result)=>{
-      this.data=result;
+    this.dataService.getData().subscribe((result) => {
+      this.data = result;
     });
   }
 
-  constructor(private formBuilder : FormBuilder,
-    public dialog: MatDialog, private dataService : DataService, private router : Router){
-    this.googleSheetForm=this.formBuilder.group({
-
+  constructor(
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog,
+    private dataService: DataService,
+    private router: Router
+  ) {
+    this.googleSheetForm = this.formBuilder.group({
       JobId: ['', Validators.required],
       Role: ['', Validators.required],
       YearsOfExperience: [0, Validators.required],
@@ -68,8 +70,7 @@ export class JobManagementComponent implements OnInit {
 
   createSheet() {
     this.isAdd = true;
-    this.googleSheetForm=this.formBuilder.group({
-
+    this.googleSheetForm = this.formBuilder.group({
       JobId: ['', Validators.required],
       Role: ['', Validators.required],
       YearsOfExperience: [0, Validators.required],
@@ -174,13 +175,13 @@ export class JobManagementComponent implements OnInit {
   }
 
   onClose() {
-    this.showJobPosts=false;  
+    this.showJobPosts = false;
   }
-  onAddClose(){
-    // this.showJobPosts=false; 
-    this.isAdd=false;
+  onAddClose() {
+    // this.showJobPosts=false;
+    this.isAdd = false;
   }
-  onEditClose(){
-    this.isEdit=false;
+  onEditClose() {
+    this.isEdit = false;
   }
 }
