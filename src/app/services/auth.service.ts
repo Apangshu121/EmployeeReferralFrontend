@@ -359,4 +359,12 @@ export class AuthService {
       })
       .pipe();
   }
+
+  getSelectedCandidates(googleToken : string){
+    const headers = new HttpHeaders({
+      Authorization: 'Bearer ' + googleToken,
+    });
+    return this.httpClient.get<any>(`${this.path}senior/getCandidatesOfBusinessUnit`,{headers}).pipe();
+  }
+
 }

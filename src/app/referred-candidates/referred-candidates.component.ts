@@ -126,7 +126,6 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
   }
 
   interviewTheCandidate(candidateId : number, index:number){
-    // candidate.interviewed = true;
     console.log(index);
     const googleToken = this.authService.getToken();
     if (googleToken) {
@@ -134,8 +133,9 @@ constructor(private fb: FormBuilder, private authService : AuthService, private 
         .interviewTheCandidate(googleToken, candidateId)
         .subscribe(
           (response) => {
-            const errorMessage = response.message;
-            this.showErrorDialog(errorMessage);
+            // const errorMessage = "Candidate is selected for the interview \nPlease update the details";
+            // this.showErrorDialog(errorMessage);
+            alert("Candidate is selected for the interview \nPlease update the details");
           },
           (error) => {
             this.showErrorDialog(error);

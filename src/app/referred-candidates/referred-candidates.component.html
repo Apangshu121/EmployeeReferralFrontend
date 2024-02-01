@@ -144,13 +144,13 @@
             <button (click)="interviewTheCandidate(item.id, item)" *ngIf="!item.interviewTheCandidate" class="btn btn-primary">
               Interview this candidate
             </button>
-            <button *ngIf="item.interviewTheCandidate" (click)="candidateInfo(item)" class="btn btn-primary">
-              See details
+            <button mat-icon-button *ngIf="item.interviewTheCandidate" (click)="candidateInfo(item)">
+             <mat-icon>visibility</mat-icon>
             </button>
           </td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"  [ngClass]="{'odd-row': i % 2 === 0, 'even-row': i % 2 !== 0}"></tr>
       
       </table>
     </div>
@@ -159,7 +159,7 @@
 
 <div class="parent-container">
   <div class="cand-info" *ngIf="showCandInfo && !isUpdate">
-    <h5 class="cand-title">Candidate Details:</h5>
+    <h2 class="cand-title">Candidate Details:</h2>
     <div class="cand-details">
       <p>ID: {{ candidate.id }}</p>
       <p>Name: {{ candidate.candidateName }}</p>
@@ -179,10 +179,10 @@
       <p>Interview Status: {{ candidate.interviewStatus.interviewStatus }}</p>
     </div>
     <div class="cand-btn-group">
-      <button mat-raised-button class="update-button" (click)="onClick(candidate)">Update</button>
-      <button mat-raised-button color="primary" (click)="downloadResume(candidate.id)">Download Resume</button>
-      <button mat-raised-button color="warn" (click)="onClose()">Close</button>
-      <button mat-raised-button color="primary" (click)="sendMail(candidate.id)">Send Mail</button>
+      <button mat-raised-button class="all-button" (click)="onClick(candidate)">Update</button>
+      <button mat-raised-button class="all-button" (click)="downloadResume(candidate.id)">Download Resume</button>
+      <button mat-raised-button class="all-button" (click)="onClose()">Close</button>
+      <button mat-raised-button class="all-button" (click)="sendMail(candidate.id)">Send Mail</button>
     </div>
   </div>
   </div>

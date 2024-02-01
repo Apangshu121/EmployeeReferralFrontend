@@ -1,0 +1,28 @@
+.table-container th {
+
+    background-color: #7FC7D9;
+    color: #fff; /* Light gray background */
+    margin-left: 2cm;
+    text-align: left;
+    padding: 12px;
+  }
+
+.odd-row {
+  background-color: white; /* Set the background color for odd rows */
+}
+
+.even-row {
+  background-color: #f0f0f0; /* Set the background color for even rows */
+}
+
+.table-container td.number {
+    text-align: center;
+  }
+
+  .table1 {
+    margin: 0 auto;
+    margin-top: 1cm;
+    display: flex;
+    justify-content: center;
+    width: 80%;
+  }
