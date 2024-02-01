@@ -74,6 +74,8 @@
         <option value="EMPLOYEE">Employee</option>
         <option value="ADMIN">Admin</option>
       </select>
+      <label for="bu">Business Unit:</label>
+      <input type="text" id="bu" placeholder="Busiess Unit" [(ngModel)]="bu">
       <button mat-button (click)="editUser(selectedUser)">Update</button>
       <button mat-button (click)="close()">Cancel</button>
     </div>

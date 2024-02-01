@@ -166,12 +166,17 @@ mat-form-field {
 }
 
 .table-container th {
-    background-color: #7FC7D9;
-    color: #fff; /* Light gray background */
+    background-color: rgb(247, 204, 247);
+    // color: #fff; /* Light gray background */
     margin-left: 2cm;
     text-align: left;
     padding: 12px;
   }
+  // .btn-primary{
+  //   font-size: smaller;
+  //   width:100px;
+  //   height: 50px;
+  // }
 
 // .header-row{
 //   background-color: #3498db;

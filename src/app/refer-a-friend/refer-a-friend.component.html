@@ -227,7 +227,7 @@
       (change)="onFileChange($event)"
       accept=".pdf"
     />
-    <button type="submit" class="btn btn-primary mt-3" (click)="uploadPdf()">
+    <button type="submit" class="btn btn-primary" (click)="uploadPdf()">
       Upload
     </button>
   </div><br>
@@ -286,6 +286,17 @@
         id="primaryskill"
         placeholder="Primary Skill"
         formControlName="primarySkill"
+        required
+      />
+    </div><br>
+    <div class="form-group">
+      <label for="businessUnit">Busiess Unit:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="businessUnit"
+        placeholder="Business Unit"
+        formControlName="businessUnit"
         required
       />
     </div><br>
@@ -385,10 +396,11 @@
     </div><br>
     <div class="form-group">
       <label for="vouch">
-        <a href="javascript:void(0);" (click)="openPdf()">I vouch for this candidate.</a>
-      <div class="form-check">
         <input type="checkbox" class="form-check-input" formControlName="vouch" />
-      </div>
+        <a href="javascript:void(0);" (click)="openPdf()">   I vouch for this candidate.</a>
+      
+        
+      
     </label>
     </div><br>
     <div class="form-group">

@@ -1,0 +1,22 @@
+.cards{
+    height: 50px;
+    width: 5cm;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc; 
+}
+
+.card-content {
+    text-align: center;
+  }
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+//   .card-row {
+//     display: flex;
+//   }

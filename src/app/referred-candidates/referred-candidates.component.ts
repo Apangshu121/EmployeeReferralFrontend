@@ -34,7 +34,7 @@ export class ReferredCandidatesComponent implements OnInit {
   filteredCandidates: any[] = [];
   isFilter = false;
   displayedColumns: string[] = [
-    'id',
+    
     'candidateName',
     'candidateEmail',
     'contactNumber',

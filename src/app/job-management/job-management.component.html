@@ -1,7 +1,7 @@
 <!-- <app-navigation></app-navigation> -->
 
 <div class="cont">
-<h3 *ngIf="!isAdd && !isEdit">Job Posts</h3>
+<h2 *ngIf="!isAdd && !isEdit">Job Posts</h2>
 <button mat-raised-button color="primary" (click)="createSheet()"
 class="close-button" *ngIf="showJobPosts && !isEdit && !isAdd && !isJob"><mat-icon>add</mat-icon>Add Job</button>
   <div class="center-container">
@@ -64,8 +64,8 @@ class="close-button" *ngIf="showJobPosts && !isEdit && !isAdd && !isJob"><mat-ic
       </td>
     </ng-container>
   
-    <tr mat-header-row *matHeaderRowDef="['jobId', 'role', 'yearsOfExperience', 'techStack', 'actions']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['jobId', 'role', 'yearsOfExperience', 'techStack', 'actions']; let i = index"></tr>
+    <tr mat-header-row *matHeaderRowDef="['jobId', 'role', 'yearsOfExperience', 'techStack', 'actions']" class="header-row"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['jobId', 'role', 'yearsOfExperience', 'techStack', 'actions']; let i = index" [ngClass]="{'odd-row': i % 2 === 0, 'even-row': i % 2 !== 0}"></tr>
   </table>
 
 
