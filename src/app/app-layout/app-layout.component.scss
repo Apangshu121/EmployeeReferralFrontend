@@ -1,7 +1,10 @@
 
 mat-toolbar{
-  background-color: #7FC7D9;
-  color: white;
+  // background-color: #7FC7D9;
+  color: #0D016B;
+  height: 2cm;
+  font-family: "Geomanist",Helvetica,Arial,Sans-Serif;
+  transition: color 0.3s;
 }
 
 .example-spacer {
@@ -9,10 +12,11 @@ mat-toolbar{
 }
 
 mat-sidenav{
+  font-family: "Geomanist",Helvetica,Arial,Sans-Serif;
   margin: 16px;
   width: 250px;
   border-right: none;
-  background-color: #4492a5;
+  background-color: rgb(171, 3, 171);
   color: white;
   border-radius: 10px;
   padding: 16px;
@@ -50,13 +54,30 @@ mat-sidenav-container{
       color: white;
   }
   mat-icon{
-      margin-right: 8px;
+      // margin-right: 8px;
       color: white;
   }
 }
 .company-logo {
-  width: 300px;
-  height: 50%;
+  width: 100px;
+  height: 20%;
 }
 
+.nav-text{
+  padding: 10px;
+  font-size: medium;
+  cursor: pointer;
+  font-weight: bold;
+  border-bottom: 2px solid transparent; /* Initial transparent border */
+  transition: border-bottom 0.3s;
+}
+
+.nav-text:hover{
+  color: purple;
+  border-bottom: 2px solid purple;
+}
+.nav-button{
+  background-color: transparent;
+  border: white;
+}
 

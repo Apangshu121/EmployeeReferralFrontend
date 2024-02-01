@@ -13,7 +13,7 @@ export class ManageEmployeeComponent implements OnInit {
   update: boolean = false;
   editUserFlag: boolean = true;
   isAdmin: boolean = false;
-
+  bu!:string;
   user: any;
   displayedColumns: string[] = ['id', 'name', 'email', 'role', 'updateRole'];
   getColumnAlignment(value: any): string {
@@ -137,7 +137,7 @@ export class ManageEmployeeComponent implements OnInit {
         )
       ) {
         this.authService
-          .updateRole(googleToken, userEmail, this.selectedRole)
+          .updateRole(googleToken, userEmail, this.selectedRole,this.bu)
           .subscribe(
             (response) => {
               // console.log(user.email);
