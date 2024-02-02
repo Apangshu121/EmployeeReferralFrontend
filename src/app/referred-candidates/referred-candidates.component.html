@@ -150,7 +150,7 @@
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"  [ngClass]="{'odd-row': i % 2 === 0, 'even-row': i % 2 !== 0}"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"  [ngClass]="{'odd-row': i % 2 === 0, 'even-row': i % 2 !== 0, 'blacklist':row.blacklisted}"></tr>
       
       </table>
     </div>
@@ -168,7 +168,7 @@
       <p>Referrer Email: {{ candidate.referrerEmail }}</p>
       <p>Experience: {{ candidate.experience }}</p>
       <p>Primary Skill: {{ candidate.primarySkill }}</p>
-      <p>Notice Period: {{ candidate.noticePeriod }}</p>
+      <p>Notice Period: {{ candidate.noticePeriodLeft }}</p>
       <p>Offers In Hand: {{ candidate.offerInHand }}</p>
       <p>Preferred Location: {{ candidate.preferredLocation }}</p>
       <p>Willing To Relocate: {{ candidate.willingToRelocate }}</p>
@@ -217,14 +217,14 @@
       <input matInput type="text" formControlName="band" /> </mat-form-field
     ><br />
 
-    <mat-form-field>
+    <!-- <mat-form-field>
       <mat-label>No Of Rounds</mat-label>
       <input
         matInput
         type="number"
         formControlName="noOfRounds"
       /> </mat-form-field
-    ><br />
+    ><br /> -->
 
     <mat-form-field>
       <mat-label>Current Status</mat-label>

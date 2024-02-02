@@ -7,8 +7,9 @@
 </div>
 <div style="background-color: #fffefe">
   <div class="search-box" *ngIf="!isJob">
-    <input
-      type="text"
+
+  <!-- <input type = "text" placeholder="Search" [(ngModel)]="searchTerm" (ngModelChange)="onSearch()"> -->
+    <input 
       [(ngModel)]="searchTerm"
       placeholder="Search for Jobs"
       (ngModelChange)="onSearch()"

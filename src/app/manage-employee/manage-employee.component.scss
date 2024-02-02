@@ -25,31 +25,46 @@
 margin: 0 auto;
 display: flex;
 justify-content: center;
-width: 100%;
+width: 99%;
 }
-.mat-mdc-table .mat-mdc-header-cell{
-  background: #e9e9f4;
+// .mat-mdc-table .mat-mdc-header-cell{
+//   background: #0D016B;
+//   color: #fff;
+//   text-align: center;
+// }
+
+// .align-left {
+//   text-align: center;
+// }
+.header-row{
+  text-align: center;
+  justify-content: center;
+  color: whitesmoke;
+  background-color: #0D016B;
+} 
+
+// td{
+//   vertical-align: middle;
+//   text-align: center;
+// }
+// .align-right {
+//   text-align: right;
+// }
+
+.odd-row {
+  background-color: white; /* Set the background color for odd rows */
 }
 
-.align-left {
-  text-align: left;
+.even-row {
+  background-color: #f0f0f0; /* Set the background color for even rows */
 }
-
-.align-right {
-  text-align: right;
-}
-td{
-  vertical-align: middle;
-}
-
-
-//card design
 
 .update-role-card {
+  margin-top: 1cm;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* Adjust as needed for your layout */
+  // height: 100vh; 
 }
 
 .card {
@@ -60,7 +75,7 @@ td{
 }
 
 .card-header {
-  background-color: #004a9f;
+  background-color: #0D016B;
   color: #fff;
   padding: 10px;
   text-align: center;
@@ -92,3 +107,4 @@ button {
   display: flex;
   justify-content: center;
 }
+

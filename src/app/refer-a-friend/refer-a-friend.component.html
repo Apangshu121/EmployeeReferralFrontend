@@ -231,14 +231,20 @@
             class="btn"
             style="background-color: #0a66c2; height: 30px; align-items: center"
             (click)="uploadPdf()"
+            [disabled]="uploading"
           >
             Upload
           </button>
+          <mat-spinner
+            *ngIf="uploading"
+            diameter="20"
+            color="primary"
+          ></mat-spinner>
         </div>
         <br />
         <form [formGroup]="refForm" (ngSubmit)="onSubmit()" *ngIf="!formClosed">
           <div class="form-group">
-            <label for="name">Candidate Name:</label>
+            <label for="name">Candidate Name<span class="required" style="color: red">*</span></label>
             <input
               type="text"
               class="form-control"
@@ -250,7 +256,7 @@
           </div>
           <br />
           <div class="form-group">
-            <label for="phone">Mobile Number:</label>
+            <label for="phone">Mobile Number<span class="required" style="color: red">*</span></label>
             <input
               type="number"
               class="form-control"
@@ -263,7 +269,7 @@
           </div>
           <br />
           <div class="form-group">
-            <label for="email">Email Id:</label>
+            <label for="email">Email Id<span class="required" style="color: red">*</span></label>
             <input
               type="text"
               class="form-control"
@@ -275,7 +281,7 @@
           </div>
           <br />
           <div class="form-group">
-            <label for="experience">Experience:</label>
+            <label for="experience">Experience<span class="required" style="color: red">*</span></label>
             <input
               type="number"
               class="form-control"
@@ -288,7 +294,7 @@
           </div>
           <br />
           <div class="form-group">
-            <label for="primaryskill">Primary Skill:</label>
+            <label for="primaryskill">Primary Skill<span class="required" style="color: red">*</span></label>
             <input
               type="text"
               class="form-control"
@@ -300,20 +306,24 @@
           </div>
           <br />
           <div class="form-group">
-            <label for="businessUnit">Busiess Unit:</label>
-            <input
-              type="text"
+            <label for="businessUnit">Busiess Unit<span class="required" style="color: red">*</span></label>
+            <select
               class="form-control"
               id="businessUnit"
-              placeholder="Business Unit"
+              [(ngModel)]="businessUnit"
               formControlName="businessUnit"
               required
-            />
+            >
+            <option value="BFS">BFS</option>
+              <option value="WM">Wealth Management</option>
+              <option value="Telecom">Telecom</option>
+              <option value="Insurance">Insurance </option>
+            </select>
           </div>
           <br />
           <div class="form-group">
             <label for="currentCompanyNoticePeriod"
-              >Current Company Notice Period:</label
+              >Current Company Notice Period<span class="required" style="color: red">*</span></label
             >
             <input
               type="number"
@@ -326,7 +336,7 @@
           </div>
           <br />
           <div class="form-group">
-            <label for="preferredlocation">Preferred Location:</label>
+            <label for="preferredlocation">Preferred Location<span class="required" style="color: red">*</span></label>
             <select
               class="form-control"
               id="preferredlocation"
@@ -426,7 +436,7 @@
           </div>
           <br />
           <div class="form-group">
-            <label for="profileSource">Profile Source:</label>
+            <label for="profileSource">Profile Source<span class="required" style="color: red">*</span></label>
             <select
               class="form-control"
               id="profileSource"

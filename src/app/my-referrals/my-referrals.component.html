@@ -12,7 +12,7 @@
     <div class="mat-elevation-z8">
       <table
         mat-table
-        class="mat-table table container"
+        
         [dataSource]="referredCandidates"
       >
         <!-- Name Column -->
@@ -53,8 +53,8 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns; let i= index" [ngClass]="{ 'odd-row': i % 2 === 0, 'even-row': i % 2 !== 0 }"></tr>
       </table>
     </div>
   </div>

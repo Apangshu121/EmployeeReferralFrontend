@@ -17,9 +17,9 @@ export class ReferredCandidateAdminComponent implements OnInit {
   data: any;
   displayedColumns: string[] = [
     'candidateName',
-    'willingToRelocate',
-    'offerInHand',
-    'servingNoticePeriod',
+    // 'willingToRelocate',
+    // 'offerInHand',
+    // 'servingNoticePeriod',
     'primarySkill',
     'experience',
     'contactNumber',

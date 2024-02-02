@@ -53,6 +53,8 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { ReferralsTallyComponent } from './referrals-tally/referrals-tally.component';
 import { BuSelectedCandidatesComponent } from './bu-selected-candidates/bu-selected-candidates.component';
 import { ReferredCandidateAdminComponent } from './referred-candidate-admin/referred-candidate-admin.component';
+import { DxDataGridModule } from 'devextreme-angular';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -83,7 +85,9 @@ import { ReferredCandidateAdminComponent } from './referred-candidate-admin/refe
     ReactiveFormsModule,
     MatPaginatorModule,
     MatFormFieldModule,
+    DxDataGridModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatListModule,

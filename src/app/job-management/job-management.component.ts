@@ -15,6 +15,7 @@ import {
 } from '@angular/material/dialog';
 import { ErrorMessageDialogComponent } from '../error-message-dialog/error-message-dialog.component';
 
+
 @Component({
   selector: 'app-job-management',
   templateUrl: './job-management.component.html',
@@ -61,11 +62,6 @@ export class JobManagementComponent implements OnInit {
       BU: ['', Validators.required],
       Visibility: true,
     });
-  }
-
-  jopOpenings() {
-    this.router.navigate(['/app-job-openings']);
-    this.isShowJobs = true;
   }
 
   createSheet() {
@@ -155,24 +151,28 @@ export class JobManagementComponent implements OnInit {
     // console.log(this.jobData);
   }
 
-  openJobDetailsDialog(jobData: any, templateRef: TemplateRef<any>): void {
-    // console.log(jobData);
-
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '600px';
-    dialogConfig.height = '300px';
-    dialogConfig.data = { jobData };
-
-    dialogConfig.panelClass = 'custom-dialog';
-
-    this.dialog.open(templateRef, dialogConfig);
+  closeJobCard(){
+    this.isJob=false;
   }
 
-  closeDialog(): void {
-    if (this.dialogRef) {
-      this.dialogRef.close();
-    }
-  }
+  // openJobDetailsDialog(jobData: any, templateRef: TemplateRef<any>): void {
+  //   // console.log(jobData);
+
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.width = '600px';
+  //   dialogConfig.height = '300px';
+  //   dialogConfig.data = { jobData };
+
+  //   dialogConfig.panelClass = 'custom-dialog';
+
+  //   this.dialog.open(templateRef, dialogConfig);
+  // }
+
+  // closeDialog(): void {
+  //   if (this.dialogRef) {
+  //     this.dialogRef.close();
+  //   }
+  // }
 
   onClose() {
     this.showJobPosts = false;

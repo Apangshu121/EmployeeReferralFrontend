@@ -78,9 +78,10 @@ export class ReferAFriendComponent {
       }
     }
   }
-
+uploading:boolean=false;
   uploadPdf(): void {
     if (this.fileUpload) {
+      this.uploading=true;
       if (this.selectedFile) {
         this.authService.extractInfo(this.selectedFile).subscribe(
           (jsonResumeData: any) => {
@@ -97,6 +98,7 @@ export class ReferAFriendComponent {
             this.refForm.patchValue(refFormValue);
             this.extractedText = JSON.stringify(jsonResumeData, null, 2);
             this.enableForm();
+            this.uploading=false;
           },
           (error) => {
             if (error instanceof HttpErrorResponse && error.status === 401) {

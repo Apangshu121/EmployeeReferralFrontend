@@ -173,7 +173,7 @@ export class AuthService {
     googleToken: string,
     candidateId: number,
     updatedDetails: any
-  ): Observable<any> {
+): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + googleToken,
     });

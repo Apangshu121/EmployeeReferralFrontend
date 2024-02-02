@@ -1,0 +1,26 @@
+
+.table1 {
+    margin: 0 auto;
+    margin-top: 1cm;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    }
+// .mat-mdc-table .mat-mdc-header-cell{
+//       background: #0D016B;
+//       color: #fff;
+//       text-align: center;
+// }  
+.header-row{
+    background: #0D016B;
+      color: #fff;
+} 
+.odd-row {
+  
+    background-color: white; /* Set the background color for odd rows */
+  }
+  
+  .even-row {
+    
+    background-color: #f0f0f0; /* Set the background color for even rows */
+  }

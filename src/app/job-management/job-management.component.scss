@@ -160,7 +160,7 @@ button {
   width: 45%;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: #e6e4e4;
 }
 
 .odd-row {
@@ -175,6 +175,16 @@ button {
   &:hover {
     background-color: #a8a0de; /* Background color on hover for data cells */
   }
+}
+
+.job-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.details{
+  width: 60%;
 }
 
 

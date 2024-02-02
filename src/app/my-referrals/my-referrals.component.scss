@@ -11,20 +11,22 @@
   }
 
 .info1{
-  margin : 1cm;
-  width:100%;
+  margin: 0 auto;
+  margin-top: 1cm;
+  width:99%;
   justify-content: center;
   align-self: center;
 }
-.table1 {
-// margin: 0 auto;
-display: flex;
-justify-content: center;
-width: 100%;
-}
-.mat-mdc-table .mat-mdc-header-cell{
-  background: #e9e9f4;
-}
+  // .table1 {
+  // // margin: 0 auto;
+  // display: flex;
+  // justify-content: center;
+  // width: 100%;
+  // }
+// .mat-mdc-table .mat-mdc-header-cell{
+//   background: #0D016B;
+//   color: #fff;
+// }
 
 
 td{
@@ -54,3 +56,23 @@ td{
 // .refer-button {
 //   text-align: right;
 // }
+
+.odd-row {
+  background-color: white; /* Set the background color for odd rows */
+}
+
+.even-row {
+  background-color: #f0f0f0; /* Set the background color for even rows */
+}
+
+.header-row{
+  background-color: rgb(14, 14, 114);
+  color: whitesmoke;
+}
+.odd-row {
+  background-color: white; /* Set the background color for odd rows */
+}
+
+.even-row {
+  background-color: #f0f0f0; /* Set the background color for even rows */
+}

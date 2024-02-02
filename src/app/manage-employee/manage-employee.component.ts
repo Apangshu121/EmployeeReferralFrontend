@@ -25,10 +25,10 @@ export class ManageEmployeeComponent implements OnInit {
     'businessUnit',
     'updateRole',
   ];
-  getColumnAlignment(value: any): string {
-    // Check the data type of the 'id' column and return the appropriate CSS class
-    return typeof value === 'number' ? 'align-right' : 'align-left';
-  }
+  // getColumnAlignment(value: any): string {
+  //   // Check the data type of the 'id' column and return the appropriate CSS class
+  //   return typeof value === 'number' ? 'align-right' : 'align-left';
+  // }
   constructor(private authService: AuthService) {}
 
   searchQuery!: string;
@@ -101,10 +101,12 @@ export class ManageEmployeeComponent implements OnInit {
       // console.error('Authentication token not available.');
     }
   }
+  
   selectedUser: any;
   selectedRole: any;
 
   openEditCard(user: any): void {
+    this.searchResults=null;
     this.update = true;
     this.editUserFlag = false;
     this.editFlag = false;

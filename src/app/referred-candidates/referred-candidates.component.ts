@@ -67,25 +67,24 @@ export class ReferredCandidatesComponent implements OnInit {
       band: ['', Validators.required],
       currentStatus: ['SELECT', Validators.required],
       interviewStatus: ['CODELYSER SELECT', Validators.required],
-      noOfRounds: [0, Validators.required],
+      noOfRounds: [3, Validators.required],
     });
   }
 
   ngOnInit() {
     this.getAllReferredCandidates();
 
-    this.updateForm.get('noOfRounds')!.valueChanges.subscribe((value) => {
+    
       this.interviewStatuses = [];
       this.interviewStatuses.push('CODELYSER SELECT');
       this.interviewStatuses.push('CODELYSER REJECT');
-      this.generateInterviewStatusOptions(value);
-    });
+      this.generateInterviewStatusOptions(3);
   }
 
   generateInterviewStatusOptions(noOfRounds: number): void {
     // this.interviewStatuses = [];
 
-    for (let i = 1; i < noOfRounds; i++) {
+    for (let i = 1; i < 4; i++) {
       this.interviewStatuses.push(`R${i} SELECT`);
       this.interviewStatuses.push(`R${i} REJECT`);
     }
@@ -159,7 +158,7 @@ export class ReferredCandidatesComponent implements OnInit {
           );
         },
         (error) => {
-          this.showErrorDialog(error);
+          this.showErrorMessage("Mail Already sent");
         }
       );
     } else {

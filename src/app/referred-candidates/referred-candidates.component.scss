@@ -37,13 +37,14 @@
   justify-content: center;
   align-items: center;
   // height: 100vh;
+  // background-color: #e6e4e4;
   padding: 0 15px;
   box-sizing: border-box;
  }
 
 .cand-info {
   margin-top: 1cm;
-  background-color: #C9D6DF;
+  background-color: #e6e4e4;
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 20px;
@@ -52,7 +53,7 @@
 
   .cand-title {
     margin-top: 0;
-    
+    color: #0D016B;
     margin-bottom: 10px;
     text-align: center;
   }
@@ -102,7 +103,7 @@
 }
 
 .form-header {
-  background-color: #52616B;
+  background-color: #0D016B;
 
   // margin-bottom: 20px;
   color: #fff; 
@@ -114,14 +115,14 @@ form {
   max-width: 50%; /* Adjust the maximum width as needed */
   width: 100%;
   padding: 20px;
-  background-color: #C9D6DF;
+  background-color: #e6e4e4;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 mat-form-field {
-  width: 90%;
+  width: 100%;
   margin-bottom: 15px;
 }
 
@@ -131,7 +132,8 @@ mat-form-field {
 }
 
 .table-container th {
-    background-color: #e9e9f4;
+    background-color: #0D016B;
+    color: #fff;
     // color: #fff; /* Light gray background */
     margin-left: 2cm;
     text-align: left;
@@ -155,6 +157,10 @@ mat-form-field {
 
 .even-row {
   background-color: #f0f0f0; /* Set the background color for even rows */
+}
+
+.blacklist{
+  background-color: rgb(245, 131, 131);
 }
 
 .table-container td.number {

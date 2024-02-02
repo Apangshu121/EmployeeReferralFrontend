@@ -10,7 +10,6 @@
 </button>
 
 <div class="cont">
-  <div>
     <div class="center-container">
       <ng-container>
         <table
@@ -48,7 +47,7 @@
             <td mat-cell *matCellDef="let item of data; let i = index">
               <button
                 mat-icon-button
-                (click)="openJobDetailsDialog(item, jobDetailsTemplate)"
+                (click)="jobInfo(i)"
               >
                 <mat-icon class="view-icon">visibility</mat-icon>
               </button>
@@ -92,27 +91,25 @@
             [ngClass]="{ 'odd-row': i % 2 === 0, 'even-row': i % 2 !== 0 }"
           ></tr>
         </table>
-
-        <ng-template #jobDetailsTemplate let-data>
-          <div class="details">
-            <p>Job Id: {{ data.jobData.JobId }}</p>
-            <p>Role : {{ data.jobData.Role }}</p>
-            <p>Years Of Experience: {{ data.jobData.YearsOfExperience }}</p>
-            <p>Tech Stack : {{ data.jobData.TechStack }}</p>
-            <p>Description : {{ data.jobData.Description }}</p>
-            <p>Band : {{ data.jobData.Band }}</p>
-            <p>Business Unit : {{ data.jobData.BU }}</p>
-          </div>
-        </ng-template>
       </ng-container>
     </div>
-  </div>
 </div>
-
+<div class="job-card">
+<mat-card class="details" *ngIf="isJob">
+  <p>Job Id: {{ jobData.JobId }}</p>
+  <p>Role : {{ jobData.Role }}</p>
+  <p>Years Of Experience: {{ jobData.YearsOfExperience }}</p>
+  <p>Tech Stack : {{ jobData.TechStack }}</p>
+  <p>Description : {{ jobData.Description }}</p>
+  <p>Band : {{ jobData.Band }}</p>
+  <p>Business Unit : {{ jobData.BU }}</p>
+  <button mat-raised-button (click)="closeJobCard()">Close</button>
+</mat-card>
+</div>
 <div class="forms">
   <div class="add" *ngIf="isAdd || isEdit">
     <div class="form-header" *ngIf="isAdd">
-      <h5>Job Details Form</h5>
+      <h2 style="color: #fff">Job Details Form</h2>
     </div>
 
     <div class="form-header" *ngIf="isEdit">
