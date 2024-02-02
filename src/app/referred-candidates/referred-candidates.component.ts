@@ -97,6 +97,7 @@ export class ReferredCandidatesComponent implements OnInit {
       this.authService.getAllReferredCandidates(googleToken).subscribe(
         (response) => {
           this.data = response;
+          console.log(this.data);
         },
         (error) => {
           this.showErrorDialog(error);

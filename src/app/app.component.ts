@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
       this.showErrorMessage('Please login again');
     }
     if (googleToken) {
-      console.log(googleToken);
+      // console.log(googleToken);
       this.authService.getNameOfUser(googleToken).subscribe(
         (data) => {
           console.log(data.role);

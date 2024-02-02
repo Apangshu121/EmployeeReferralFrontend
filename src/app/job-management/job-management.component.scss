@@ -1,7 +1,27 @@
+.heading {
+  font-size: 34px;
+  // color: #333;
+  text-align: center;
+margin-top: 20px;
+  margin-bottom: 5px;
+  // font-size: large;
+  font-weight: bold;
+  font-style: italic;
+  // color: cadetblue;
+  color: #33006F;
+}
+
+
 .center-container {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.close-button{
+  // position: absolute;
+ 
+  margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 h2{
@@ -61,10 +81,10 @@ h2{
     text-align: center;
   }
   
-  th{
-    background-color: #7FC7D9;
+  .center-container th{
+    background-color: #0D016B;
     text-align: center;
-    
+    color: #fff;
     padding: 8px;
   }
 
@@ -81,7 +101,7 @@ h2{
     color: black; /* Set the color for the delete icon */
   }
   .view-icon {
-    color: rgb(13, 186, 254); /* Set the color for the delete icon */
+    color: #b5afdf; /* Set the color for the delete icon */
   }
   /* job-management.component.scss */
 
@@ -94,7 +114,7 @@ h2{
 
 :host ::ng-deep {
   .custom-dialog {
-    background-color: aqua;
+    background-color: #b5afdf;
     color: brown;
   }
 }
@@ -107,11 +127,13 @@ img{
 }
 
 .forms{
+  
   display: flex;
   align-items: center;
   justify-content: center;
 }
 form {
+  background-color: #fafafa;
   width: 70%;
   align-self: center;
   max-width: 500px; /* Adjust the maximum width as needed */
@@ -119,9 +141,10 @@ form {
 }
 
 .form-header {
-  background-color: #7FC7D9;
+  background-color: #0D016B;
+  color: #fff;
   margin-bottom: 20px;
-  color: #fff; 
+  // color: #fff; 
   padding: 10px;
   text-align: center;
 }
@@ -129,12 +152,7 @@ form {
 button {
   margin-top: 20px; /* Adjust spacing between the form fields and the button */
 }
-.close-button{
-  position: absolute;
-  top:10px;
-  right:10px;
 
-}
 
 .add{
   margin-top: 20px;
@@ -142,7 +160,7 @@ button {
   width: 45%;
   align-items: center;
   justify-content: center;
-  background-color: #DCF2F1;
+  // background-color: #DCF2F1;
 }
 
 .odd-row {
@@ -153,9 +171,9 @@ button {
   background-color: #f0f0f0; /* Set the background color for even rows */
 }
 .header-row{
-  background-color: #7FC7D9;
+  background-color: #b5afdf;
   &:hover {
-    background-color: #35bcde; /* Background color on hover for data cells */
+    background-color: #a8a0de; /* Background color on hover for data cells */
   }
 }
 

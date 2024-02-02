@@ -5,7 +5,9 @@ import { saveAs } from 'file-saver';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Tally } from '../my-profile/my-profile.component';
+import { Tally } from '../app-layout/app-layout.component';
+// import { Tally } from '../app-layout/app-layout.component';
+// import { Tally } from '../my-profile/my-profile.component';
 import { AdminUpdateDTO } from '../referred-candidate-admin/admin-update-dtos';
 
 @Injectable({

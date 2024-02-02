@@ -1,13 +1,4 @@
-<mat-toolbar class="custom-toolbar">
-  <!-- <button
-    mat-icon-button
-    *ngIf="sidenav.mode === 'over'"
-    (click)="sidenav.toggle()"
-  >
-    <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
-    <mat-icon *ngIf="sidenav.opened">menu</mat-icon>
-  </button> -->
-
+<mat-toolbar>
   <span
     ><img
       class="company-logo"
@@ -46,14 +37,32 @@
     >Edit</span
   >
 
-  <button
+  <!-- <button
     mat-icon-button
     class="example-icon favorite-icon"
     aria-label="Example icon-button with account_circle icon"
     [routerLink]="'my-profile'"
   >
+    <mat-icon>account_circle</mat-icon> -->
+  <!-- </button> -->
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+    aria-label="Example icon-button with a menu"
+  >
     <mat-icon>account_circle</mat-icon>
   </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item style="color: rgb(10, 56, 92)">
+      <mat-icon style="color: rgb(10, 56, 92)">person</mat-icon>
+      <span>{{ tallyData?.name }}</span>
+    </button>
+    <button mat-menu-item style="color: rgb(10, 56, 92)">
+      <mat-icon style="color: rgb(10, 56, 92)">work</mat-icon>
+      <span>{{ role }}</span>
+    </button>
+  </mat-menu>
+
   <button
     mat-icon-button
     class="example-icon"
@@ -123,16 +132,6 @@
       <mat-icon>check_circle</mat-icon>
       <span>Selected Candidates</span>
     </button>
-
-    <!-- <button
-      mat-button
-      class="menu-button"
-      *ngIf="adminFlag"
-      [routerLink]="'referred-candidate-admin'"
-    >
-      <mat-icon>dashboard</mat-icon>
-      <span>Referred Candidates</span>
-    </button> -->
 
     <button
       mat-button
